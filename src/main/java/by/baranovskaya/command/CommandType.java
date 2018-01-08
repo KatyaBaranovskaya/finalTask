@@ -5,7 +5,6 @@ import by.baranovskaya.service.UserService;
 public enum CommandType {
     LOGIN(new LoginCommand(new UserService())),
     REGISTRATION(new RegistrationCommand(new UserService()));
-    //LOGOUT(new LogoutCommand());
 
     private Command command;
 
