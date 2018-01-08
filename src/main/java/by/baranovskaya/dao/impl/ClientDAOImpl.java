@@ -71,11 +71,11 @@ public class ClientDAOImpl implements ClientDAO {
             close(preparedStatement);
             close(connection);
         }
-        return true;//???????????????
+        return true;
     }
 
     @Override
-    public boolean findClientByLoginPassword(String login, String password) throws DAOException { /// нормально так???
+    public boolean findClientByLoginPassword(String login, String password) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
