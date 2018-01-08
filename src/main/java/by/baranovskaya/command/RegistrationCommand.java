@@ -42,7 +42,7 @@ public class RegistrationCommand implements Command{
                 //request.setAttribute("user", loginValue);// ?????
                 page = PATH_PAGE_MAIN;
             } else{
-                //request.setAttribute("er");
+                //request.setAttribute("");
                 page = PATH_PAGE_LOGIN;
             }
         } else {
