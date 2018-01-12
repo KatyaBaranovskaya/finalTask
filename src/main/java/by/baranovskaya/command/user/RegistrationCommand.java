@@ -1,13 +1,16 @@
-package by.baranovskaya.command;
+package by.baranovskaya.command.user;
 
+import by.baranovskaya.command.Command;
 import by.baranovskaya.entity.Client;
+import by.baranovskaya.exception.CommandException;
 import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.service.UserService;
+import by.baranovskaya.validation.AuthenticationValidation;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
-public class RegistrationCommand implements Command{
+public class RegistrationCommand implements Command {
     private static final String PARAM_EMAIL = "mail";
     private static final String PARAM_LOGIN = "login";
     private static final String PARAM_PASSWORD = "password";
@@ -16,17 +19,17 @@ public class RegistrationCommand implements Command{
     private static final String PARAM_MIDDLE_NAME = "middleName";
     private static final String PARAM_DATE_BIRTH = "date";
     private static final String PARAM_PHONE = "phone";
-    private static final String PATH_PAGE_LOGIN = "/jsp/registration.jsp";
-    private static final String PATH_PAGE_MAIN = "/jsp/main.jsp";
+    private static final String PATH_PAGE_REGISTER = "/jsp/common/registration.jsp";
+    private static final String PATH_PAGE_MAIN = "/jsp/common/main.jsp";
     private UserService userService;
 
-    public RegistrationCommand(UserService clientService) {
+    public RegistrationCommand(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws DAOException {
-        String page = null;
+    public String execute(HttpServletRequest request) throws CommandException {
+         String page = null;
         Client client = new Client();
         client.setEmail(request.getParameter(PARAM_EMAIL));
         client.setLogin(request.getParameter(PARAM_LOGIN));
@@ -37,17 +40,22 @@ public class RegistrationCommand implements Command{
         client.setDateBirth(Date.valueOf(request.getParameter(PARAM_DATE_BIRTH)));
         client.setTelephone(request.getParameter(PARAM_PHONE));
 
-        if(client != null){
-            if(userService.registerUser(client)){
-                //request.setAttribute("user", loginValue);// ?????
-                page = PATH_PAGE_MAIN;
-            } else{
-                //request.setAttribute("er");
-                page = PATH_PAGE_LOGIN;
+        // проверка есть ли в базе такой?!!!!!!!!!!!!!!
+        if(AuthenticationValidation.validateRegistration(client)){
+            try {
+
+                if(userService.registerUser(client)){
+                    page = PATH_PAGE_MAIN;
+                } else{
+                    //request.setAttribute("er");
+                    page = PATH_PAGE_REGISTER;
+                }
+            } catch (DAOException e) {
+                throw new CommandException(e);
             }
         } else {
             //request.setAttribute("");
-            page = PATH_PAGE_LOGIN;
+            page = PATH_PAGE_REGISTER;
         }
         return page;
     }

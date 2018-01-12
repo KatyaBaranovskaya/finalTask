@@ -2,7 +2,8 @@ package by.baranovskaya.controller;
 
 import by.baranovskaya.command.ActionFactory;
 import by.baranovskaya.command.Command;
-import by.baranovskaya.command.EmptyCommand;
+import by.baranovskaya.command.common.EmptyCommand;
+import by.baranovskaya.exception.CommandException;
 import by.baranovskaya.exception.DAOException;
 
 import javax.servlet.RequestDispatcher;
@@ -31,8 +32,8 @@ public class Controller extends HttpServlet {
 
         try {
             page = command.execute(request);
-        } catch (DAOException e) {
-            e.printStackTrace();
+        } catch (CommandException e) {
+           //???
         }
 
         if(page != null){

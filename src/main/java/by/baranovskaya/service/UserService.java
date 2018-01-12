@@ -8,7 +8,7 @@ import by.baranovskaya.exception.DAOException;
 public class UserService {
     private ClientDAO dao = DAOFactory.getClientDao();
 
-    public boolean checkUserIsExist(String login, String password) throws DAOException {
+    public int checkUserIsExist(String login, String password) throws DAOException {
         return dao.findClientByLoginPassword(login, password);
     }
 

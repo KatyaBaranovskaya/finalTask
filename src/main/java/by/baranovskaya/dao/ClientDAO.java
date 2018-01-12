@@ -9,5 +9,5 @@ import java.util.List;
 public interface ClientDAO extends AbstractDAO{
     List<Client> getAll() throws DAOException;
     boolean addClient(Client client) throws DAOException;
-    boolean findClientByLoginPassword(String login, String password) throws DAOException;
+    int findClientByLoginPassword(String login, String password) throws DAOException;
 }
