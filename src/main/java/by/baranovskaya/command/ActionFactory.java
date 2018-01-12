@@ -1,7 +1,5 @@
 package by.baranovskaya.command;
 
-//исключение???
-
 import java.util.Optional;
 
 public class ActionFactory {

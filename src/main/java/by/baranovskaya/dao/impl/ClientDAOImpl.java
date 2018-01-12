@@ -15,7 +15,7 @@ public class ClientDAOImpl implements ClientDAO {
     private static final String SELECT_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, passport, telephone" +
      "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE roles.role_name = 'Пользователь'";
     private static final String INSERT_CLIENT = "INSERT INTO clients(email, login, password, id_role, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
-    private static final String FIND_CLIENT = "SELECT id_role FROM hotel.clients WHERE login = ? AND password = ?"; //???
+    private static final String FIND_CLIENT = "SELECT id_client FROM hotel.clients WHERE login = ? AND password = ?"; //???
 
     @Override
     public List<Client> getAll() throws DAOException {
@@ -75,7 +75,7 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public int findClientByLoginPassword(String login, String password) throws DAOException { /// нормально так???
+    public boolean findClientByLoginPassword(String login, String password) throws DAOException { /// нормально так???
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -83,15 +83,12 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                return resultSet.getInt("id_role");
-            }
+            return resultSet.next();
         }  catch (SQLException e) {
             throw new DAOException("Exception selecting client by login and password" + e);
         } finally {
             close(preparedStatement);
             close(connection);
         }
-        return 0;
     }
 }
