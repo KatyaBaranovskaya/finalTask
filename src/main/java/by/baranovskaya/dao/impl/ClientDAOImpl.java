@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDAOImpl implements ClientDAO {
-    private static final int ID_ROLE = 2;
-    private static final String SELECT_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, passport, telephone" +
+    private final static int ID_ROLE = 2;
+    private final static String SELECT_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, passport, telephone" +
      "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE roles.role_name = 'Пользователь'";
-    private static final String INSERT_CLIENT = "INSERT INTO clients(email, login, password, id_role, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
-    private static final String FIND_CLIENT = "SELECT id_client FROM hotel.clients WHERE login = ? AND password = ?"; //???
+    private final static String INSERT_CLIENT = "INSERT INTO clients(email, login, password, id_role, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
+    private final static String FIND_CLIENT = "SELECT id_role FROM hotel.clients WHERE login = ? AND password = ?";
 
     @Override
     public List<Client> getAll() throws DAOException {
@@ -71,7 +71,7 @@ public class ClientDAOImpl implements ClientDAO {
             close(preparedStatement);
             close(connection);
         }
-        return true;//???????????????
+        return true;
     }
 
     @Override

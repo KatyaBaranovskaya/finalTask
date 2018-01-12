@@ -1,11 +1,14 @@
 package by.baranovskaya.command.user;
 
 import by.baranovskaya.command.Command;
+import by.baranovskaya.constant.PageConstant;
 import by.baranovskaya.entity.Client;
-import by.baranovskaya.exception.CommandException;
-import by.baranovskaya.exception.DAOException;
+import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
 import by.baranovskaya.validation.AuthenticationValidation;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
@@ -19,16 +22,16 @@ public class RegistrationCommand implements Command {
     private static final String PARAM_MIDDLE_NAME = "middleName";
     private static final String PARAM_DATE_BIRTH = "date";
     private static final String PARAM_PHONE = "phone";
-    private static final String PATH_PAGE_REGISTER = "/jsp/common/registration.jsp";
-    private static final String PATH_PAGE_MAIN = "/jsp/common/main.jsp";
     private UserService userService;
+
+    private final static Logger LOGGER = LogManager.getLogger(RegistrationCommand.class);
 
     public RegistrationCommand(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) {
          String page = null;
         Client client = new Client();
         client.setEmail(request.getParameter(PARAM_EMAIL));
@@ -40,22 +43,20 @@ public class RegistrationCommand implements Command {
         client.setDateBirth(Date.valueOf(request.getParameter(PARAM_DATE_BIRTH)));
         client.setTelephone(request.getParameter(PARAM_PHONE));
 
-        // проверка есть ли в базе такой?!!!!!!!!!!!!!!
         if(AuthenticationValidation.validateRegistration(client)){
             try {
-
                 if(userService.registerUser(client)){
-                    page = PATH_PAGE_MAIN;
+                    page = PageConstant.PATH_PAGE_MAIN;
                 } else{
-                    //request.setAttribute("er");
-                    page = PATH_PAGE_REGISTER;
+                    //TODO user is exist
+                    page = PageConstant.PATH_PAGE_REGISTER;
                 }
-            } catch (DAOException e) {
-                throw new CommandException(e);
+            } catch (ServiceException e) {
+                LOGGER.log(Level.ERROR, e);
             }
         } else {
-            //request.setAttribute("");
-            page = PATH_PAGE_REGISTER;
+            //TODO warn incorrect info
+            page = PageConstant.PATH_PAGE_REGISTER;;
         }
         return page;
     }

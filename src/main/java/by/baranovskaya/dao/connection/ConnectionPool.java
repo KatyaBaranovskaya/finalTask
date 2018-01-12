@@ -33,7 +33,7 @@ public class ConnectionPool {
             try {
                 connections.put(manager.getConnection());
             } catch (InterruptedException e) {
-                LOGGER.log(Level.ERROR, "Can not init connection: " + e); //????
+                LOGGER.log(Level.ERROR, "Can not init connection: " + e); //?
             }
         }
     }

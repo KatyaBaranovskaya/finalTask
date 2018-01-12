@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
-  <title>First</title>
+  <title></title>
 </head>
 <body>
 <jsp:forward page="/jsp/common/main.jsp"/>

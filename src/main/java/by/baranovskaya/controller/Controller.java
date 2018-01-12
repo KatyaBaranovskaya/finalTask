@@ -3,8 +3,8 @@ package by.baranovskaya.controller;
 import by.baranovskaya.command.ActionFactory;
 import by.baranovskaya.command.Command;
 import by.baranovskaya.command.common.EmptyCommand;
-import by.baranovskaya.exception.CommandException;
-import by.baranovskaya.exception.DAOException;
+import by.baranovskaya.constant.PageConstant;
+import by.baranovskaya.exception.ServiceException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class Controller extends HttpServlet {
-    private final static String INDEX_PAGE = "/index.jsp";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
@@ -28,13 +27,7 @@ public class Controller extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Optional<Command> commandOptional = ActionFactory.defineCommand(request.getParameter("command"));
         Command command = commandOptional.orElse(new EmptyCommand());
-        String page = null;
-
-        try {
-            page = command.execute(request);
-        } catch (CommandException e) {
-           //???
-        }
+        String page =  command.execute(request);
 
         if(page != null){
             RequestDispatcher dispatcher = request.getRequestDispatcher(page);
@@ -42,7 +35,7 @@ public class Controller extends HttpServlet {
         } else {
             //request.getSession().setAttribute("nullPage", MessageManager.getMessage("message.nullPage"));
             //response.sendRedirect(request.getContextPath() + "/index.jsp");
-            response.sendRedirect(INDEX_PAGE);
+            response.sendRedirect(PageConstant.PATH_PAGE_INDEX);
         }
     }
 }

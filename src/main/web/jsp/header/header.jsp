@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html" ; charset="UTF-8"/>
-    <title><fmt:message key="label.singIn" bundle="${rb}"/></title>
+    <title></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/reg.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
@@ -19,33 +19,33 @@
     <a class="navbar-logo" href=""><img width="60" height="60" src="/resources/hotel.png"></a>
     <ul class="menu-main">
 
-        <li><a href="">Главная</a></li>
-        <li><a href="">Номера и цены</a></li>
-        <li><a href="">Услуги</a></li>
-        <li><a href="">Контакты</a></li>
+        <li><a href=""><fmt:message key="page.main" bundle="${rb}"/></a></li>
+        <li><a href=""><fmt:message key="page.room" bundle="${rb}"/></a></li>
+        <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
+        <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
 
         <c:if test="${sessionScope.role == null}">
-            <li><a href="/jsp/common/login.jsp">Авторизация</a></li>
-            <li><a href="/jsp/common/registration.jsp">Регистрация</a></li>
+            <li><a href="/jsp/common/login.jsp"><fmt:message key="page.authorization" bundle="${rb}"/></a></li>
+            <li><a href="/jsp/common/registration.jsp"><fmt:message key="page.registration" bundle="${rb}"/></a></li>
         </c:if>
 
         <c:if test="${sessionScope.role == 'user'}">
-            <li><a href="">Бронирование</a></li>
-            <li><a href="">Личный кабинет</a></li>
+            <li><a href=""><fmt:message key="page.reservation" bundle="${rb}"/></a></li>
+            <li><a href=""><fmt:message key="page.account" bundle="${rb}"/></a></li>
             <li>
                 <form action="/Controller" method="POST">
                     <input type="hidden" name="command" value="logout"/>
-                    <input type="submit" value="Выход" class="button"/><br/>
+                    <input type="submit" value="<fmt:message key="page.exit" bundle="${rb}"/>" class="button"/><br/>
                 </form>
             </li>
         </c:if>
 
         <c:if test="${sessionScope.role == 'admin'}">
-            <li><a href="">Личный кабинет</a></li>
+            <li><a href=""><fmt:message key="page.account" bundle="${rb}"/></a></li>
             <li>
                 <form action="/Controller" method="POST">
                     <input type="hidden" name="command" value="logout"/>
-                    <input type="submit" value="Выход" class="button"/><br/>
+                    <input type="submit" value="<fmt:message key="page.exit" bundle="${rb}"/>" class="button"/><br/>
                 </form>
             </li>
         </c:if>

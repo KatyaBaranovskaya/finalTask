@@ -1,31 +1,32 @@
-package by.baranovskaya.command.user;
+package by.baranovskaya.command.common;
 
 import by.baranovskaya.command.Command;
-import by.baranovskaya.exception.CommandException;
-import by.baranovskaya.exception.DAOException;
+import by.baranovskaya.constant.PageConstant;
+import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
 import by.baranovskaya.validation.AuthenticationValidation;
-
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements Command {
     private final static String PARAM_LOGIN = "login";
     private final static String PARAM_PASSWORD = "password";
-    private final static String PATH_PAGE_LOGIN = "/jsp/common/login.jsp";
-    private final static String PATH_PAGE_USER_MAIN = "/jsp/user/userMain.jsp";
-    private final static String PATH_PAGE_ADMIN_MAIN = "/jsp/admin/adminMain.jsp";
     private final static int  ADMIN_ROLE = 1;
     private final static int  USER_ROLE = 2;
     private final static int  NONE = 0;
     private UserService userService;
+
+    private final static Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
     public LoginCommand(UserService userService) {
         this.userService = userService;
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) {
         String page = null;
         String loginValue = request.getParameter(PARAM_LOGIN);
         String passValue = request.getParameter(PARAM_PASSWORD);
@@ -36,23 +37,23 @@ public class LoginCommand implements Command {
                 switch (userService.checkUserIsExist(loginValue, passValue)) {
                     case ADMIN_ROLE:
                         session.setAttribute("role", "admin");
-                        page = PATH_PAGE_ADMIN_MAIN;
+                        page = PageConstant.PATH_PAGE_ADMIN_MAIN;
                         break;
                     case USER_ROLE:
                         session.setAttribute("role", "user");
-                        page = PATH_PAGE_USER_MAIN;
+                        page = PageConstant.PATH_PAGE_USER_MAIN;
                         break;
                     case NONE:
-                        //что нет такого пользователя
-                        page = PATH_PAGE_LOGIN;
+                        //TODO user doesn't exist
+                        page = PageConstant.PATH_PAGE_LOGIN;
                         break;
                 }
-            } catch (DAOException e) {
-                throw new CommandException(e); //что-то еще дописать!  и нормально ли блок стоит??????
+            } catch (ServiceException e) {
+                LOGGER.log(Level.ERROR, e);
             }
         } else {
-            //что некорректная инфа
-            page = PATH_PAGE_LOGIN;
+            //TODO warn incorrect info
+            page = PageConstant.PATH_PAGE_LOGIN;
         }
         return page;
     }

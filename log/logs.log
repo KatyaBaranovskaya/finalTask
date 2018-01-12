@@ -1,0 +1,4 @@
+04:45:36.031 [http-bio-8080-exec-3] ERROR LoginCommand:52  - by.baranovskaya.exception.ServiceException: by.baranovskaya.exception.DAOException: Exception selecting client by login and passwordjava.sql.SQLException: Column 'id_role' not found.
+04:45:54.950 [http-bio-8080-exec-9] ERROR LoginCommand:52  - by.baranovskaya.exception.ServiceException: by.baranovskaya.exception.DAOException: Exception selecting client by login and passwordjava.sql.SQLException: Column 'id_role' not found.
+04:46:50.788 [http-bio-8080-exec-10] ERROR LoginCommand:52  - by.baranovskaya.exception.ServiceException: by.baranovskaya.exception.DAOException: Exception selecting client by login and passwordjava.sql.SQLException: Column 'id_role' not found.
+04:48:36.008 [http-bio-8080-exec-9] ERROR LoginCommand:53  - by.baranovskaya.exception.ServiceException: by.baranovskaya.exception.DAOException: Exception selecting client by login and passwordjava.sql.SQLException: Column 'id_role' not found.
