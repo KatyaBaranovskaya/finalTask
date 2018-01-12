@@ -75,7 +75,7 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public boolean findClientByLoginPassword(String login, String password) throws DAOException { /// нормально так???
+    public int findClientByLoginPassword(String login, String password) throws DAOException { /// нормально так???
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -83,7 +83,11 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            if(resultSet.next()){
+                return resultSet.getInt("id_role");
+            } else{
+                return 0;
+            }
         }  catch (SQLException e) {
             throw new DAOException("Exception selecting client by login and password" + e);
         } finally {

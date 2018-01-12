@@ -12,8 +12,6 @@ public interface AbstractDAO {
 
     Logger LOGGER = LogManager.getLogger(AbstractDAO.class);
 
-    //List<T> getAll() throws DAOException, DBException;
-
     default void close(Statement st){
         if (st != null){
             try {
@@ -24,7 +22,6 @@ public interface AbstractDAO {
         }
     }
 
-//?? делать ли его
     default void close(ProxyConnection connection){
         if (connection != null){
             try {
