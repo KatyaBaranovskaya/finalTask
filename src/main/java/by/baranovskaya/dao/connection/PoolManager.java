@@ -11,12 +11,12 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class PoolManager {
+    private final static Logger LOGGER = LogManager.getLogger(PoolManager.class);
+
     private String url;
     private String user;
     private String password;
     private int poolSize;
-
-    private final static Logger LOGGER = LogManager.getLogger(PoolManager.class);
 
     PoolManager() {
         ResourceBundle resource = ResourceBundle.getBundle(DBProperty.DB_PROPERTY_FILE);

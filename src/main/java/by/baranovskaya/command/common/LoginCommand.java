@@ -4,7 +4,7 @@ import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstant;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.AuthenticationValidation;
+import by.baranovskaya.validation.Validation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LoginCommand implements Command {
+    private final static Logger LOGGER = LogManager.getLogger(LoginCommand.class);
+
     private final static String PARAM_LOGIN = "login";
     private final static String PARAM_PASSWORD = "password";
     private final static int  ADMIN_ROLE = 1;
     private final static int  USER_ROLE = 2;
     private final static int  NONE = 0;
     private UserService userService;
-
-    private final static Logger LOGGER = LogManager.getLogger(LoginCommand.class);
 
     public LoginCommand(UserService userService) {
         this.userService = userService;
@@ -32,7 +32,7 @@ public class LoginCommand implements Command {
         String passValue = request.getParameter(PARAM_PASSWORD);
         HttpSession session = request.getSession(true);
 
-        if(AuthenticationValidation.validateLogin(loginValue, passValue)){
+        if(Validation.validateLogin(loginValue, passValue)){
             try {
                 switch (userService.checkUserIsExist(loginValue, passValue)) {
                     case ADMIN_ROLE:

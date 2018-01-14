@@ -7,4 +7,6 @@ public class PageConstant {
     public final static String PATH_PAGE_REGISTER = "/jsp/common/registration.jsp";
     public final static String PATH_PAGE_USER_MAIN = "/jsp/user/userMain.jsp";
     public final static String PATH_PAGE_ADMIN_MAIN = "/jsp/admin/adminMain.jsp";
+    public final static String PATH_PAGE_ADMIN_ROOM = "/jsp/admin/printRooms.jsp";
+    public final static String PATH_PAGE_ADMIN_ADD_ROOM = "/jsp/admin/addRoom.jsp";
 }

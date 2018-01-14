@@ -7,12 +7,12 @@ import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.exception.ServiceException;
 
 public class UserService {
-    private ClientDAO dao = DAOFactory.getClientDao();
+    private ClientDAO clientDAO = DAOFactory.getClientDAO();
 
     public int checkUserIsExist(String login, String password) throws ServiceException {
         int id = 0;
         try {
-            id = dao.findClientByLoginPassword(login, password);
+            id = clientDAO.findClientByLoginPassword(login, password);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -22,7 +22,7 @@ public class UserService {
     public boolean registerUser(Client client) throws ServiceException {
         boolean flag = false;
         try {
-            flag = dao.addClient(client);
+            flag = clientDAO.addClient(client);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

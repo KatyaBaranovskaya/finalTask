@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -19,17 +19,20 @@
     <a class="navbar-logo" href=""><img width="60" height="60" src="/resources/hotel.png"></a>
     <ul class="menu-main">
 
-        <li><a href=""><fmt:message key="page.main" bundle="${rb}"/></a></li>
-        <li><a href=""><fmt:message key="page.room" bundle="${rb}"/></a></li>
-        <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
-        <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
+        <li><a href="/jsp/common/main.jsp"><fmt:message key="page.main" bundle="${rb}"/></a></li>
 
-        <c:if test="${sessionScope.role == null}">
+        <c:if test="${sessionScope.role == null || sessionScope.role == 'guest'}">
+            <li><a href=""><fmt:message key="page.room" bundle="${rb}"/></a></li>
+            <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
+            <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
             <li><a href="/jsp/common/login.jsp"><fmt:message key="page.authorization" bundle="${rb}"/></a></li>
             <li><a href="/jsp/common/registration.jsp"><fmt:message key="page.registration" bundle="${rb}"/></a></li>
         </c:if>
 
         <c:if test="${sessionScope.role == 'user'}">
+            <li><a href=""><fmt:message key="page.room" bundle="${rb}"/></a></li>
+            <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
+            <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.reservation" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.account" bundle="${rb}"/></a></li>
             <li>
@@ -41,6 +44,14 @@
         </c:if>
 
         <c:if test="${sessionScope.role == 'admin'}">
+            <li>
+                <form action="/Controller" method="POST">
+                    <input type="hidden" name="command" value="print_room"/>
+                    <input type="submit" value="<fmt:message key="page.room" bundle="${rb}"/>" class="btn btn-success">
+                </form>
+            </li>
+            <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
+            <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.account" bundle="${rb}"/></a></li>
             <li>
                 <form action="/Controller" method="POST">

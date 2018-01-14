@@ -13,13 +13,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ConnectionPool {
+    private final static Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
     private static ConnectionPool instance;
     private static AtomicBoolean instanceCreated = new AtomicBoolean();
     private static Lock lock = new ReentrantLock();
     private BlockingQueue<ProxyConnection> connections;
     private PoolManager manager;
-
-    private final static Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     public ConnectionPool()  {
         init();
