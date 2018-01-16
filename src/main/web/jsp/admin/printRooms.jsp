@@ -28,6 +28,7 @@
         <th>Вместимость</th>
         <th>Цена</th>
         <th>Описание</th>
+        <th>Фото</th>
     </tr>
     </thead>
     <tbody>
@@ -40,6 +41,7 @@
         <td>${room.capacity}</td>
         <td>${room.price}</td>
         <td>${room.description}</td>
+        <td><img src="/resources/${room.picture}" alt="${room.roomNumber}"></td>
     </tr>
     </tbody>
     </c:forEach>

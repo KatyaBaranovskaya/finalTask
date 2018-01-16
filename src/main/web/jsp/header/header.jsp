@@ -16,7 +16,7 @@
 </head>
 <body>
 <nav class="top-menu">
-    <a class="navbar-logo" href=""><img width="60" height="60" src="/resources/hotel.png"></a>
+    <a class="navbar-logo" href=""><img width="60" height="60" src="${pageContext.request.contextPath}/resources/hotel.png"></a>
     <ul class="menu-main">
 
         <li><a href="/jsp/common/main.jsp"><fmt:message key="page.main" bundle="${rb}"/></a></li>
@@ -34,7 +34,7 @@
             <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.reservation" bundle="${rb}"/></a></li>
-            <li><a href=""><fmt:message key="page.account" bundle="${rb}"/></a></li>
+            <li><a href="/jsp/user/account.jsp"><fmt:message key="page.account" bundle="${rb}"/></a></li>
             <li>
                 <form action="/Controller" method="POST">
                     <input type="hidden" name="command" value="logout"/>

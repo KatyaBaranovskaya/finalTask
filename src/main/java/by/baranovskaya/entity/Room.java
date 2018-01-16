@@ -6,6 +6,7 @@ public class Room extends Entity {
     private String typeRoom;
     private int capacity;
     private double price;
+    private String picture;
     private String description;
 
     public int getRoomNumber() {
@@ -46,6 +47,14 @@ public class Room extends Entity {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getDescription() {

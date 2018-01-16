@@ -4,10 +4,10 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/css/style.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resource/css/bootstrap-theme.css">
-    <script src="${pageContext.request.contextPath}/resource/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+    <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 </head>
 <body>
 <footer class="footer">

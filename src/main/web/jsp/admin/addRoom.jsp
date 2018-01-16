@@ -65,6 +65,11 @@
     <input type="hidden" name="command" value="add_room"/>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
+            <input type="file" name="image" id="image">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" name="add" class="btn btn-success">Добавить</button>
         </div>
     </div>

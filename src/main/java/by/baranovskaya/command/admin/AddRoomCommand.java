@@ -9,6 +9,7 @@ import by.baranovskaya.validation.Validation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class AddRoomCommand implements Command {
@@ -36,6 +37,7 @@ public class AddRoomCommand implements Command {
         room.setCapacity(Integer.parseInt(request.getParameter(PARAM_CAPACITY)));
         room.setPrice(Integer.parseInt(request.getParameter(PARAM_PRICE)));
         room.setDescription(request.getParameter(PARAM_DESCRIPTION));
+        room.setPicture(request.getParameter("image"));
 
         if(Validation.validateRoom(room)){
             try {

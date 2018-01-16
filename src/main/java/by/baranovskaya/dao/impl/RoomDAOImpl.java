@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomDAOImpl implements RoomDAO {
-    private final static String SELECT_ROOM = "SELECT type_room, capacity, price, description, room_number, status\n" +
+    private final static String SELECT_ROOM = "SELECT type_room, capacity, price, picture, description, room_number, status\n" +
             "FROM hotel.types_room JOIN rooms ON rooms.id_type = types_room.id_type";
-    private final static String INSERT_ROOM_TYPE = "INSERT INTO types_room(type_room, capacity, price, description) VALUES (?,?,?,?)";
+    private final static String INSERT_ROOM_TYPE = "INSERT INTO types_room(type_room, capacity, price, picture, description) VALUES (?,?,?,?,?)";
     private final static String INSERT_ROOM = "INSERT INTO rooms(room_number, id_type, status) VALUES (?,LAST_INSERT_ID(),?)";
 
 
@@ -34,6 +34,7 @@ public class RoomDAOImpl implements RoomDAO {
                 room.setTypeRoom(resultSet.getString("type_room"));
                 room.setCapacity(resultSet.getInt("capacity"));
                 room.setPrice(resultSet.getDouble("price"));
+                room.setPicture(resultSet.getString("picture"));
                 room.setDescription(resultSet.getString("description"));
                 listRoom.add(room);
             }
@@ -73,7 +74,8 @@ public class RoomDAOImpl implements RoomDAO {
             preparedStatement.setString(1, room.getTypeRoom());
             preparedStatement.setInt(2, room.getCapacity());
             preparedStatement.setDouble(3, room.getPrice());
-            preparedStatement.setString(4, room.getDescription());
+            preparedStatement.setString(4, room.getPicture());
+            preparedStatement.setString(5, room.getDescription());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception inserting room" + e);
