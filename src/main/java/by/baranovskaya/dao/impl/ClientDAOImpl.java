@@ -12,8 +12,8 @@ import java.util.List;
 
 public class ClientDAOImpl implements ClientDAO {
     private final static int ID_ROLE = 2;
-    private final static String SELECT_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, passport, telephone" +
-     "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE roles.role_name = 'Пользователь'";
+    private final static String SELECT_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, passport, telephone \n" +
+            "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE roles.role_name = 'Пользователь'";
     private final static String INSERT_CLIENT = "INSERT INTO clients(email, login, password, id_role, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
     private final static String FIND_CLIENT = "SELECT id_role FROM hotel.clients WHERE login = ? AND password = ?";
 

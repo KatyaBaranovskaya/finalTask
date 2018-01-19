@@ -18,7 +18,7 @@
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
 <jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 
-<a href="/jsp/admin/addRoom.jsp">Добавить номер</a></li>
+<a href="/jsp/admin/addRoom.jsp">Номера</a></li>
 <table class="table table-hover">
     <thead>
     <tr>

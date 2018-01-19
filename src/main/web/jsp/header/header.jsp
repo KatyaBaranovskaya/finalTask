@@ -50,9 +50,19 @@
                     <input type="submit" value="<fmt:message key="page.room" bundle="${rb}"/>" class="btn btn-success">
                 </form>
             </li>
-            <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
+            <li>
+                <form action="/Controller" method="POST">
+                    <input type="hidden" name="command" value="print_service"/>
+                    <input type="submit" value="<fmt:message key="page.service" bundle="${rb}"/>" class="btn btn-success">
+                </form>
+            </li>
             <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
-            <li><a href=""><fmt:message key="page.account" bundle="${rb}"/></a></li>
+            <li>
+                <form action="/Controller" method="POST">
+                    <input type="hidden" name="command" value="print_user"/>
+                    <input type="submit" value="<fmt:message key="page.users" bundle="${rb}"/>" class="btn btn-success">
+                </form>
+            </li>
             <li>
                 <form action="/Controller" method="POST">
                     <input type="hidden" name="command" value="logout"/>

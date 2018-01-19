@@ -35,14 +35,14 @@ public class AddRoomCommand implements Command {
         room.setStatus(request.getParameter(PARAM_STATUS));
         room.setTypeRoom(request.getParameter(PARAM_TYPE));
         room.setCapacity(Integer.parseInt(request.getParameter(PARAM_CAPACITY)));
-        room.setPrice(Integer.parseInt(request.getParameter(PARAM_PRICE)));
+        room.setPrice(Double.parseDouble(request.getParameter(PARAM_PRICE)));
         room.setDescription(request.getParameter(PARAM_DESCRIPTION));
         room.setPicture(request.getParameter("image"));
 
         if(Validation.validateRoom(room)){
             try {
                 if(adminService.addRoom(room)){
-                    page = PageConstant.PATH_PAGE_ADMIN_ROOM;
+                    page = PageConstant.PATH_PAGE_ADMIN_ROOMS;
                 } else{
                     //TODO user is exist
                     page = PageConstant.PATH_PAGE_ADMIN_ADD_ROOM;
