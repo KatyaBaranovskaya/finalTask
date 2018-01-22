@@ -1,4 +1,3 @@
-
 CREATE TABLE `roles` (
   `id_role` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Поле содержит "ID роли".',
   `role_name` varchar(45) NOT NULL COMMENT 'Поле содержит имя роли, а именно администратор или клиент.',
@@ -24,27 +23,26 @@ CREATE TABLE `clients` (
   CONSTRAINT `id_role_fk` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='Данная таблица предназначена для хранения персональных данных о всех клиентах. Таблица содержит первичный ключ - "ID клиента". Все поля данной таблицы являются не нулевыми.';
 
-CREATE TABLE `types_room` (
-  `id_type` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Поле содержит "ID типа номера".',
+CREATE TABLE `rooms` (
+  `room_number` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Поле содержит "ID типа номера".',
   `type_room` varchar(45) NOT NULL COMMENT 'Поле содержит тип номера (люкс, полулюкс и тд).',
   `capacity` int(11) NOT NULL COMMENT 'Поле содержит вместимость номера, т.е. максимальное количество человек, которые могут проживать в номере.',
   `price` decimal(18,10) NOT NULL COMMENT 'Поле содержит цену номера за сутки.',
+  `status` varchar(45) NOT NULL,
   `picture` varchar(45) DEFAULT NULL,
   `description` text NOT NULL COMMENT 'В данном поле содержится описание номера.',
-  PRIMARY KEY (`id_type`),
+  PRIMARY KEY (`room_number`),
   KEY `type_idx` (`type_room`) COMMENT 'Индекс, который состоит из типа номера, т.к по данному полю наиболее часто выполняется запрос на чтение.',
   KEY `capacity_price_idx` (`capacity`,`price`) COMMENT 'Индекс, который состоит из вместимости и цены номера, т.к по данным полям наиболее часто выполняется запрос на поиск.'
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='Данная таблица предназначена для хранения данных о видах номеров отеля. Таблица содержит первичный ключ, который хранит в себе "ID типа  номера". Все поля данной таблицы являются не нулевыми.';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='Данная таблица предназначена для хранения данных о номерах и их видах. Все поля данной таблицы являются не нулевыми.';
 
-CREATE TABLE `rooms` (
-  `room_number` int(11) NOT NULL COMMENT 'Поле содержит номер апартамента отеля.',
-  `id_type` int(11) unsigned NOT NULL COMMENT 'Поле содержит "ID типа номера".\nПоле является внешним ключом, предназначено для хранения значения первичного ключа таблицы "types_room" с целью организации связи между этими таблицами.',
-  `status` varchar(45) NOT NULL COMMENT 'Поле содержит статус номера, т.е. забронирован или свободен.',
-  PRIMARY KEY (`room_number`),
-  KEY `status_idx` (`status`) COMMENT 'Индекс, который состоит из статуса номера, т.к по данному полю наиболее часто выполняется запрос свободен номер или нет.',
-  KEY `id_type_fk_idx` (`id_type`),
-  CONSTRAINT `id_type_fk` FOREIGN KEY (`id_type`) REFERENCES `types_room` (`id_type`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Данная таблица предназначена для хранения данных о номерах отеля. Таблица содержит первичный ключ, который хранит в себе номер апартамента, а также поля тип номера и его статус. Все поля данной таблицы являются не нулевыми.';
+CREATE TABLE `services` (
+  `id_service` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Поле содержит "ID предоставляемой услуги".',
+  `type_service` varchar(45) NOT NULL COMMENT 'Поле содержит тип предоставляемой услуги( питание, массаж и тд).',
+  `price` decimal(18,10) NOT NULL COMMENT 'Поле содержит цену за одноразовое использование услуги.',
+  PRIMARY KEY (`id_service`),
+  KEY `type_idx` (`type_service`) COMMENT 'Индекс, который включает в себя тип предоставляемых услуг в отеле. Используем индекс для этого поля, т.к по данному полю наиболее часто выполняется запрос на чтение.'
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='Данная таблица предназначена для хранения всех услуг, которые предоставляются отелем. Таблица содержит первичный ключ - "ID услуги". Все поля данной таблицы являются не нулевыми.';
 
 CREATE TABLE `orders` (
   `id_order` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Поле содержит "ID заказа".',
@@ -55,19 +53,11 @@ CREATE TABLE `orders` (
   `price` decimal(18,10) NOT NULL COMMENT 'Поле содержит цену за проживание.',
   `status` varchar(45) NOT NULL,
   PRIMARY KEY (`id_order`),
-  KEY `room_number_fk_idx` (`room_number`),
   KEY `id_client_fk_idx` (`id_client`),
+  KEY `id_room_number_fk_idx` (`room_number`),
   CONSTRAINT `id_client_fk` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id_client`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `room_number_fk` FOREIGN KEY (`room_number`) REFERENCES `rooms` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `id_room_number_fk` FOREIGN KEY (`room_number`) REFERENCES `rooms` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='Данная таблица предназначена для хранения обработанных заявок клиентов, т.е. каждая заявка уже подтверждена администратором и имеет статус заказа. Таблица содержит первичный ключ -"ID заказа". Все поля данной таблицы являются не нулевыми.';
-
-CREATE TABLE `services` (
-  `id_service` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Поле содержит "ID предоставляемой услуги".',
-  `type_service` varchar(45) NOT NULL COMMENT 'Поле содержит тип предоставляемой услуги( питание, массаж и тд).',
-  `price` decimal(18,10) NOT NULL COMMENT 'Поле содержит цену за одноразовое использование услуги.',
-  PRIMARY KEY (`id_service`),
-  KEY `type_idx` (`type_service`) COMMENT 'Индекс, который включает в себя тип предоставляемых услуг в отеле. Используем индекс для этого поля, т.к по данному полю наиболее часто выполняется запрос на чтение.'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='Данная таблица предназначена для хранения всех услуг, которые предоставляются отелем. Таблица содержит первичный ключ - "ID услуги". Все поля данной таблицы являются не нулевыми.';
 
 CREATE TABLE `order_service` (
   `id_order` int(10) unsigned NOT NULL,
