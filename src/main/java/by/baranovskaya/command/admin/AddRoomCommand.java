@@ -4,7 +4,7 @@ import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstant;
 import by.baranovskaya.entity.Room;
 import by.baranovskaya.exception.ServiceException;
-import by.baranovskaya.service.AdminService;
+import by.baranovskaya.service.RoomService;
 import by.baranovskaya.validation.Validation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -16,15 +16,15 @@ public class AddRoomCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(AddRoomCommand.class);
 
     private final static String PARAM_NUMBER = "number";
-    private final static String PARAM_STATUS = "status";
     private final static String PARAM_TYPE = "type";
     private final static String PARAM_CAPACITY = "capacity";
     private final static String PARAM_PRICE = "price";
+    private final static String PARAM_STATUS = "status";
     private final static String PARAM_DESCRIPTION = "description";
-    private AdminService adminService;
+    private RoomService roomService;
 
-    public AddRoomCommand(AdminService adminService) {
-        this.adminService = adminService;
+    public AddRoomCommand(RoomService roomService) {
+        this.roomService = roomService;
     }
 
     @Override
@@ -32,16 +32,16 @@ public class AddRoomCommand implements Command {
         String page = null;
         Room room = new Room();
         room.setRoomNumber(Integer.parseInt(request.getParameter(PARAM_NUMBER)));
-        room.setStatus(request.getParameter(PARAM_STATUS));
         room.setTypeRoom(request.getParameter(PARAM_TYPE));
         room.setCapacity(Integer.parseInt(request.getParameter(PARAM_CAPACITY)));
         room.setPrice(Double.parseDouble(request.getParameter(PARAM_PRICE)));
+        room.setStatus(request.getParameter(PARAM_STATUS));
         room.setDescription(request.getParameter(PARAM_DESCRIPTION));
         room.setPicture(request.getParameter("image"));
 
         if(Validation.validateRoom(room)){
             try {
-                if(adminService.addRoom(room)){
+                if(roomService.addRoom(room)){
                     page = PageConstant.PATH_PAGE_ADMIN_ROOMS;
                 } else{
                     //TODO user is exist

@@ -18,17 +18,19 @@
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
 <jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 
+
+
 <a href="/jsp/admin/addRoom.jsp">Номера</a></li>
 <table class="table table-hover">
     <thead>
     <tr>
         <th>№ Номера</th>
-        <th>Статус</th>
         <th>Тип</th>
         <th>Вместимость</th>
         <th>Цена</th>
-        <th>Описание</th>
+        <th>Статус</th>
         <th>Фото</th>
+        <th>Описание</th>
     </tr>
     </thead>
     <tbody>
@@ -36,16 +38,39 @@
     <c:forEach var="room" items="${rooms}">
     <tr>
         <td>${room.roomNumber}</td>
-        <td>${room.status}</td>
         <td>${room.typeRoom}</td>
         <td>${room.capacity}</td>
         <td>${room.price}</td>
+        <td>${room.status}</td>
+        <td class="printRoom" ><img src="/resources/${room.picture}" alt="${room.roomNumber}"></td>
         <td>${room.description}</td>
-        <td><img src="/resources/${room.picture}" alt="${room.roomNumber}"></td>
+        <td>
+            <a href="/Controller?command=delete_room&id=${room.roomNumber}">Удалить</a>
+        </td>
     </tr>
     </tbody>
     </c:forEach>
-
 </table>
+
+<table border="1" cellpadding="5" cellspacing="5">
+    <tr>
+        <c:forEach begin="1" end="${noOfPages}" var="i">
+            <c:choose>
+                <c:when test="${currentPage eq i}">
+                    <td>${i}</td>
+                </c:when>
+                <c:otherwise>
+                    <td><a href="/Controller?command=print_room&page=${i}">${i}</a></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </tr>
+</table>
+
+<c:if test="${currentPage lt noOfPages}">
+    <td><a href="/Controller?command=print_room&page=${currentPage + 1}">Next</a></td>
+</c:if>
 </body>
 </html>
+
+

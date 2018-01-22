@@ -7,6 +7,7 @@ import by.baranovskaya.command.common.LoginCommand;
 import by.baranovskaya.command.common.LogoutCommand;
 import by.baranovskaya.service.AdminService;
 import by.baranovskaya.service.HotelService;
+import by.baranovskaya.service.RoomService;
 import by.baranovskaya.service.UserService;
 
 public enum CommandType {
@@ -15,10 +16,13 @@ public enum CommandType {
     REGISTRATION(new RegistrationCommand(new UserService())),
     CHANGE_LOCALE(new ChangeLocaleCommand()),
     PRINT_USER(new PrintClientCommand(new AdminService())),
-    ADD_ROOM(new AddRoomCommand(new AdminService())),
-    PRINT_ROOM(new PrintRoomCommand(new HotelService())),
-    ADD_SERVICE(new AddServiceCommand(new AdminService())),
-    PRINT_SERVICE(new PrintServiceCommand(new HotelService()));
+    DELETE_CLIENT(new DeleteClientCommand(new AdminService())),
+    ADD_TYPE_ROOM(new AddRoomCommand(new RoomService())),
+    PRINT_ROOM(new PrintRoomCommand(new RoomService())),
+    DELETE_ROOM(new DeleteRoomCommand(new RoomService())),
+    ADD_SERVICE(new AddServiceCommand(new HotelService())),
+    PRINT_SERVICE(new PrintServiceCommand(new HotelService())),
+    DELETE_SERVICE(new DeleteServiceCommand(new HotelService()));
 
     private Command command;
 

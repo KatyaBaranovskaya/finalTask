@@ -15,6 +15,7 @@ public class ClientDAOImpl implements ClientDAO {
     private final static String SELECT_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, passport, telephone \n" +
             "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE roles.role_name = 'Пользователь'";
     private final static String INSERT_CLIENT = "INSERT INTO clients(email, login, password, id_role, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
+    public final static String DELETE_CLIENT = "DELETE FROM clients WHERE id_client=?";
     private final static String FIND_CLIENT = "SELECT id_role FROM hotel.clients WHERE login = ? AND password = ?";
 
     @Override
@@ -67,6 +68,23 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception inserting client" + e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteClient(int idClient) throws DAOException {
+        ProxyConnection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(DELETE_CLIENT);
+            preparedStatement.setInt(1, idClient);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Exception deleting client" + e);
         } finally {
             close(preparedStatement);
             close(connection);

@@ -11,5 +11,5 @@ public class PageConstant {
     public final static String PATH_PAGE_ADMIN_ADD_ROOM = "/jsp/admin/addRoom.jsp";
     public final static String PATH_PAGE_ADMIN_SERVICES = "/jsp/admin/printServices.jsp";
     public final static String PATH_PAGE_ADMIN_ADD_SERVICE = "/jsp/admin/addService.jsp";
-    public final static String PATH_PAGE_ADMIN_USERS = "/jsp/admin/printUsers.jsp";
+    public final static String PATH_PAGE_ADMIN_CLIENTS = "/jsp/admin/printClients.jsp";
 }

@@ -19,20 +19,12 @@
 <jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 
 <form action="/Controller" method="POST">
+    <h3>Добавить новый тип</h3>
     <div class="form-group">
         <label class="col-sm-2 control-label">Номер</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" name="number">
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Статус</label>
-        <label class="radio-inline">
-            <input type="radio" name="status" id="radio1" value="Свободен"> cвободен
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="status" id="radio2" value="Бронирован"> бронирован
-        </label>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Тип</label>
@@ -57,12 +49,21 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-sm-2 control-label">Статус</label>
+        <label class="radio-inline">
+            <input type="radio" name="status" id="radio1" value="Свободен"> cвободен
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="status" id="radio2" value="Бронирован"> бронирован
+        </label>
+    </div>
+    <div class="form-group">
         <label class="col-sm-2 control-label">Описание</label>
         <div class="col-sm-10">
             <textarea type="text" class="form-control" name="description"></textarea>
         </div>
     </div>
-    <input type="hidden" name="command" value="add_room"/>
+    <input type="hidden" name="command" value="add_type_room"/>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <input type="file" name="image" id="image">
@@ -94,3 +95,6 @@
         <option>3 ADL</option>
     </select>
 </div>--%>
+
+
+

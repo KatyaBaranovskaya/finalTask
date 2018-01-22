@@ -7,6 +7,7 @@ import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.AdminService;
 import by.baranovskaya.service.HotelService;
+import by.baranovskaya.service.RoomService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,20 +18,28 @@ import java.util.List;
 public class PrintRoomCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(PrintRoomCommand.class);
 
-    private HotelService hotelService;
+    private RoomService roomService;
 
-    public PrintRoomCommand(HotelService hotelService) {
-        this.hotelService = hotelService;
+    public PrintRoomCommand(RoomService roomService) {
+        this.roomService = roomService;
     }
 
     @Override
     public String execute(HttpServletRequest request) {
+        int noPage = 1;
+        if(request.getParameter("page") != null) {
+            noPage = Integer.parseInt(request.getParameter("page"));
+        }
         String page = null;
         List<Room> listRoom;
 
         try {
-            listRoom = hotelService.getAllRoom();
+            listRoom = roomService.getRooms(noPage);
+
             request.setAttribute("rooms", listRoom);
+            request.setAttribute("noOfPages", roomService.getNoOfPages());
+            request.setAttribute("currentPage", noPage);
+
             page = PageConstant.PATH_PAGE_ADMIN_ROOMS;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

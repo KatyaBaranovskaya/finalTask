@@ -11,7 +11,9 @@
 </head>
 <body>
 <footer class="footer">
-    <h3>HotelBooking</h3>
+    <div class="container">
+        <p>HotelBooking</p>
+    </div>
     <form action="/Controller" method="POST">
         <input type="hidden" name="command" value="change_locale">
         <input type="hidden" name="url" value="${pageContext.request.requestURI}">
@@ -23,3 +25,5 @@
 </footer>
 </body>
 </html>
+
+

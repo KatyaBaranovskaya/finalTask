@@ -1,3 +1,15 @@
+* {
+  margin:0;
+}
+
+body {
+  height: 100%;
+}
+html {
+  position:relative;
+  min-height:100%;
+}
+
 .formHolder p{
   text-align: center;
   font-family: Sans-serif;
@@ -99,7 +111,6 @@ a:hover {
 
 /*header*/
 p {color: #524f4e;}
-html, body {min-height:100%}
 
 .top-menu {
   background: rgba(255,255,255,.5);
@@ -162,12 +173,15 @@ html, body {min-height:100%}
 @media (max-width:600px){
   .menu-main li {display: block;}
 }
+/*header*/
 
 .footer {
   position: absolute;
-  left: 0; bottom: 0;
+  left: 0;
+  bottom: 0;
   padding-top: 19px;
   color: #000000;
+  width: 100%;
 }
 
 .footerBtn{
@@ -185,7 +199,6 @@ html, body {min-height:100%}
   color: black;
   text-decoration: none;
 }
-/*header*/
 
 /*account*/
 body.account
@@ -211,3 +224,15 @@ span.tags
   padding: 2px 4px;
 }
 /*account*/
+
+.printRoom img{
+  height: 100px;
+  width: 100px;
+}
+.b-content {
+  padding: 10px 0;
+  /*background: url(/upload/images/room-bg.jpg) no-repeat;*/
+  background-position: center center;
+  background-size: cover;
+  background-repeat: repeat-y;
+}
