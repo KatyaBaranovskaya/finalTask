@@ -10,5 +10,5 @@ public interface ClientDAO extends AbstractDAO{
     List<Client> getAll() throws DAOException;
     boolean addClient(Client client) throws DAOException;
     boolean deleteClient(int idClient) throws DAOException;
-    int findClientByLoginPassword(String login, String password) throws DAOException;
+    Client findClientByLoginPassword(String login, String password) throws DAOException;
 }

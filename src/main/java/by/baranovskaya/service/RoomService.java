@@ -7,6 +7,7 @@ import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.exception.ServiceException;
 
 import java.util.List;
+import java.util.Set;
 
 public class RoomService {
     private final static int recordsPerPage = 5;
@@ -62,5 +63,35 @@ public class RoomService {
             throw new ServiceException(e);
         }
         return (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+    }
+
+    public Set<String> getTypesRoom() throws ServiceException {
+        Set<String> listTypes  = null;
+        try {
+            listTypes =  roomDAO.getTypesRoom();
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return listTypes;
+    }
+
+    public Room findRoomByNumber(int roomNumber) throws ServiceException {
+        Room room = null;
+        try {
+            room =  roomDAO.findRoomByNumber(roomNumber);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return room;
+    }
+
+    public boolean updateRoom(Room room) throws ServiceException {
+        boolean flag = false;
+        try {
+            flag = roomDAO.updateRoomByNumber(room);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return flag;
     }
 }

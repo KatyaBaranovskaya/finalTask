@@ -9,7 +9,10 @@ public class PageConstant {
     public final static String PATH_PAGE_ADMIN_MAIN = "/jsp/admin/adminMain.jsp";
     public final static String PATH_PAGE_ADMIN_ROOMS = "/jsp/admin/printRooms.jsp";
     public final static String PATH_PAGE_ADMIN_ADD_ROOM = "/jsp/admin/addRoom.jsp";
+    public final static String PATH_PAGE_ADMIN_EDIT_ROOM = "/jsp/admin/editRoom.jsp";
     public final static String PATH_PAGE_ADMIN_SERVICES = "/jsp/admin/printServices.jsp";
     public final static String PATH_PAGE_ADMIN_ADD_SERVICE = "/jsp/admin/addService.jsp";
+    public final static String PATH_PAGE_ADMIN_EDIT_SERVICE = "/jsp/admin/editService.jsp";
+    public final static String PATH_PAGE_USER_RESERVATION = "/jsp/user/reservation.jsp";
     public final static String PATH_PAGE_ADMIN_CLIENTS = "/jsp/admin/printClients.jsp";
 }

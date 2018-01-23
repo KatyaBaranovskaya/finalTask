@@ -9,14 +9,14 @@ import by.baranovskaya.exception.ServiceException;
 public class UserService {
     private ClientDAO clientDAO = DAOFactory.getClientDAO();
 
-    public int checkUserIsExist(String login, String password) throws ServiceException {
-        int id = 0;
+    public Client checkUserIsExist(String login, String password) throws ServiceException {
+        Client client = null;
         try {
-            id = clientDAO.findClientByLoginPassword(login, password);
+            client = clientDAO.findClientByLoginPassword(login, password);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return id;
+        return client;
     }
 
     public boolean registerUser(Client client) throws ServiceException {

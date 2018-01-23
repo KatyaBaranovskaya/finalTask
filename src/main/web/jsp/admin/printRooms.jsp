@@ -20,7 +20,7 @@
 
 
 
-<a href="/jsp/admin/addRoom.jsp">Номера</a></li>
+<a href="/Controller?command=get_types">Добавить номер</a></li>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -46,6 +46,7 @@
         <td>${room.description}</td>
         <td>
             <a href="/Controller?command=delete_room&id=${room.roomNumber}">Удалить</a>
+            <a href="/Controller?command=edit_room&id=${room.roomNumber}">Редактировать</a>
         </td>
     </tr>
     </tbody>

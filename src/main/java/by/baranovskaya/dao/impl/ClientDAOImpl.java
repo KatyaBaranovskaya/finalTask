@@ -16,7 +16,8 @@ public class ClientDAOImpl implements ClientDAO {
             "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE roles.role_name = 'Пользователь'";
     private final static String INSERT_CLIENT = "INSERT INTO clients(email, login, password, id_role, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
     public final static String DELETE_CLIENT = "DELETE FROM clients WHERE id_client=?";
-    private final static String FIND_CLIENT = "SELECT id_role FROM hotel.clients WHERE login = ? AND password = ?";
+    private final static String FIND_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, passport, telephone \n" +
+            "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE login = ? AND password = ?";
 
     @Override
     public List<Client> getAll() throws DAOException {
@@ -93,7 +94,7 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public int findClientByLoginPassword(String login, String password) throws DAOException { /// нормально так???
+    public Client findClientByLoginPassword(String login, String password) throws DAOException { /// нормально так???
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -102,9 +103,21 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                return resultSet.getInt("id_role");
+                Client client = new Client();
+                client.setIdClient(resultSet.getInt("id_client"));
+                client.setLogin(resultSet.getString("email"));
+                client.setLogin(resultSet.getString("login"));
+                client.setPassword(resultSet.getString("password"));
+                client.setRole(resultSet.getString("role_name"));
+                client.setSurname(resultSet.getString("surname"));
+                client.setName(resultSet.getString("name"));
+                client.setMiddleName(resultSet.getString("middle_name"));
+                client.setDateBirth(resultSet.getDate("date_birth"));
+                client.setPassport(resultSet.getString("passport"));
+                client.setTelephone(resultSet.getString("telephone"));
+                return client;
             } else{
-                return 0;
+                return null;
             }
         }  catch (SQLException e) {
             throw new DAOException("Exception selecting client by login and password" + e);

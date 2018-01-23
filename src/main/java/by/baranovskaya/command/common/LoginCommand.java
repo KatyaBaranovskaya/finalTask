@@ -2,6 +2,7 @@ package by.baranovskaya.command.common;
 
 import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstant;
+import by.baranovskaya.entity.Client;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
 import by.baranovskaya.validation.Validation;
@@ -16,9 +17,8 @@ public class LoginCommand implements Command {
 
     private final static String PARAM_LOGIN = "login";
     private final static String PARAM_PASSWORD = "password";
-    private final static int  ADMIN_ROLE = 1;
-    private final static int  USER_ROLE = 2;
-    private final static int  NONE = 0;
+    private final static String ADMIN_ROLE = "Администратор";
+    private final static String USER_ROLE = "Пользователь";
     private UserService userService;
 
     public LoginCommand(UserService userService) {
@@ -31,19 +31,22 @@ public class LoginCommand implements Command {
         String loginValue = request.getParameter(PARAM_LOGIN);
         String passValue = request.getParameter(PARAM_PASSWORD);
         HttpSession session = request.getSession(true);
+        Client client = null;
 
         if(Validation.validateLogin(loginValue, passValue)){
             try {
-                switch (userService.checkUserIsExist(loginValue, passValue)) {
+                client = userService.checkUserIsExist(loginValue, passValue);
+                switch (client.getRole()) {
                     case ADMIN_ROLE:
                         session.setAttribute("role", "admin");
                         page = PageConstant.PATH_PAGE_ADMIN_MAIN;
                         break;
                     case USER_ROLE:
                         session.setAttribute("role", "user");
+                        session.setAttribute("user", client);
                         page = PageConstant.PATH_PAGE_USER_MAIN;
                         break;
-                    case NONE:
+                    default:
                         //TODO user doesn't exist
                         page = PageConstant.PATH_PAGE_LOGIN;
                         break;

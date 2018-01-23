@@ -36,6 +36,7 @@
         <td>${service.price}</td>
         <td>
             <a href="/Controller?command=delete_service&id=${service.idService}">Удалить</a>
+            <a href="/Controller?command=edit_service&id=${service.idService}">Редактировать</a>
         </td>
     </tr>
     </tbody>

@@ -33,7 +33,7 @@
             <li><a href=""><fmt:message key="page.room" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
-            <li><a href=""><fmt:message key="page.reservation" bundle="${rb}"/></a></li>
+            <li><a href="/Controller?command=get_services"><fmt:message key="page.reservation" bundle="${rb}"/></a></li>
             <li><a href="/jsp/user/account.jsp"><fmt:message key="page.account" bundle="${rb}"/></a></li>
             <li>
                 <form action="/Controller" method="POST">

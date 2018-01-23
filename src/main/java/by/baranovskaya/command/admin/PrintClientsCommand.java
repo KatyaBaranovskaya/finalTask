@@ -12,12 +12,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class PrintClientCommand implements Command{
-    private final static Logger LOGGER = LogManager.getLogger(PrintClientCommand.class);
+public class PrintClientsCommand implements Command{
+    private final static Logger LOGGER = LogManager.getLogger(PrintClientsCommand.class);
 
     private AdminService adminService;
 
-    public PrintClientCommand(AdminService adminService) {
+    public PrintClientsCommand(AdminService adminService) {
         this.adminService = adminService;
     }
 

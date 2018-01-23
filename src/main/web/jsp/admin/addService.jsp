@@ -31,9 +31,9 @@
             <input type="text" class="form-control" name="price">
         </div>
     </div>
-    <input type="hidden" name="command" value="add_service"/>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="command" value="add_service"/>
             <button type="submit" name="add" class="btn btn-success">Добавить</button>
         </div>
     </div>

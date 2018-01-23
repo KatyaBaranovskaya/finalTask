@@ -31,6 +31,13 @@
         <div class="col-sm-10">
             <input type="text" class="form-control" name="type">
         </div>
+
+        <select class="span1" name="typeOption">
+            <c:forEach var="type" items="${types}">
+                <option>${type}</option>
+            </c:forEach>
+        </select>
+
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Вместимость</label>
@@ -63,7 +70,6 @@
             <textarea type="text" class="form-control" name="description"></textarea>
         </div>
     </div>
-    <input type="hidden" name="command" value="add_type_room"/>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <input type="file" name="image" id="image">
@@ -71,6 +77,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
+            <input type="hidden" name="command" value="add_room"/>
             <button type="submit" name="add" class="btn btn-success">Добавить</button>
         </div>
     </div>

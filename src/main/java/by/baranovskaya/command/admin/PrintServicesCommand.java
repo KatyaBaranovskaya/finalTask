@@ -2,10 +2,8 @@ package by.baranovskaya.command.admin;
 
 import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstant;
-import by.baranovskaya.entity.Room;
 import by.baranovskaya.entity.Service;
 import by.baranovskaya.exception.ServiceException;
-import by.baranovskaya.service.AdminService;
 import by.baranovskaya.service.HotelService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -14,12 +12,12 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class PrintServiceCommand  implements Command{
-    private final static Logger LOGGER = LogManager.getLogger(PrintServiceCommand.class);
+public class PrintServicesCommand implements Command{
+    private final static Logger LOGGER = LogManager.getLogger(PrintServicesCommand.class);
 
     private HotelService hotelService;
 
-    public PrintServiceCommand(HotelService hotelService) {
+    public PrintServicesCommand(HotelService hotelService) {
         this.hotelService = hotelService;
     }
 
