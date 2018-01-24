@@ -14,7 +14,7 @@ public class RoomService {
     private RoomDAO roomDAO = DAOFactory.getRoomDAO();
 
     public boolean addRoom(Room room) throws ServiceException {
-        boolean flag = false;
+        boolean flag;
         try {
             flag = roomDAO.addRoom(room);
         } catch (DAOException e) {
@@ -25,7 +25,7 @@ public class RoomService {
 
 
     public boolean deleteRoom(int roomNumber) throws ServiceException {
-        boolean flag = false;
+        boolean flag;
         try {
             flag = roomDAO.deleteRoom(roomNumber);
         } catch (DAOException e) {
@@ -35,7 +35,7 @@ public class RoomService {
     }
 
     public List<Room> getAllRoom() throws ServiceException {
-        List<Room> listRoom = null;
+        List<Room> listRoom;
         try {
             listRoom =  roomDAO.getAll();
         } catch (DAOException e) {
@@ -56,7 +56,7 @@ public class RoomService {
     }
 
     public int getNoOfPages() throws ServiceException {
-        int noOfRecords = 0;
+        int noOfRecords;
         try {
             noOfRecords = roomDAO.countRoom();
         } catch (DAOException e) {
@@ -66,7 +66,7 @@ public class RoomService {
     }
 
     public Set<String> getTypesRoom() throws ServiceException {
-        Set<String> listTypes  = null;
+        Set<String> listTypes;
         try {
             listTypes =  roomDAO.getTypesRoom();
         } catch (DAOException e) {
@@ -76,7 +76,7 @@ public class RoomService {
     }
 
     public Room findRoomByNumber(int roomNumber) throws ServiceException {
-        Room room = null;
+        Room room;
         try {
             room =  roomDAO.findRoomByNumber(roomNumber);
         } catch (DAOException e) {
@@ -86,7 +86,7 @@ public class RoomService {
     }
 
     public boolean updateRoom(Room room) throws ServiceException {
-        boolean flag = false;
+        boolean flag;
         try {
             flag = roomDAO.updateRoomByNumber(room);
         } catch (DAOException e) {

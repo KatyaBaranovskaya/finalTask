@@ -4,6 +4,7 @@ import by.baranovskaya.entity.Service;
 import by.baranovskaya.exception.DAOException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface ServiceDAO extends AbstractDAO {
@@ -12,5 +13,5 @@ public interface ServiceDAO extends AbstractDAO {
     boolean deleteService(int idService) throws DAOException;
     Service findServiceById(int idService) throws DAOException;
     boolean updateServiceById(Service service) throws DAOException;
-    Set<String> getTypesService() throws DAOException;
+    Map<Integer, String> getTypesService() throws DAOException;
 }

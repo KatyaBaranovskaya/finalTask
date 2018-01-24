@@ -11,7 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class GetServicesCommand implements Command {
@@ -26,10 +28,10 @@ public class GetServicesCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String page = null;
-        Set<String> listServices = new HashSet<>();
+        Map<Integer, String> mapServices;
         try {
-            listServices = hotelService.getTypesService();
-            request.setAttribute("services", listServices);
+            mapServices = hotelService.getTypesService();
+            request.setAttribute("services", mapServices);
             page = PageConstant.PATH_PAGE_USER_RESERVATION;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

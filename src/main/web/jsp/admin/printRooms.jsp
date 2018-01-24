@@ -44,10 +44,18 @@
         <td>${room.status}</td>
         <td class="printRoom" ><img src="/resources/${room.picture}" alt="${room.roomNumber}"></td>
         <td>${room.description}</td>
-        <td>
-            <a href="/Controller?command=delete_room&id=${room.roomNumber}">Удалить</a>
-            <a href="/Controller?command=edit_room&id=${room.roomNumber}">Редактировать</a>
-        </td>
+
+        <c:if test="${sessionScope.role == 'admin'}">
+            <td>
+                <a href="/Controller?command=delete_room&id=${room.roomNumber}">Удалить</a>
+                <a href="/Controller?command=edit_room&id=${room.roomNumber}">Редактировать</a>
+            </td>
+        </c:if>
+        <c:if test="${sessionScope.role == 'user'}">
+            <td>
+                <a href="/Controller?command=reservation_room&id=${room.roomNumber}">Забронировать</a>
+            </td>
+        </c:if>
     </tr>
     </tbody>
     </c:forEach>

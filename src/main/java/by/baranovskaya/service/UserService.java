@@ -10,7 +10,7 @@ public class UserService {
     private ClientDAO clientDAO = DAOFactory.getClientDAO();
 
     public Client checkUserIsExist(String login, String password) throws ServiceException {
-        Client client = null;
+        Client client;
         try {
             client = clientDAO.findClientByLoginPassword(login, password);
         } catch (DAOException e) {
@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public boolean registerUser(Client client) throws ServiceException {
-        boolean flag = false;
+        boolean flag;
         try {
             flag = clientDAO.addClient(client);
         } catch (DAOException e) {

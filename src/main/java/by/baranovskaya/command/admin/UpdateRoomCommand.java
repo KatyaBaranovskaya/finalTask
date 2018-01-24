@@ -47,7 +47,7 @@ public class UpdateRoomCommand implements Command{
                 if(roomService.updateRoom(room)){
                     page = PageConstant.PATH_PAGE_ADMIN_ROOMS;
                 } else{
-                    //TODO user is exist
+                    //TODO  err
                     page = PageConstant.PATH_PAGE_ADMIN_EDIT_ROOM;
                 }
             } catch (ServiceException e) {

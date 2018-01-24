@@ -7,6 +7,7 @@ import by.baranovskaya.command.common.ChangeLocaleCommand;
 import by.baranovskaya.command.common.LoginCommand;
 import by.baranovskaya.command.common.LogoutCommand;
 import by.baranovskaya.command.user.ReservationCommand;
+import by.baranovskaya.command.user.ReservationRoomCommand;
 import by.baranovskaya.service.*;
 
 public enum CommandType {
@@ -28,7 +29,9 @@ public enum CommandType {
     GET_SERVICES(new GetServicesCommand(new HotelService())),
     PRINT_SERVICE(new PrintServicesCommand(new HotelService())),
     DELETE_SERVICE(new DeleteServiceCommand(new HotelService())),
-    RESERVATION(new ReservationCommand(new OrderService()));
+    RESERVATION(new ReservationCommand(new OrderService())),
+    RESERVATION_ROOM(new ReservationRoomCommand(new HotelService())),
+    PRINT_APPLICATION(new PrintApplicationCommand(new OrderService()));
 
     private Command command;
 

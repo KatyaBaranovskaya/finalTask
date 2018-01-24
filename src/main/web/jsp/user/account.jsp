@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">
-                <img src="${pageContext.request.contextPath}/resources/kate.jpg" class="rounded-circle"
+                <img src="${pageContext.request.contextPath}/resources/avatars/${client.avatar}" class="rounded-circle"
                      alt="user" width=60%" height="40%">
             </div>
             <div class="col-xs-12 divider text-center">

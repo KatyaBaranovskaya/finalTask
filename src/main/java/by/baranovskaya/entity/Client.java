@@ -12,8 +12,8 @@ public class Client extends Entity {
     private String name;
     private String middleName;
     private Date dateBirth;
-    private String passport;
     private String telephone;
+    private String avatar;
 
     public int getIdClient() {
         return idClient;
@@ -87,20 +87,20 @@ public class Client extends Entity {
         this.dateBirth = dateBirth;
     }
 
-    public String getPassport() {
-        return passport;
-    }
-
-    public void setPassport(String passport) {
-        this.passport = passport;
-    }
-
     public String getTelephone() {
         return telephone;
     }
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override
@@ -119,8 +119,8 @@ public class Client extends Entity {
         if (name != null ? !name.equals(client.name) : client.name != null) return false;
         if (middleName != null ? !middleName.equals(client.middleName) : client.middleName != null) return false;
         if (dateBirth != null ? !dateBirth.equals(client.dateBirth) : client.dateBirth != null) return false;
-        if (passport != null ? !passport.equals(client.passport) : client.passport != null) return false;
-        return telephone != null ? telephone.equals(client.telephone) : client.telephone == null;
+        if (telephone != null ? !telephone.equals(client.telephone) : client.telephone != null) return false;
+        return avatar != null ? avatar.equals(client.avatar) : client.avatar == null;
     }
 
     @Override
@@ -134,8 +134,8 @@ public class Client extends Entity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (middleName != null ? middleName.hashCode() : 0);
         result = 31 * result + (dateBirth != null ? dateBirth.hashCode() : 0);
-        result = 31 * result + (passport != null ? passport.hashCode() : 0);
         result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
+        result = 31 * result + (avatar != null ? avatar.hashCode() : 0);
         return result;
     }
 
@@ -150,9 +150,9 @@ public class Client extends Entity {
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", middleName='" + middleName + '\'' +
-                ", dateBirth='" + dateBirth + '\'' +
-                ", passport='" + passport + '\'' +
+                ", dateBirth=" + dateBirth +
                 ", telephone='" + telephone + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

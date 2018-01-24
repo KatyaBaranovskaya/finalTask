@@ -34,7 +34,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Услуги</label>
         <c:forEach var="service" items="${services}">
-            <br/><input type="checkbox" name="services" value="${service}"> ${service}
+            <br/><input type="checkbox" name="services" value="${service.key}"> ${service.value}
         </c:forEach>
     </div>
 

@@ -16,7 +16,7 @@ public class AdminService {
     private ClientDAO clientDAO = DAOFactory.getClientDAO();
 
     public List<Client> getAllClient() throws ServiceException {
-        List<Client> clientList = null;
+        List<Client> clientList;
         try {
             clientList =  clientDAO.getAll();
         } catch (DAOException e) {
@@ -26,7 +26,7 @@ public class AdminService {
     }
 
     public boolean deleteClient(int idClient) throws ServiceException {
-        boolean flag = false;
+        boolean flag;
         try {
             flag = clientDAO.deleteClient(idClient);
         } catch (DAOException e) {

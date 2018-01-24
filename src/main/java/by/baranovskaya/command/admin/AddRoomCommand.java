@@ -51,7 +51,7 @@ public class AddRoomCommand implements Command {
                 if(roomService.addRoom(room)){
                     page = PageConstant.PATH_PAGE_ADMIN_ROOMS;
                 } else{
-                    //TODO user is exist
+                    //TODO err
                     page = PageConstant.PATH_PAGE_ADMIN_ADD_ROOM;
                 }
             } catch (ServiceException e) {

@@ -11,19 +11,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class ServiceDAOIml implements ServiceDAO{
+public class ServiceDAOImpl implements ServiceDAO{
     private final static String SELECT_SERVICE = "SELECT id_service, type_service, price FROM hotel.services";
     private final static String INSERT_SERVICE = "INSERT INTO services(type_service, price) VALUES (?,?)";
     public final static String DELETE_SERVICE = "DELETE FROM services WHERE id_service=?";
     public final static String FIND_SERVICE_BY_ID = "SELECT id_service, type_service, price FROM services WHERE id_service=?";
     public final static String UPDATE_SERVICE_BY_ID = "UPDATE services SET type_service=?, price=? WHERE id_service=?";
-    private final static String SELECT_TYPES_SERVICE = "SELECT type_service FROM hotel.services;";
+    private final static String SELECT_TYPES_SERVICE = "SELECT id_service, type_service FROM hotel.services";
 
+    @Override
     public List<Service> getAll() throws DAOException {
         List<Service> serviceList = new ArrayList<>();
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
@@ -125,15 +123,15 @@ public class ServiceDAOIml implements ServiceDAO{
     }
 
     @Override
-    public Set<String> getTypesService() throws DAOException {
-        Set<String> setServices = new HashSet<>();
+    public Map<Integer, String> getTypesService() throws DAOException {
+        Map<Integer, String> mapServices = new HashMap<>();
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         Statement statement = null;
         try {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_TYPES_SERVICE);
             while (resultSet.next()) {
-                setServices.add(resultSet.getString("type_service"));
+                mapServices.put(resultSet.getInt("id_service"), resultSet.getString("type_service"));
             }
         } catch (SQLException e) {
             throw new DAOException("Exception selecting all types" + e);
@@ -141,6 +139,6 @@ public class ServiceDAOIml implements ServiceDAO{
             close(statement);
             close(connection);
         }
-        return setServices;
+        return mapServices;
     }
 }

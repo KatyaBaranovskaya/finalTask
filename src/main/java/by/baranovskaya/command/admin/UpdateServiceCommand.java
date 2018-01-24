@@ -37,7 +37,7 @@ public class UpdateServiceCommand implements Command{
                 if(hotelService.updateService(service)){
                     page = PageConstant.PATH_PAGE_ADMIN_SERVICES;
                 } else{
-                    //TODO user is exist
+                    //TODO err
                     page = PageConstant.PATH_PAGE_ADMIN_EDIT_SERVICE;
                 }
             } catch (ServiceException e) {

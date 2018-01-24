@@ -30,7 +30,7 @@
         </c:if>
 
         <c:if test="${sessionScope.role == 'user'}">
-            <li><a href=""><fmt:message key="page.room" bundle="${rb}"/></a></li>
+            <li><a href="/Controller?command=print_room"><fmt:message key="page.room" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.service" bundle="${rb}"/></a></li>
             <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
             <li><a href="/Controller?command=get_services"><fmt:message key="page.reservation" bundle="${rb}"/></a></li>
@@ -57,6 +57,7 @@
                 </form>
             </li>
             <li><a href=""><fmt:message key="page.contact" bundle="${rb}"/></a></li>
+            <li><a href="/Controller?command=print_application"><fmt:message key="page.application" bundle="${rb}"/></a></li>
             <li>
                 <form action="/Controller" method="POST">
                     <input type="hidden" name="command" value="print_user"/>

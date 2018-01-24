@@ -11,6 +11,7 @@ public class Order extends Entity {
     private double price;
     private String status;
     private Service[] services;
+    private Client client;
 
     public int getIdOrder() {
         return idOrder;
@@ -76,6 +77,14 @@ public class Order extends Entity {
         this.services = services;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,7 +101,8 @@ public class Order extends Entity {
             return false;
         if (status != null ? !status.equals(order.status) : order.status != null) return false;
         // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(services, order.services);
+        if (!Arrays.equals(services, order.services)) return false;
+        return client != null ? client.equals(order.client) : order.client == null;
     }
 
     @Override
@@ -108,6 +118,7 @@ public class Order extends Entity {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(services);
+        result = 31 * result + (client != null ? client.hashCode() : 0);
         return result;
     }
 
@@ -122,6 +133,7 @@ public class Order extends Entity {
                 ", price=" + price +
                 ", status='" + status + '\'' +
                 ", services=" + Arrays.toString(services) +
+                ", client=" + client +
                 '}';
     }
 }

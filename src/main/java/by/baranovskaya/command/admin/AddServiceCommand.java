@@ -37,7 +37,7 @@ public class AddServiceCommand implements Command {
                 if(hotelService.addService(service)){
                     page = PageConstant.PATH_PAGE_ADMIN_SERVICES;
                 } else{
-                    //TODO user is exist
+                    //TODO err
                     page = PageConstant.PATH_PAGE_ADMIN_ADD_SERVICE;
                 }
             } catch (ServiceException e) {

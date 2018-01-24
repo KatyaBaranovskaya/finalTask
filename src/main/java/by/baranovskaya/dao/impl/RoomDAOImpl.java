@@ -66,7 +66,6 @@ public class RoomDAOImpl implements RoomDAO {
             preparedStatement.setString(6, room.getPicture());
             preparedStatement.setString(7, room.getDescription());
             preparedStatement.executeUpdate();
-            System.out.println(room);
         } catch (SQLException e) {
             throw new DAOException("Exception inserting room" + e);
         } finally {
