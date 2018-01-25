@@ -28,4 +28,24 @@ public class UserService {
         }
         return flag;
     }
+
+    public Client findClientById(int idClient) throws ServiceException {
+        Client client;
+        try {
+            client = clientDAO.findClientById(idClient);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return client;
+    }
+
+    public boolean updatePassword(int idClient, String password) throws ServiceException {
+        boolean flag;
+        try {
+            flag = clientDAO.updatePasswordById(idClient, password);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return flag;
+    }
 }

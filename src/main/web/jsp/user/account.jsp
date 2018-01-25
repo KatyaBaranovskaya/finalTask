@@ -19,27 +19,26 @@
 <jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 
 <div class="row">
-    <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+    <div class="col-md-offset-12 col-md-12 col-lg-offset-5 col-lg-9">
         <div class="well profile">
             <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-8">
-                    <h2>Сергей Иванов</h2>
-                    <p><strong>Обо мне: </strong> Веб-дизайнер. </p>
-                    <p><strong>Хобби: </strong> Книги, природа, активный отдых, сайтостроение, дизайн, верстка </p>
-                    <p><strong>Знания: </strong>
-                        <span class="tags">HTML5</span>
-                        <span class="tags">CSS3</span>
-                        <span class="tags">jQuery</span>
-                        <span class="tags">Bootstrap</span>
-                    </p>
+                    <h2>${client.surname} ${client.name} ${client.middleName}</h2>
+                    <p><strong>Логин: </strong> ${client.login} </p>
+                    <p><strong>Email: </strong> ${client.email}</p>
+                    <p><strong>Дата рождения: </strong> ${client.dateBirth}</p>
+                    <p><strong>Телефон: </strong> ${client.telephone}</p>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">
                 <img src="${pageContext.request.contextPath}/resources/avatars/${client.avatar}" class="rounded-circle"
-                     alt="user" width=60%" height="40%">
+                     alt="user" width=200px" height="200px">
+                <button type="submit" name="changePhoto" class="btn btn-success">Изменить фото</button>
             </div>
             <div class="col-xs-12 divider text-center">
-                dddd
+                <button type="submit" name="changePhoto" class="btn btn-success">Изменить информацию о себе</button>
+                <a href="/jsp/user/changePassword.jsp">Изменить пароль</a>
+                <button type="submit" name="changePhoto" class="btn btn-success">Посмотреть мои заказы</button>
             </div>
         </div>
     </div>

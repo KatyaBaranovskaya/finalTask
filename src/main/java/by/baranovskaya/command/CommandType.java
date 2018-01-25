@@ -1,13 +1,10 @@
 package by.baranovskaya.command;
 
 import by.baranovskaya.command.admin.*;
-import by.baranovskaya.command.user.GetServicesCommand;
-import by.baranovskaya.command.user.RegistrationCommand;
+import by.baranovskaya.command.user.*;
 import by.baranovskaya.command.common.ChangeLocaleCommand;
 import by.baranovskaya.command.common.LoginCommand;
 import by.baranovskaya.command.common.LogoutCommand;
-import by.baranovskaya.command.user.ReservationCommand;
-import by.baranovskaya.command.user.ReservationRoomCommand;
 import by.baranovskaya.service.*;
 
 public enum CommandType {
@@ -31,7 +28,9 @@ public enum CommandType {
     DELETE_SERVICE(new DeleteServiceCommand(new HotelService())),
     RESERVATION(new ReservationCommand(new OrderService())),
     RESERVATION_ROOM(new ReservationRoomCommand(new HotelService())),
-    PRINT_APPLICATION(new PrintApplicationCommand(new OrderService()));
+    PRINT_APPLICATION(new PrintApplicationCommand(new OrderService())),
+    SHOW_ACCOUNT(new ShowAccountCommand(new UserService())),
+    CHANGE_PASSWORD(new ChangePasswordCommand(new UserService()));
 
     private Command command;
 

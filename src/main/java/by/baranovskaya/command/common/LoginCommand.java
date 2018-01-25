@@ -39,6 +39,7 @@ public class LoginCommand implements Command {
                 switch (client.getRole()) {
                     case ADMIN_ROLE:
                         session.setAttribute("role", "admin");
+                        session.setAttribute("admin", client);
                         page = PageConstant.PATH_PAGE_ADMIN_MAIN;
                         break;
                     case USER_ROLE:

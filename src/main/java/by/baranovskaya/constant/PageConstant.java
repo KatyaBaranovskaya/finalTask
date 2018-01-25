@@ -14,5 +14,7 @@ public class PageConstant {
     public final static String PATH_PAGE_ADMIN_ADD_SERVICE = "/jsp/admin/addService.jsp";
     public final static String PATH_PAGE_ADMIN_EDIT_SERVICE = "/jsp/admin/editService.jsp";
     public final static String PATH_PAGE_USER_RESERVATION = "/jsp/user/reservation.jsp";
+    public final static String PATH_PAGE_USER_ACCOUNT = "/jsp/user/account.jsp";
+    public final static String PATH_PAGE_CHANGE_PASSWORD = "/jsp/user/changePassword.jsp";
     public final static String PATH_PAGE_ADMIN_CLIENTS = "/jsp/admin/printClients.jsp";
 }
