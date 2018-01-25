@@ -17,7 +17,7 @@ public class Validation {
 
     public static boolean validateRoom(Room room) {
         return (room.getRoomNumber() != 0 && !room.getStatus().isEmpty() && !room.getTypeRoom().isEmpty() &&
-                room.getCapacity() != 0 && room.getPrice() != 0 && !room.getDescription().isEmpty());
+                room.getClassApartment() !=0 && room.getCapacity() != 0 && room.getPrice() != 0 && !room.getDescription().isEmpty());
     }
 
     public static boolean validateService(Service service) {
@@ -26,5 +26,9 @@ public class Validation {
 
     public static boolean validatePassword(String lastPassword, String newPassword) {
         return (lastPassword != null && !lastPassword.isEmpty() && newPassword != null && !newPassword.isEmpty());
+    }
+
+    public static boolean validateAvatar(String avatar) {
+        return (avatar != null && !avatar.isEmpty());
     }
 }

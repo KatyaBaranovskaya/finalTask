@@ -12,16 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDAOImpl implements ClientDAO {
-    private final static int ID_ROLE = 2;
     private final static String SELECT_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, telephone, avatar \n" +
             "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE roles.role_name = 'Пользователь'";
-    private final static String INSERT_CLIENT = "INSERT INTO clients(email, login, password, id_role, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
+    private final static String INSERT_CLIENT = "INSERT INTO clients(email, login, password, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?,?)";
     public final static String DELETE_CLIENT = "DELETE FROM clients WHERE id_client=?";
     private final static String FIND_CLIENT = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, telephone, avatar \n" +
             "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE login = ? AND password = ?";
     private final static String FIND_CLIENT_BY_ID = "SELECT id_client, email, login, password, role_name, surname, name, middle_name, date_birth, telephone, avatar \n" +
             "FROM hotel.clients JOIN roles ON roles.id_role = clients.id_role WHERE id_client = ?";
     public final static String UPDATE_PASSWORD_BY_ID = "UPDATE clients SET password=? WHERE id_client=?";
+    public final static String UPDATE_AVATAR_BY_ID = "UPDATE clients SET avatar=? WHERE id_client=?";
+    public final static String UPDATE_ACCOUNT_INFO_BY_ID = "UPDATE clients SET surname=?, name=?, middle_name=?, date_birth=?, telephone=? WHERE id_client=?";
+
     @Override
     public List<Client> getAll() throws DAOException {
         List<Client> listClient = new ArrayList<>();
@@ -63,12 +65,11 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement.setString(1, client.getEmail());
             preparedStatement.setString(2, client.getLogin());
             preparedStatement.setString(3, client.getPassword());
-            preparedStatement.setInt(4, ID_ROLE);
-            preparedStatement.setString(5, client.getSurname());
-            preparedStatement.setString(6, client.getName());
-            preparedStatement.setString(7, client.getMiddleName());
-            preparedStatement.setDate(8, client.getDateBirth());
-            preparedStatement.setString(9, client.getTelephone());
+            preparedStatement.setString(4, client.getSurname());
+            preparedStatement.setString(5, client.getName());
+            preparedStatement.setString(6, client.getMiddleName());
+            preparedStatement.setDate(7, client.getDateBirth());
+            preparedStatement.setString(8, client.getTelephone());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception inserting client" + e);
@@ -108,7 +109,7 @@ public class ClientDAOImpl implements ClientDAO {
             if(resultSet.next()){
                 Client client = new Client();
                 client.setIdClient(resultSet.getInt("id_client"));
-                client.setLogin(resultSet.getString("email"));
+                client.setEmail(resultSet.getString("email"));
                 client.setLogin(resultSet.getString("login"));
                 client.setPassword(resultSet.getString("password"));
                 client.setRole(resultSet.getString("role_name"));
@@ -141,7 +142,7 @@ public class ClientDAOImpl implements ClientDAO {
             if(resultSet.next()){
                 Client client = new Client();
                 client.setIdClient(resultSet.getInt("id_client"));
-                client.setLogin(resultSet.getString("email"));
+                client.setEmail(resultSet.getString("email"));
                 client.setLogin(resultSet.getString("login"));
                 client.setPassword(resultSet.getString("password"));
                 client.setRole(resultSet.getString("role_name"));
@@ -174,6 +175,46 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception updating password" + e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateAvatarById(int idClient, String avatarPath) throws DAOException {
+        ProxyConnection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_AVATAR_BY_ID);
+            preparedStatement.setString(1, avatarPath);
+            preparedStatement.setInt(2, idClient);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Exception updating avatar" + e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateClientInfo(Client client) throws DAOException {
+        ProxyConnection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_ACCOUNT_INFO_BY_ID);
+            preparedStatement.setString(1, client.getSurname());
+            preparedStatement.setString(2, client.getName());
+            preparedStatement.setString(3, client.getMiddleName());
+            preparedStatement.setDate(4, client.getDateBirth());
+            preparedStatement.setString(5, client.getTelephone());
+            preparedStatement.setInt(6, client.getIdClient());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Exception updating avatar" + e);
         } finally {
             close(preparedStatement);
             close(connection);

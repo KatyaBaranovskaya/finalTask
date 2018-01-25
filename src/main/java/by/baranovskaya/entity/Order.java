@@ -1,13 +1,17 @@
 package by.baranovskaya.entity;
 
+
+import java.sql.Date;
 import java.util.Arrays;
 
 public class Order extends Entity {
     private int idOrder;
     private int idClient;
     private int roomNumber;
-    private String arrivalDate;
-    private String departureDate;
+    private Date arrivalDate;
+    private Date departureDate;
+    private int noPersons;
+    private int classApartment;
     private double price;
     private String status;
     private Service[] services;
@@ -37,20 +41,36 @@ public class Order extends Entity {
         this.roomNumber = roomNumber;
     }
 
-    public String getArrivalDate() {
+    public Date getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(String arrivalDate) {
+    public void setArrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 
-    public String getDepartureDate() {
+    public Date getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(String departureDate) {
+    public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public int getNoPersons() {
+        return noPersons;
+    }
+
+    public void setNoPersons(int noPersons) {
+        this.noPersons = noPersons;
+    }
+
+    public int getClassApartment() {
+        return classApartment;
+    }
+
+    public void setClassApartment(int classApartment) {
+        this.classApartment = classApartment;
     }
 
     public double getPrice() {
@@ -95,6 +115,8 @@ public class Order extends Entity {
         if (idOrder != order.idOrder) return false;
         if (idClient != order.idClient) return false;
         if (roomNumber != order.roomNumber) return false;
+        if (noPersons != order.noPersons) return false;
+        if (classApartment != order.classApartment) return false;
         if (Double.compare(order.price, price) != 0) return false;
         if (arrivalDate != null ? !arrivalDate.equals(order.arrivalDate) : order.arrivalDate != null) return false;
         if (departureDate != null ? !departureDate.equals(order.departureDate) : order.departureDate != null)
@@ -114,6 +136,8 @@ public class Order extends Entity {
         result = 31 * result + roomNumber;
         result = 31 * result + (arrivalDate != null ? arrivalDate.hashCode() : 0);
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
+        result = 31 * result + noPersons;
+        result = 31 * result + classApartment;
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (status != null ? status.hashCode() : 0);
@@ -128,8 +152,10 @@ public class Order extends Entity {
                 "idOrder=" + idOrder +
                 ", idClient=" + idClient +
                 ", roomNumber=" + roomNumber +
-                ", arrivalDate='" + arrivalDate + '\'' +
-                ", departureDate='" + departureDate + '\'' +
+                ", arrivalDate=" + arrivalDate +
+                ", departureDate=" + departureDate +
+                ", noPersons=" + noPersons +
+                ", classApartment=" + classApartment +
                 ", price=" + price +
                 ", status='" + status + '\'' +
                 ", services=" + Arrays.toString(services) +

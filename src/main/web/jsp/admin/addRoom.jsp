@@ -37,7 +37,16 @@
                 <option>${type}</option>
             </c:forEach>
         </select>
-
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Класс апартамента</label>
+        <label class="radio-inline">
+            <input type="radio" name="classApartment" value="1"> 1
+            <input type="radio" name="classApartment" value="2"> 2
+            <input type="radio" name="classApartment" value="3"> 3
+            <input type="radio" name="classApartment" value="4"> 4
+            <input type="radio" name="classApartment" value="5"> 5
+        </label>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Вместимость</label>
@@ -58,10 +67,8 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Статус</label>
         <label class="radio-inline">
-            <input type="radio" name="status" id="radio1" value="Свободен"> cвободен
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="status" id="radio2" value="Бронирован"> бронирован
+            <input type="radio" name="status" value="Свободен"> cвободен
+            <input type="radio" name="status" value="Бронирован"> бронирован
         </label>
     </div>
     <div class="form-group">

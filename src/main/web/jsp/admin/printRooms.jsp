@@ -26,6 +26,7 @@
     <tr>
         <th>№ Номера</th>
         <th>Тип</th>
+        <th>Класс апартамента</th>
         <th>Вместимость</th>
         <th>Цена</th>
         <th>Статус</th>
@@ -39,6 +40,7 @@
     <tr>
         <td>${room.roomNumber}</td>
         <td>${room.typeRoom}</td>
+        <td>${room.classApartment}</td>
         <td>${room.capacity}</td>
         <td>${room.price}</td>
         <td>${room.status}</td>

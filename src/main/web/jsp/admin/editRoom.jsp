@@ -22,7 +22,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">Номер</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="number" value="${room.roomNumber}">
+            <input type="text" class="form-control" name="number" value="${room.roomNumber}" readonly>
         </div>
     </div>
     <div class="form-group">
@@ -30,6 +30,46 @@
         <div class="col-sm-10">
             <input type="text" class="form-control" name="type" value="${room.typeRoom}">
         </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Класс апартамента</label>
+        <label class="radio-inline">
+            <c:if test="${requestScope.room.classApartment == 1}">
+                <input type="radio" name="classApartment" value="1" checked> 1
+                <input type="radio" name="classApartment" value="2"> 2
+                <input type="radio" name="classApartment" value="3"> 3
+                <input type="radio" name="classApartment" value="4"> 4
+                <input type="radio" name="classApartment" value="5"> 5
+            </c:if>
+            <c:if test="${requestScope.room.classApartment == 2}">
+                <input type="radio" name="classApartment" value="1"> 1
+                <input type="radio" name="classApartment" value="2" checked> 2
+                <input type="radio" name="classApartment" value="3"> 3
+                <input type="radio" name="classApartment" value="4"> 4
+                <input type="radio" name="classApartment" value="5"> 5
+            </c:if>
+            <c:if test="${requestScope.room.classApartment == 3}">
+                <input type="radio" name="classApartment" value="1"> 1
+                <input type="radio" name="classApartment" value="2"> 2
+                <input type="radio" name="classApartment" value="3" checked> 3
+                <input type="radio" name="classApartment" value="4"> 4
+                <input type="radio" name="classApartment" value="5"> 5
+            </c:if>
+            <c:if test="${requestScope.room.classApartment == 4}">
+                <input type="radio" name="classApartment" value="1"> 1
+                <input type="radio" name="classApartment" value="2"> 2
+                <input type="radio" name="classApartment" value="3"> 3
+                <input type="radio" name="classApartment" value="4" checked> 4
+                <input type="radio" name="classApartment" value="5"> 5
+            </c:if>
+            <c:if test="${requestScope.room.classApartment == 5}">
+                <input type="radio" name="classApartment" value="1"> 1
+                <input type="radio" name="classApartment" value="2"> 2
+                <input type="radio" name="classApartment" value="3"> 3
+                <input type="radio" name="classApartment" value="4"> 4
+                <input type="radio" name="classApartment" value="5" checked> 5
+            </c:if>
+        </label>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">Вместимость</label>
@@ -81,11 +121,11 @@
         <label class="col-sm-2 control-label">Статус</label>
         <label class="radio-inline">
             <c:if test="${requestScope.room.status == 'свободен'}">
-                <input type="radio" name="status" id="radio1" value="Свободен" checked> cвободен
-                <input type="radio" name="status" id="radio2" value="Бронирован"> бронирован
+                <input type="radio" name="status" value="Свободен" checked> cвободен
+                <input type="radio" name="status" value="Бронирован"> бронирован
             </c:if>
-            <input type="radio" name="status" id="radio1" value="Свободен"> cвободен
-            <input type="radio" name="status" id="radio2" value="Бронирован" checked> бронирован
+            <input type="radio" name="status" value="Свободен"> cвободен
+            <input type="radio" name="status" value="Бронирован" checked> бронирован
         </label>
     </div>
     <div class="form-group">

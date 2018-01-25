@@ -2,10 +2,11 @@ package by.baranovskaya.entity;
 
 public class Room extends Entity {
     private int roomNumber;
-    private String status;
     private String typeRoom;
+    private int classApartment;
     private int capacity;
     private double price;
+    private String status;
     private String picture;
     private String description;
 
@@ -17,20 +18,20 @@ public class Room extends Entity {
         this.roomNumber = roomNumber;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getTypeRoom() {
         return typeRoom;
     }
 
     public void setTypeRoom(String typeRoom) {
         this.typeRoom = typeRoom;
+    }
+
+    public int getClassApartment() {
+        return classApartment;
+    }
+
+    public void setClassApartment(int classApartment) {
+        this.classApartment = classApartment;
     }
 
     public int getCapacity() {
@@ -47,6 +48,14 @@ public class Room extends Entity {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPicture() {
@@ -73,10 +82,12 @@ public class Room extends Entity {
         Room room = (Room) o;
 
         if (roomNumber != room.roomNumber) return false;
+        if (classApartment != room.classApartment) return false;
         if (capacity != room.capacity) return false;
         if (Double.compare(room.price, price) != 0) return false;
-        if (status != null ? !status.equals(room.status) : room.status != null) return false;
         if (typeRoom != null ? !typeRoom.equals(room.typeRoom) : room.typeRoom != null) return false;
+        if (status != null ? !status.equals(room.status) : room.status != null) return false;
+        if (picture != null ? !picture.equals(room.picture) : room.picture != null) return false;
         return description != null ? description.equals(room.description) : room.description == null;
     }
 
@@ -85,11 +96,13 @@ public class Room extends Entity {
         int result;
         long temp;
         result = roomNumber;
-        result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (typeRoom != null ? typeRoom.hashCode() : 0);
+        result = 31 * result + classApartment;
         result = 31 * result + capacity;
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (picture != null ? picture.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
@@ -98,10 +111,12 @@ public class Room extends Entity {
     public String toString() {
         return "Room{" +
                 "roomNumber=" + roomNumber +
-                ", status='" + status + '\'' +
                 ", typeRoom='" + typeRoom + '\'' +
+                ", classApartment=" + classApartment +
                 ", capacity=" + capacity +
                 ", price=" + price +
+                ", status='" + status + '\'' +
+                ", picture='" + picture + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

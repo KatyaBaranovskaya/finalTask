@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Set;
 
 public class RoomDAOImpl implements RoomDAO {
-    private final static String SELECT_ALL_ROOM = "SELECT room_number, type_room, capacity, price, status, picture, description FROM rooms";
+    private final static String SELECT_ALL_ROOM = "SELECT room_number, type_room, class_apartment, capacity, price, status, picture, description FROM rooms";
     private final static String COUNT_ROOM = "SELECT count(*) FROM rooms";
-    private final static String SELECT_TYPES_ROOM = "SELECT type_room FROM hotel.rooms;";
-    private final static String INSERT_ROOM = "INSERT INTO rooms(room_number, type_room, capacity, price, status, picture, description) VALUES (?,?,?,?,?,?,?)";
+    private final static String SELECT_TYPES_ROOM = "SELECT type_room FROM hotel.rooms";
+    private final static String INSERT_ROOM = "INSERT INTO rooms(room_number, type_room, class_apartment, capacity, price, status, picture, description) VALUES (?,?,?,?,?,?,?,?)";
     public final static String DELETE_ROOM = "DELETE FROM rooms WHERE room_number=?";
-    public final static String FIND_ROOM_BY_NUMBER = "SELECT room_number, type_room, capacity, price, status, picture, description FROM rooms WHERE room_number=?";
-    public final static String UPDATE_ROOM_BY_NUMBER = "UPDATE rooms SET room_number=?, type_room=?, capacity=?, price=?, status=?, picture=?, description=? WHERE room_number=?";
+    public final static String FIND_ROOM_BY_NUMBER = "SELECT room_number, type_room, class_apartment, capacity, price, status, picture, description FROM rooms WHERE room_number=?";
+    public final static String UPDATE_ROOM_BY_NUMBER = "UPDATE rooms SET room_number=?, type_room=?, class_apartment=?, capacity=?, price=?, status=?, picture=?, description=? WHERE room_number=?";
 
     @Override
     public List<Room> getAll() throws DAOException {
@@ -36,6 +36,7 @@ public class RoomDAOImpl implements RoomDAO {
                 Room room = new Room();
                 room.setRoomNumber(resultSet.getInt("room_number"));
                 room.setTypeRoom(resultSet.getString("type_room"));
+                room.setClassApartment(resultSet.getInt("class_apartment"));
                 room.setCapacity(resultSet.getInt("capacity"));
                 room.setPrice(resultSet.getDouble("price"));
                 room.setStatus(resultSet.getString("status"));
@@ -60,11 +61,12 @@ public class RoomDAOImpl implements RoomDAO {
             preparedStatement = connection.prepareStatement(INSERT_ROOM);
             preparedStatement.setInt(1, room.getRoomNumber());
             preparedStatement.setString(2, room.getTypeRoom());
-            preparedStatement.setInt(3, room.getCapacity());
-            preparedStatement.setDouble(4, room.getPrice());
-            preparedStatement.setString(5, room.getStatus());
-            preparedStatement.setString(6, room.getPicture());
-            preparedStatement.setString(7, room.getDescription());
+            preparedStatement.setInt(3, room.getClassApartment());
+            preparedStatement.setInt(4, room.getCapacity());
+            preparedStatement.setDouble(5, room.getPrice());
+            preparedStatement.setString(6, room.getStatus());
+            preparedStatement.setString(7, room.getPicture());
+            preparedStatement.setString(8, room.getDescription());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception inserting room" + e);
@@ -142,6 +144,7 @@ public class RoomDAOImpl implements RoomDAO {
             if (resultSet.next()) {
                 room.setRoomNumber(resultSet.getInt("room_number"));
                 room.setTypeRoom(resultSet.getString("type_room"));
+                room.setClassApartment(resultSet.getInt("class_apartment"));
                 room.setCapacity(resultSet.getInt("capacity"));
                 room.setPrice(resultSet.getDouble("price"));
                 room.setStatus(resultSet.getString("status"));
@@ -165,12 +168,13 @@ public class RoomDAOImpl implements RoomDAO {
             preparedStatement = connection.prepareStatement(UPDATE_ROOM_BY_NUMBER);
             preparedStatement.setInt(1, room.getRoomNumber());
             preparedStatement.setString(2, room.getTypeRoom());
-            preparedStatement.setInt(3, room.getCapacity());
-            preparedStatement.setDouble(4, room.getPrice());
-            preparedStatement.setString(5, room.getStatus());
-            preparedStatement.setString(6, room.getPicture());
-            preparedStatement.setString(7, room.getDescription());
-            preparedStatement.setInt(8, room.getRoomNumber());
+            preparedStatement.setInt(3, room.getClassApartment());
+            preparedStatement.setInt(4, room.getCapacity());
+            preparedStatement.setDouble(5, room.getPrice());
+            preparedStatement.setString(6, room.getStatus());
+            preparedStatement.setString(7, room.getPicture());
+            preparedStatement.setString(8, room.getDescription());
+            preparedStatement.setInt(9, room.getRoomNumber());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception updating room" + e);

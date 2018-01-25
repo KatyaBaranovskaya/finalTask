@@ -25,8 +25,7 @@
         <th>Имя</th>
         <th>Отчества</th>
         <th>Дата рождения</th>
-        <th>Паспорт</th>
-        <th>Теоефон</th>
+        <th>Телефон</th>
     </tr>
     </thead>
     <tbody>
@@ -37,7 +36,6 @@
         <td>${client.name}</td>
         <td>${client.middleName}</td>
         <td>${client.dateBirth}</td>
-        <td>${client.passport}</td>
         <td>${client.telephone}</td>
         <td>
             <a href="/Controller?command=delete_client&id=${client.idClient}">Удалить</a>

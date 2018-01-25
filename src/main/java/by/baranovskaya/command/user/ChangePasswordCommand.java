@@ -30,7 +30,7 @@ public class ChangePasswordCommand implements Command{
     public String execute(HttpServletRequest request) {
         String page = null;
         HttpSession session = request.getSession(true);
-        Client client = (Client) session.getAttribute("user");
+        Client client = (Client) session.getAttribute("client");
         String lastPassword = request.getParameter(PARAM_LAST_PASSWORD);
         String newPassword = request.getParameter(PARAM_NEW_PASSWORD);
 

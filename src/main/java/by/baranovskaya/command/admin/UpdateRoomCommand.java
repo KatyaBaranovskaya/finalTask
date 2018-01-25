@@ -17,7 +17,7 @@ public class UpdateRoomCommand implements Command{
 
     private final static String PARAM_NUMBER = "number";
     private final static String PARAM_TYPE = "type";
-    private final static String PARAM_TYPE_OPTION = "typeOption";
+    private final static String PARAM_CLASS_APARTMENT = "classApartment";
     private final static String PARAM_CAPACITY = "capacity";
     private final static String PARAM_PRICE = "price";
     private final static String PARAM_STATUS = "status";
@@ -36,6 +36,7 @@ public class UpdateRoomCommand implements Command{
         Room room = new Room();
         room.setRoomNumber(Integer.parseInt(request.getParameter(PARAM_NUMBER)));
         room.setTypeRoom(request.getParameter(PARAM_TYPE));
+        room.setClassApartment(Integer.parseInt(request.getParameter(PARAM_CLASS_APARTMENT)));
         room.setCapacity(Integer.parseInt(request.getParameter(PARAM_CAPACITY)));
         room.setPrice(Double.parseDouble(request.getParameter(PARAM_PRICE)));
         room.setStatus(request.getParameter(PARAM_STATUS));

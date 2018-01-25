@@ -44,7 +44,7 @@ public class LoginCommand implements Command {
                         break;
                     case USER_ROLE:
                         session.setAttribute("role", "user");
-                        session.setAttribute("user", client);
+                        session.setAttribute("client", client);
                         page = PageConstant.PATH_PAGE_USER_MAIN;
                         break;
                     default:

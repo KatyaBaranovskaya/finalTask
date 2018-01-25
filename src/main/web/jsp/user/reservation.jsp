@@ -37,7 +37,22 @@
             <br/><input type="checkbox" name="services" value="${service.key}"> ${service.value}
         </c:forEach>
     </div>
-
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Количество людей</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" name="noPersons">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Класс апартамента</label>
+        <label class="radio-inline">
+            <input type="radio" name="classApartment" value="1"> 1
+            <input type="radio" name="classApartment" value="2"> 2
+            <input type="radio" name="classApartment" value="3"> 3
+            <input type="radio" name="classApartment" value="4"> 4
+            <input type="radio" name="classApartment" value="5"> 5
+        </label>
+    </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <input type="hidden" name="command" value="reservation"/>

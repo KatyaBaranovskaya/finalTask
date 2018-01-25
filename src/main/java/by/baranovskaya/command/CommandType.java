@@ -29,8 +29,9 @@ public enum CommandType {
     RESERVATION(new ReservationCommand(new OrderService())),
     RESERVATION_ROOM(new ReservationRoomCommand(new HotelService())),
     PRINT_APPLICATION(new PrintApplicationCommand(new OrderService())),
-    SHOW_ACCOUNT(new ShowAccountCommand(new UserService())),
-    CHANGE_PASSWORD(new ChangePasswordCommand(new UserService()));
+    CHANGE_PASSWORD(new ChangePasswordCommand(new UserService())),
+    CHANGE_AVATAR(new ChangeAvatarCommand(new UserService())),
+    CHANGE_ACCOUNT_INFORMATION(new ChangeAccountInfoCommand(new UserService()));
 
     private Command command;
 

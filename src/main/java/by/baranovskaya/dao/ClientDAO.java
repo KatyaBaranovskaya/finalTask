@@ -13,4 +13,6 @@ public interface ClientDAO extends AbstractDAO{
     Client findClientByLoginPassword(String login, String password) throws DAOException;
     Client findClientById(int idClient) throws DAOException;
     boolean updatePasswordById(int idClient, String password) throws DAOException;
+    boolean updateAvatarById(int idClient, String avatarPath) throws DAOException;
+    boolean updateClientInfo(Client client) throws DAOException;
 }

@@ -48,4 +48,24 @@ public class UserService {
         }
         return flag;
     }
+
+    public boolean updateAvatar(int idClient, String avatarPath) throws ServiceException {
+        boolean flag;
+        try {
+            flag = clientDAO.updateAvatarById(idClient, avatarPath);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return flag;
+    }
+
+    public boolean updateClientInfo(Client client) throws ServiceException {
+        boolean flag;
+        try {
+            flag = clientDAO.updateClientInfo(client);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return flag;
+    }
 }

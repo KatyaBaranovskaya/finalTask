@@ -18,7 +18,7 @@
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
 <jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 
-<div class="row">
+<div class="row" var="client" items="${sessionScope.client}">
     <div class="col-md-offset-12 col-md-12 col-lg-offset-5 col-lg-9">
         <div class="well profile">
             <div class="col-sm-12">
@@ -33,10 +33,14 @@
             <div class="col-xs-12 col-sm-4 text-center">
                 <img src="${pageContext.request.contextPath}/resources/avatars/${client.avatar}" class="rounded-circle"
                      alt="user" width=200px" height="200px">
-                <button type="submit" name="changePhoto" class="btn btn-success">Изменить фото</button>
+                <form action="/Controller" method="POST">
+                    <input type="hidden" name="command" value="change_avatar"/>
+                    <input type="file" name="avatar" id="avatar">
+                    <button type="submit" name="changePhoto" class="btn btn-success">Изменить фото</button>
+                </form>
             </div>
             <div class="col-xs-12 divider text-center">
-                <button type="submit" name="changePhoto" class="btn btn-success">Изменить информацию о себе</button>
+                <a href="/jsp/user/changeAccount.jsp">Изменить информацию о себе</a>
                 <a href="/jsp/user/changePassword.jsp">Изменить пароль</a>
                 <button type="submit" name="changePhoto" class="btn btn-success">Посмотреть мои заказы</button>
             </div>
