@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class EditRoomCommand implements Command{
+public class EditRoomCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(EditRoomCommand.class);
 
     private final static String PARAM_ID = "id";

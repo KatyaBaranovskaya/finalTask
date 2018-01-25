@@ -6,7 +6,7 @@ import by.baranovskaya.entity.Service;
 
 public class Validation {
     public static boolean validateLogin(String loginValue, String passValue) {
-         return (loginValue != null && !loginValue.isEmpty() && passValue != null && !passValue.isEmpty());///????
+        return (loginValue != null && !loginValue.isEmpty() && passValue != null && !passValue.isEmpty());///????
     }
 
     public static boolean validateRegistration(Client client) {
@@ -17,11 +17,11 @@ public class Validation {
 
     public static boolean validateRoom(Room room) {
         return (room.getRoomNumber() != 0 && !room.getStatus().isEmpty() && !room.getTypeRoom().isEmpty() &&
-                room.getClassApartment() !=0 && room.getCapacity() != 0 && room.getPrice() != 0 && !room.getDescription().isEmpty());
+                room.getClassApartment() != 0 && room.getCapacity() != 0 && room.getPrice() != 0 && !room.getDescription().isEmpty());
     }
 
     public static boolean validateService(Service service) {
-        return (!service.getTypeService().isEmpty() &&  service.getPrice() != 0);
+        return (!service.getTypeService().isEmpty() && service.getPrice() != 0);
     }
 
     public static boolean validatePassword(String lastPassword, String newPassword) {

@@ -10,11 +10,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class ChangePasswordCommand implements Command{
+public class ChangePasswordCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(ChangePasswordCommand.class);
 
     private final static String PARAM_LAST_PASSWORD = "lastPassword";
@@ -34,12 +33,12 @@ public class ChangePasswordCommand implements Command{
         String lastPassword = request.getParameter(PARAM_LAST_PASSWORD);
         String newPassword = request.getParameter(PARAM_NEW_PASSWORD);
 
-        if(Validation.validatePassword(lastPassword, newPassword)){
+        if (Validation.validatePassword(lastPassword, newPassword)) {
             try {
-                if(userService.findClientById(client.getIdClient()).getPassword().equals(lastPassword)){
+                if (userService.findClientById(client.getIdClient()).getPassword().equals(lastPassword)) {
                     userService.updatePassword(client.getIdClient(), newPassword);
                     page = PageConstant.PATH_PAGE_USER_ACCOUNT;
-                } else{
+                } else {
                     //TODO err
                     page = PageConstant.PATH_PAGE_CHANGE_PASSWORD;
                 }

@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class UpdateRoomCommand implements Command{
+public class UpdateRoomCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(UpdateRoomCommand.class);
 
     private final static String PARAM_NUMBER = "number";
@@ -43,11 +43,11 @@ public class UpdateRoomCommand implements Command{
         room.setDescription(request.getParameter(PARAM_DESCRIPTION));
         room.setPicture(request.getParameter(PARAM_IMAGE));
 
-        if(Validation.validateRoom(room)){
+        if (Validation.validateRoom(room)) {
             try {
-                if(roomService.updateRoom(room)){
+                if (roomService.updateRoom(room)) {
                     page = PageConstant.PATH_PAGE_ADMIN_ROOMS;
-                } else{
+                } else {
                     //TODO  err
                     page = PageConstant.PATH_PAGE_ADMIN_EDIT_ROOM;
                 }

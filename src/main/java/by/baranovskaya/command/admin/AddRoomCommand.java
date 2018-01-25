@@ -48,11 +48,11 @@ public class AddRoomCommand implements Command {
         room.setDescription(request.getParameter(PARAM_DESCRIPTION));
         room.setPicture(request.getParameter(PARAM_IMAGE));
 
-        if(Validation.validateRoom(room)){
+        if (Validation.validateRoom(room)) {
             try {
-                if(roomService.addRoom(room)){
+                if (roomService.addRoom(room)) {
                     page = PageConstant.PATH_PAGE_ADMIN_ROOMS;
-                } else{
+                } else {
                     //TODO err
                     page = PageConstant.PATH_PAGE_ADMIN_ADD_ROOM;
                 }
@@ -61,7 +61,8 @@ public class AddRoomCommand implements Command {
             }
         } else {
             //TODO warn incorrect info
-            page = PageConstant.PATH_PAGE_ADMIN_ADD_ROOM;;
+            page = PageConstant.PATH_PAGE_ADMIN_ADD_ROOM;
+            ;
         }
         return page;
     }

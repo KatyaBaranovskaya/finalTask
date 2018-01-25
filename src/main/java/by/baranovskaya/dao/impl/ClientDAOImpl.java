@@ -1,13 +1,15 @@
 package by.baranovskaya.dao.impl;
 
+import by.baranovskaya.dao.ClientDAO;
 import by.baranovskaya.dao.connection.ConnectionPool;
 import by.baranovskaya.dao.connection.ProxyConnection;
-import by.baranovskaya.dao.ClientDAO;
 import by.baranovskaya.entity.Client;
-import by.baranovskaya.entity.Room;
 import by.baranovskaya.exception.DAOException;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +108,7 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 Client client = new Client();
                 client.setIdClient(resultSet.getInt("id_client"));
                 client.setEmail(resultSet.getString("email"));
@@ -120,10 +122,10 @@ public class ClientDAOImpl implements ClientDAO {
                 client.setTelephone(resultSet.getString("telephone"));
                 client.setAvatar(resultSet.getString("avatar"));
                 return client;
-            } else{
+            } else {
                 return null;
             }
-        }  catch (SQLException e) {
+        } catch (SQLException e) {
             throw new DAOException("Exception selecting client by login and password" + e);
         } finally {
             close(preparedStatement);
@@ -139,7 +141,7 @@ public class ClientDAOImpl implements ClientDAO {
             preparedStatement = connection.prepareStatement(FIND_CLIENT_BY_ID);
             preparedStatement.setInt(1, idClient);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 Client client = new Client();
                 client.setIdClient(resultSet.getInt("id_client"));
                 client.setEmail(resultSet.getString("email"));
@@ -153,10 +155,10 @@ public class ClientDAOImpl implements ClientDAO {
                 client.setTelephone(resultSet.getString("telephone"));
                 client.setAvatar(resultSet.getString("avatar"));
                 return client;
-            } else{
+            } else {
                 return null;
             }
-        }  catch (SQLException e) {
+        } catch (SQLException e) {
             throw new DAOException("Exception selecting client by id" + e);
         } finally {
             close(preparedStatement);

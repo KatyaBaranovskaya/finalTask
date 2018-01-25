@@ -24,7 +24,7 @@ public class PrintRoomsCommand implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         int noPage = 1;
-        if(request.getParameter("page") != null) {
+        if (request.getParameter("page") != null) {
             noPage = Integer.parseInt(request.getParameter("page"));
         }
         String page = null;

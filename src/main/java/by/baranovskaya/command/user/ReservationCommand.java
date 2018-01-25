@@ -46,7 +46,7 @@ public class ReservationCommand implements Command {
         order.setClassApartment(Integer.parseInt(request.getParameter(PARAM_CLASS_APARTMENT)));
 
         try {
-            if(session.getAttribute(PARAM_ROOM_NUMBER) == null) {
+            if (session.getAttribute(PARAM_ROOM_NUMBER) == null) {
                 if (orderService.doOrder(order)) {
                     orderService.orderService(client.getIdClient(), arrivalDate, departureDate, services);
                     page = PageConstant.PATH_PAGE_MAIN;

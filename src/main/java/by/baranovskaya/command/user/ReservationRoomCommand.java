@@ -1,7 +1,6 @@
 package by.baranovskaya.command.user;
 
 import by.baranovskaya.command.Command;
-import by.baranovskaya.command.admin.GetTypesCommand;
 import by.baranovskaya.constant.PageConstant;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.HotelService;

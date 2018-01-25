@@ -27,7 +27,7 @@ public class OrderDAOImpl implements OrderDAO {
             preparedStatement.setInt(5, order.getClassApartment());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception inserting order" + e);
+            throw new DAOException("Exception inserting order " + e);
         } finally {
             close(preparedStatement);
             close(connection);

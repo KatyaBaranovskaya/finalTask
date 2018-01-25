@@ -35,7 +35,7 @@ public class OrderService {
         int idOrder;
         try {
             idOrder = orderDAO.getIdOrder(idClient, arrivalDate, departureDate); // проверка на 0
-            for (int i = 0; i < services.length; i++){
+            for (int i = 0; i < services.length; i++) {
                 orderDAO.orderService(idOrder, Integer.parseInt(services[i]));
             }
         } catch (DAOException e) {

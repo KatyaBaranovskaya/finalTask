@@ -37,7 +37,7 @@ public class RoomService {
     public List<Room> getAllRoom() throws ServiceException {
         List<Room> listRoom;
         try {
-            listRoom =  roomDAO.getAll();
+            listRoom = roomDAO.getAll();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -68,7 +68,7 @@ public class RoomService {
     public Set<String> getTypesRoom() throws ServiceException {
         Set<String> listTypes;
         try {
-            listTypes =  roomDAO.getTypesRoom();
+            listTypes = roomDAO.getTypesRoom();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -78,7 +78,7 @@ public class RoomService {
     public Room findRoomByNumber(int roomNumber) throws ServiceException {
         Room room;
         try {
-            room =  roomDAO.findRoomByNumber(roomNumber);
+            room = roomDAO.findRoomByNumber(roomNumber);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

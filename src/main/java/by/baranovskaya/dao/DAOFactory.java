@@ -6,7 +6,6 @@ import by.baranovskaya.dao.impl.RoomDAOImpl;
 import by.baranovskaya.dao.impl.ServiceDAOImpl;
 
 public class DAOFactory {
-
     public static ClientDAO getClientDAO(){
         return  new ClientDAOImpl();
     }
