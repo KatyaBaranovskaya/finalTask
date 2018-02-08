@@ -79,6 +79,7 @@ public class UpdateRoomCommand implements Command {
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);
         }
+        System.out.println(typeRoom);
         return typeRoom;
     }
 }

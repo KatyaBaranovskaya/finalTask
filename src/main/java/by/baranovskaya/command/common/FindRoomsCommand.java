@@ -37,6 +37,7 @@ public class FindRoomsCommand implements Command {
             try {
                 typeRoomList = typeRoomService.findRoomTypes(minPrice, maxPrice);
                 request.setAttribute(ParameterConstants.ROOM_TYPES, typeRoomList);
+                request.getSession().setAttribute(ParameterConstants.NO_PAGES, 0);
             } catch (ServiceException e) {
                 LOGGER.log(Level.ERROR, e);
             }

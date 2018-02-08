@@ -31,7 +31,7 @@ public class ShowServicesCommand implements Command {
 
         try {
             serviceList = hotelService.getServices();
-            request.setAttribute(ParameterConstants.SERVICES, serviceList);
+            request.getSession().setAttribute(ParameterConstants.SERVICES, serviceList);
             page = PageConstants.SERVICES_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

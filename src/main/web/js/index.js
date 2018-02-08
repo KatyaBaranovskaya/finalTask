@@ -44,7 +44,7 @@ function validationRegister() {
     }
 
     if (!(/^(\d{4})\-(0\d|1[012])\-([0-2]\d|3[01])$/.test(document.form.dateBirth.value))) {
-        alert("Дата взятия книги введена некорректно!");
+        alert("Дата рождения введена некорректно!");
         return false;
     }
 
@@ -78,8 +78,8 @@ function validationRegister() {
         return false;
     }
 
-    if (document.form.password.value.length < 7) {
-        alert("Пароль должен содержать не менее 7 символов!");
+    if (document.form.password.value.length < 5) {
+        alert("Пароль должен содержать не менее 5 символов!");
         return false;
     } else if (!(/^(?=.*[a-z])(?=.*[A-Z]).{4,}$/.test(document.form.password.value))) {
         alert("Пароль должен содержать не менее одной буквы в каждом регистре и не менее одной цифры!")
@@ -109,8 +109,8 @@ function validationSingUp() {
         return false;
     }
 
-    if (document.form.password.value.length < 7) {
-        alert("Пароль должен содержать не менее 7 символов!");
+    if (document.form.password.value.length < 5) {
+        alert("Пароль должен содержать не менее 5 символов!");
         return false;
     } else if (!(/^(?=.*[a-z])(?=.*[A-Z]).{4,}$/.test(document.form.password.value))) {
         alert("Пароль должен содержать не менее одной буквы в каждом регистре и не менее одной цифры!")
@@ -175,13 +175,10 @@ function validationService() {
     if (document.form.typeService.value == "") {
         alert("Пожалуйста, введите тип услуги!");
         return false;
-    } else if (document.form.price.value == "") {
-        alert("Пожалуйста, введите цену услуги!");
-        return false;
-    } else if (document.form.description.value == "") {
+    }  else if (document.form.description.value == "") {
         alert("Пожалуйста, введите описание услуги!");
         return false;
-    } else if (document.form.image.value == "") {
+    }  else if (document.form.image.value == "") {
         alert("Пожалуйста, выберите файл!");
         return false;
     }
@@ -191,12 +188,27 @@ function validationService() {
         return false;
     }
 
-    if (!(/\d+(\.\d{0,})?$/.test(document.form.price.value))) {
-        alert("Цена должна содержать только цифры и знак '.'!");
+    if (!(/[A-ZА-Я0-9][a-zа-я0-9\-\,\.\"\:\;\(\)\s]+$/.test(document.form.description.value))) {
+        alert("Описание должно содержать только буквы и знаки пробела!");
+        return false;
+    }
+}
+
+function validationEditService() {
+    if (document.form.typeService.value == "") {
+        alert("Пожалуйста, введите тип услуги!");
+        return false;
+    }  else if (document.form.description.value == "") {
+        alert("Пожалуйста, введите описание услуги!");
         return false;
     }
 
-    if (!(/[\W|\w|\s]+$/.test(document.form.description.value))) {
+    if (!(/[A-ZА-Я0-9][a-zа-я0-9\s]+$/.test(document.form.typeService.value))) {
+        alert("Название должно содержать только буквы и знаки пробела!");
+        return false;
+    }
+
+    if (!(/[A-ZА-Я0-9][a-zа-я0-9\-\,\.\"\:\;\(\)\s]+$/.test(document.form.description.value))) {
         alert("Описание должно содержать только буквы и знаки пробела!");
         return false;
     }
@@ -206,11 +218,9 @@ function validationTypeRoom() {
     if (document.form.typeRoom.value == "") {
         alert("Пожалуйста, введите тип номера!");
         return false;
-    } else if (document.form.classRoom.value == "") {
-        alert("Пожалуйста, выберите класс типа номера!");
-        return false;
-    } else if (document.form.capacity.value == "") {
+    } else if(document.form.capacity.selectedIndex==0){
         alert("Пожалуйста, выберите вместимость типа номера!");
+        document.form.capacity.focus();
         return false;
     } else if (document.form.price.value == "") {
         alert("Пожалуйста, введите цену типа номера!");
@@ -219,17 +229,12 @@ function validationTypeRoom() {
         alert("Пожалуйста, введите описание типа номера!");
         return false;
     } else if (document.form.image.value == "") {
-        alert("Пожалуйста, выберите файл!");
-        return false;
+            alert("Пожалуйста, выберите файл!");
+            return false;
     }
 
     if (!(/[\w\+\s]+$/.test(document.form.typeRoom.value))) {
         alert("Название типа должно содержать только буквы и знаки пробела!");
-        return false;
-    }
-
-    if (!(/[0-9]$/.test(document.form.classRoom.value))) {
-        alert("Класс номера должн содержать только число!");
         return false;
     }
 
@@ -244,6 +249,43 @@ function validationTypeRoom() {
     }
 
     if (!(/[\W|\w|\s]+$/.test(document.form.description.value))) {
+        alert("Описание должно содержать только буквы и знаки пробела!");
+        return false;
+    }
+}
+
+function validationEditTypeRoom() {
+    if (document.form.typeRoom.value == "") {
+        alert("Пожалуйста, введите тип номера!");
+        return false;
+    } else if(document.form.capacity.selectedIndex==0){
+        alert("Пожалуйста, выберите вместимость типа номера!");
+        document.form.capacity.focus();
+        return false;
+    } else if (document.form.price.value == "") {
+        alert("Пожалуйста, введите цену типа номера!");
+        return false;
+    } else if (document.form.description.value == "") {
+        alert("Пожалуйста, введите описание типа номера!");
+        return false;
+    }
+
+    if (!(/[\w\+\s]+$/.test(document.form.typeRoom.value))) {
+        alert("Название типа должно содержать только буквы и знаки пробела!");
+        return false;
+    }
+
+    if (!(/[0-9]$/.test(document.form.capacity.value))) {
+        alert("Вместимость должна содержать только число!");
+        return false;
+    }
+
+    if (!(/\d+(\.\d{0,})?$/.test(document.form.price.value))) {
+        alert("Цена должна содержать только цифры и знак '.'!");
+        return false;
+    }
+
+    if (!(/[A-ZА-Я0-9][a-zа-я0-9\-\,\.\"\:\;\(\)\s]+$/.test(document.form.description.value))) {
         alert("Описание должно содержать только буквы и знаки пробела!");
         return false;
     }
@@ -310,12 +352,6 @@ function validationRoom() {
     if (document.form.roomNumber.value == "") {
         alert("Пожалуйста, введите № номера!");
         return false;
-    } else if (document.form.typeRoom.value == "") {
-        alert("Пожалуйста, введите тип номера!");
-        return false;
-    } else if (document.form.status.value == "") {
-        alert("Пожалуйста, введите статус номера!");
-        return false;
     }
 
     if (!(/[0-9]+$/.test(document.form.roomNumber.value))) {
@@ -331,11 +367,13 @@ function validationOrder() {
     } else if (document.form.departure_date.value == "") {
         alert("Пожалуйста, введите дату отъезда!");
         return false;
-    } else if (document.form.noAdults.value == "") {
-        alert("Пожалуйста, введите кол-во взрослых!");
+    } else if(document.form.noAdults.selectedIndex==0){
+        alert("Пожалуйста, выберите кол-во взрослых");
+        document.form.noAdults.focus();
         return false;
-    } else if (document.form.noChildren.value == "") {
-        alert("Пожалуйста, введите кол-во детей!");
+    } else if(document.form.noChildren.selectedIndex==0){
+        alert("Пожалуйста, выберите кол-во детей");
+        document.form.noChildren.focus();
         return false;
     } else if (document.form.breakfast.value == "") {
         alert("Пожалуйста, выберите пункт завтрака!");
@@ -358,7 +396,7 @@ function validationOrder() {
     var result = Math.floor((second.getTime() - first.getTime()) / 1000 / 60 / 60 / 24 );
 
     if(now.getTime() >= first.getTime() || now.getTime() > second.getTime()){
-        alert("плохо!");
+        alert("Дата введена некорректно!");
         return false;
     }
 
@@ -380,24 +418,24 @@ function validationChangePass() {
         return false;
     }
 
-    if (document.form.lastPassword.value.length < 7) {
-        alert("Пароль должен содержать не менее 7 символов!");
+    if (document.form.lastPassword.value.length < 5) {
+        alert("Пароль должен содержать не менее 5 символов!");
         return false;
     } else if (!(/^(?=.*[a-z])(?=.*[A-Z]).{4,}$/.test(document.form.lastPassword.value))) {
         alert("Пароль должен содержать не менее одной буквы в каждом регистре и не менее одной цифры!")
         return false;
     }
 
-    if (document.form.newPassword.value.length < 7) {
-        alert("Пароль должен содержать не менее 7 символов!");
+    if (document.form.newPassword.value.length < 5) {
+        alert("Пароль должен содержать не менее 5 символов!");
         return false;
     } else if (!(/^(?=.*[a-z])(?=.*[A-Z]).{4,}$/.test(document.form.newPassword.value))) {
         alert("Пароль должен содержать не менее одной буквы в каждом регистре и не менее одной цифры!")
         return false;
     }
 
-    if (document.form.repeatNewPassword.value.length < 7) {
-        alert("Пароль должен содержать не менее 7 символов!");
+    if (document.form.repeatNewPassword.value.length < 5) {
+        alert("Пароль должен содержать не менее 5 символов!");
         return false;
     } else if (!(/^(?=.*[a-z])(?=.*[A-Z]).{4,}$/.test(document.form.repeatNewPassword.value))) {
         alert("Пароль должен содержать не менее одной буквы в каждом регистре и не менее одной цифры!")

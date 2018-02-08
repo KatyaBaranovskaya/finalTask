@@ -22,7 +22,9 @@ public class OrderDAOImpl implements OrderDAO {
             " JOIN roles ON roles.id_role = users.id_role WHERE roles.role_name = 'Пользователь' AND orders.status != 'принят'";
     private final static String INSERT_ORDER = "INSERT INTO orders(id_user, arrival_date, departure_date, no_adults, no_children, type_apartment, breakfast) VALUES (?,?,?,?,?,?,?)";
     private final static String SELECT_USER_ORDERS = "SELECT id_order, room_number, arrival_date, departure_date, no_adults, no_children, type_apartment, breakfast, price, status FROM orders WHERE id_user=?";
-    private final static String SELECT_ORDER_BY_ID = "SELECT id_order, id_user, room_number, arrival_date, departure_date, no_adults, no_children, type_apartment, breakfast, price, status FROM orders WHERE id_order=?";
+    private final static String SELECT_ORDER_BY_ID = "SELECT id_order, users.id_user, email, login, password, role_name, surname, name, middle_name, date_birth, telephone, avatar,\n" +
+            "room_number, arrival_date, departure_date, no_adults, no_children, type_apartment, breakfast, price, status FROM orders \n" +
+            "JOIN users ON users.id_user = orders.id_user\n JOIN roles ON roles.id_role = users.id_role WHERE id_order=?";
     private final static String UPDATE_ORDER = "UPDATE orders SET room_number=?, arrival_date=?, departure_date=?, no_adults=?, no_children=?, type_apartment=?, breakfast=?, price=?, status=? WHERE id_order=?";
     private final static String UPDATE_STATUS_ORDER = "UPDATE orders SET status='отклонен' WHERE id_order=?";
 
@@ -133,19 +135,7 @@ public class OrderDAOImpl implements OrderDAO {
             preparedStatement.setInt(1, idOrder);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
-                order.setIdOrder(resultSet.getInt("id_order"));
-                User user = new User();
-                user.setIdUser(resultSet.getInt("id_user"));
-                order.setUser(user);
-                order.setRoomNumber(resultSet.getInt("room_number"));
-                order.setArrivalDate(resultSet.getDate("arrival_date"));
-                order.setDepartureDate(resultSet.getDate("departure_date"));
-                order.setNoAdults(resultSet.getInt("no_adults"));
-                order.setNoChildren(resultSet.getInt("no_children"));
-                order.setTypeApartment(resultSet.getString("type_apartment"));
-                order.setBreakfast(resultSet.getString("breakfast"));
-                order.setPrice(resultSet.getDouble("price"));
-                order.setStatus(resultSet.getString("status"));
+                order = initOrderFromResultSet(resultSet);
             }
         } catch (SQLException e) {
             throw new DAOException("Exception selecting users orders: " + e);
@@ -205,7 +195,7 @@ public class OrderDAOImpl implements OrderDAO {
         order.setIdOrder(resultSet.getInt("id_order"));
         user.setIdUser(resultSet.getInt("id_user"));
         user.setLogin(resultSet.getString("email"));
-        user.setLogin(resultSet.getString("login"));
+        user.setEmail(resultSet.getString("login"));
         user.setPassword(resultSet.getString("password"));
         user.setRole(resultSet.getString("role_name"));
         user.setSurname(resultSet.getString("surname"));

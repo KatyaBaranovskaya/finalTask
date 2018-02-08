@@ -1,6 +1,7 @@
 package by.baranovskaya.command.common;
 
 import by.baranovskaya.command.Command;
+import by.baranovskaya.constant.PageConstants;
 import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 
@@ -13,7 +14,7 @@ public class ChangeLocaleCommand implements Command {
         Router router = new Router();
 
         String locale = request.getParameter(ParameterConstants.LOCALE);
-        String page = request.getParameter(ParameterConstants.URL);
+        String page = PageConstants.MAIN_PAGE;
         request.getSession().setAttribute(ParameterConstants.LOCALE, locale);
 
         router.setPagePath(page);

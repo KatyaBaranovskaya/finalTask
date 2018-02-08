@@ -12,9 +12,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
-    <c:if test="${sessionScope.role == 'admin'}">
-    </c:if>
-
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
@@ -23,15 +20,17 @@
         <h1 class="serviceH1"><fmt:message key="page.reservation" bundle="${rb}"/></h1>
         <p class="line"></p>
         <form action="/Controller" method="POST">
-
-            <p>${order.price}</p>
-
-
-            <div class="col-sm-offset-2 col-sm-10">
-                <input type="hidden" name="command" value="issue_order"/>
-                <button type="submit" name="edit" class="btn btn-success">Оформить</button>
+            <div class="nomerView">
+                <div class="nomerText">
+                    <h1><fmt:message key="label.arrivalDate" bundle="${rb}"/>: ${order.arrivalDate}</h1>
+                    <h1><fmt:message key="label.departureDate" bundle="${rb}"/>: ${order.departureDate}</h1>
+                    <h1><fmt:message key="label.price" bundle="${rb}"/>: ${order.price}</h1>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="hidden" name="command" value="issue_order"/>
+                    <button type="submit" name="edit" class="btn btn-success"><fmt:message key="label.issue" bundle="${rb}"/></button><br/>
+                </div>
             </div>
-
         </form>
     </div>
 </div>

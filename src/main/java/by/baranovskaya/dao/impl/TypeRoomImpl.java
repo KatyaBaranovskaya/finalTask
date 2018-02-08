@@ -21,7 +21,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
     private final static String INSERT_TYPE_ROOM = "INSERT INTO room_types(type_name, capacity, price, description, image) VALUES (?,?,?,?,?)";
     private final static String DELETE_TYPE_ROOM = "DELETE FROM room_types WHERE id_type=?";
     private final static String FIND_TYPE_ROOM_BY_NUMBER = "SELECT id_type, type_name, capacity, price, description, image FROM room_types WHERE id_type=?";
-    private final static String UPDATE_TYPE_ROOM_BY_ID = "UPDATE room_types SET type_name=? capacity=?, price=?, description=?, image=? WHERE id_type=?";
+    private final static String UPDATE_TYPE_ROOM_BY_ID = "UPDATE room_types SET type_name=?, capacity=?, price=?, description=?, image=? WHERE id_type=?";
     private final static String SELECT_TYPES = "SELECT type_name FROM room_types";
     private final static String FIND_TYPE_ROOM_BY_NAME = "SELECT id_type, type_name, capacity, price, description, image FROM room_types WHERE type_name=?";
     private final static String FIND_PRICE_BY_TYPE = "SELECT price FROM room_types WHERE type_name=? ";
@@ -135,9 +135,9 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setString(1, typeRoom.getTypeRoom());
             preparedStatement.setInt(2, typeRoom.getCapacity());
             preparedStatement.setDouble(3, typeRoom.getPrice());
-            preparedStatement.setString(4, typeRoom.getImage());
-            preparedStatement.setString(5, typeRoom.getDescription());
-            preparedStatement.setString(6, typeRoom.getImage());
+            preparedStatement.setString(4, typeRoom.getDescription());
+            preparedStatement.setString(5, typeRoom.getImage());
+            preparedStatement.setInt(6, typeRoom.getIdType());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Exception updating type room: " + e);

@@ -5,7 +5,6 @@ public class ParameterConstants {
     public final static String PAGE = "page";
     public final static String LOCALE = "locale";
     public final static String DEFAULT_LOCALE = "ru_RU";
-    public final static String URL = "url";
     public final static String ID = "id";
     public final static String MIN = "min";
     public final static String MAX = "max";

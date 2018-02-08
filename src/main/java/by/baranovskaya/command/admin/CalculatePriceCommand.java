@@ -46,7 +46,6 @@ public class CalculatePriceCommand implements Command {
             }
         } else {
             setErrorMessage(request, MessageConstants.ERROR_ORDER_LABEL, MessageProperty.ERROR_ORDER_MESSAGE);
-            router.setRouteType(Router.RouteType.FORWARD);
             page = PageConstants.EDIT_ORDER_PAGE;
         }
 

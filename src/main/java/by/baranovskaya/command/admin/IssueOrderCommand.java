@@ -32,10 +32,9 @@ public class IssueOrderCommand implements Command {
 
         try {
             if (orderService.issueOrder(order)) {
+                System.out.println(order);
                 MailSender.sendMail(ParameterConstants.TITLE_EMAIL_MESSAGE, ParameterConstants.TEXT_EMAIL_ORDER_MESSAGE, order.getUser().getEmail());
-                page = PageConstants.MAIN_PAGE;
-            } else {
-                page = PageConstants.APPLICATIONS_PAGE;
+                request.getSession().setAttribute(ParameterConstants.ORDERS, orderService.getNewOrders());
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

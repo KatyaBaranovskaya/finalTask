@@ -21,12 +21,12 @@
     <div class="addContent">
         <h1 class="serviceH1"><fmt:message key="page.reservation" bundle="${rb}"/></h1>
         <p class="line"></p>
-        <form action="/Controller" method="POST" name="form"
-              onsubmit="return validationRegister();">
+        <form class="ediOrderForm" action="/Controller" method="POST" name="form"
+              onsubmit="return validationOrder();">
             <div class="form-group">
-                <label class="col-sm-2 control-label"><fmt:message key="label.roomNumber" bundle="${rb}"/>:</label>
+                <label class="col-sm-6 control-label"><fmt:message key="label.roomNumber" bundle="${rb}"/>:</label>
                 <div class="col-sm-7">
-                    <select class="custom-select col-md-4" name="roomNumber">
+                    <select class="custom-select col-md-5" name="roomNumber">
                         <c:forEach var="number" items="${numbers}">
                             <option>${number}</option>
                         </c:forEach>
@@ -35,39 +35,39 @@
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Дата прибытия</label>
-                <div class="col-sm-3">
+                <label class="col-sm-6 control-label"><fmt:message key="label.arrivalDate" bundle="${rb}"/>:</label>
+                <div class="col-sm-4">
                     <input type="text" class="form-control" name="arrival_date" value="${order.arrivalDate}"
                            placeholder="<fmt:message key="label.date" bundle="${rb}"/> "/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Дата отъезда</label>
-                <div class="col-sm-3">
+                <label class="col-sm-6 control-label"><fmt:message key="label.departureDate" bundle="${rb}"/>:</label>
+                <div class="col-sm-4">
                     <input type="text" class="form-control" name="departure_date" value="${order.departureDate}"
                            placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Количество взрослых</label>
+                <label class="col-sm-7 control-label"><fmt:message key="label.adults" bundle="${rb}"/>:</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="noAdults" value="${order.noAdults}">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Количество детей</label>
+                <label class="col-sm-7 control-label"><fmt:message key="label.children" bundle="${rb}"/>:</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="noChildren" value="${order.noChildren}">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Тип апартаментов</label>
-                <div class="col-sm-3">
+                <label class="col-sm-7 control-label"><fmt:message key="label.typeRoom" bundle="${rb}"/>:</label>
+                <div class="col-sm-5">
                     <input type="text" class="form-control" name="typeApartment" value="${order.typeApartment}">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Завтрак</label>
+                <label class="col-sm-3 control-label"><fmt:message key="label.includeBreakfast" bundle="${rb}"/></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="breakfast" value="${order.breakfast}">
                 </div>
@@ -75,7 +75,7 @@
             <err:mtg messageError="${errorOrder}"/>
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="hidden" name="command" value="calculate_price"/>
-                <button type="submit" name="edit" class="btn btn-success">Рассчитать</button>
+                <button type="submit" name="edit" class="btn btn-success"><fmt:message key="label.count" bundle="${rb}"/></button>
             </div>
 
         </form>

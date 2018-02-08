@@ -23,7 +23,6 @@ public class DataValidator {
     private final static String BREAKFAST_REGEX = "да|нет";
 
     private static boolean isDataMatch(String data, String regex) {
-        System.out.println(data);
         if (data == null || data.isEmpty()) {
             return false;
         }
@@ -31,7 +30,6 @@ public class DataValidator {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(data);
 
-        System.out.println(matcher.matches());
         return matcher.matches();
     }
 
@@ -97,7 +95,7 @@ public class DataValidator {
     }
 
     public static boolean validateRoom(int roomNumber, TypeRoom typeRoom, String status) {
-        return isDataMatch(String.valueOf(roomNumber), NUMBER_REGEX)
+        return isDataMatch(String.valueOf(roomNumber), NUMBERS_REGEX)
                 && isDataMatch(status, STATUS_REGEX)
                 && validateTypeRoom(typeRoom.getTypeRoom(), typeRoom.getCapacity(),
                 typeRoom.getPrice(), typeRoom.getDescription(), typeRoom.getImage());

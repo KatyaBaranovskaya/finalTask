@@ -42,7 +42,6 @@ public class ForgotPasswordCommand implements Command {
                     String pass = PasswordGenerator.generate();
                     userService.updatePassword(user.getIdUser(), pass);
                     MailSender.sendMail(ParameterConstants.TITLE_EMAIL_MESSAGE, ParameterConstants.TEXT_EMAIL_MESSAGE + pass, email);
-
                     page =  PageConstants.LOGIN_PAGE;
                     router.setRouteType(Router.RouteType.REDIRECT);
                 } else{

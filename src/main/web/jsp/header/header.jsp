@@ -90,7 +90,6 @@
     <div class="locale">
         <form action="${pageContext.request.contextPath}/Controller" method="POST">
             <input type="hidden" name="command" value="change_locale">
-            <input type="hidden" name="url" value="${pageContext.request.requestURI}">
             <div class="form-group localeBtn">
                 <button class="btn btn-link" type="submit" name="locale" value="en_US">EN</button>
                 <button class="btn btn-link" type="submit" name="locale" value="ru_RU">RU</button>

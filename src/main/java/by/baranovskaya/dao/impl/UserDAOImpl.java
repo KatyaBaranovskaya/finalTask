@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean addUser(User user) throws DAOException {
-        ProxyConnection connection = ConnectionPool.getInstance().getConnection();
+         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(INSERT_USER);

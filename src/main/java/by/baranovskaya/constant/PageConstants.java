@@ -22,10 +22,10 @@ public class PageConstants {
     public final static String USER_ACCOUNT_PAGE = "/jsp/user/account.jsp";
     public final static String CHANGE_PASSWORD_PAGE = "/jsp/user/changePassword.jsp";
     public final static String CHANGE_ACCOUNT_INFO_PAGE = "/jsp/user/changeAccount.jsp";
-    public final static String CLIENTS_PAGE = "/jsp/admin/users.jsp";
+    public final static String USERS_PAGE = "/jsp/admin/users.jsp";
 
     public final static String RESERVATION_PAGE = "/jsp/user/reservation.jsp";
-    public final static String ORDERS_PAGE = "/jsp/user/clientOrders.jsp";
+    public final static String ORDERS_PAGE = "/jsp/user/userOrders.jsp";
     public final static String EDIT_ORDER_PAGE = "/jsp/admin/editOrder.jsp";
     public final static String ISSUE_ORDER = "/jsp/admin/issueOrder.jsp";
     public final static String APPLICATIONS_PAGE = "/jsp/admin/applications.jsp";

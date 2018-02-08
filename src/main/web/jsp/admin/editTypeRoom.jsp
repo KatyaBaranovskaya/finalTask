@@ -25,7 +25,7 @@
         <p class="line"></p>
 
         <form class="addServiceForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form"
-              onsubmit="return validationTypeRoom();">
+              onsubmit="return validationEditTypeRoom();">
             <div class="form-group">
                 <label class="col-sm-2 control-label"><fmt:message key="label.typeRoom" bundle="${rb}"/>:</label>
                 <div class="col-sm-7">
@@ -87,6 +87,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-5">
                     <span class="btn btn-default btn-file">
+                        <input type="hidden" name="oldImage" value="${typeRoom.image}"/>
                         <input type="file" name="image"><fmt:message key="label.browsePhoto" bundle="${rb}"/>
                     </span>
                 </div>

@@ -35,8 +35,8 @@ public class ShowRoomTypesCommand implements Command {
 
         try {
             typeRoomList = typeRoomService.getRooms(noPage);
-            request.setAttribute(ParameterConstants.ROOM_TYPES, typeRoomList);
-            request.setAttribute(ParameterConstants.NO_PAGES, typeRoomService.getNoOfPages());
+            request.getSession().setAttribute(ParameterConstants.ROOM_TYPES, typeRoomList);
+            request.getSession().setAttribute(ParameterConstants.NO_PAGES, typeRoomService.getNoOfPages());
             request.getSession().setAttribute(ParameterConstants.CURRENT_PAGE, noPage);
             page = PageConstants.ROOM_TYPES_PAGE;
         } catch (ServiceException e) {

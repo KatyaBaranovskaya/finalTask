@@ -35,8 +35,10 @@ public class AddTypeRoomCommand implements Command {
         if(typeRoom != null){
             try {
                 if(typeRoomService.addTypeRoom(typeRoom)){
-                    request.getSession().setAttribute(ParameterConstants.ROOM_TYPES, typeRoomService.getTypesRoom());
-                    page = PageConstants.SERVICES_PAGE;
+                    int currentPage = (Integer) request.getSession().getAttribute(ParameterConstants.CURRENT_PAGE);
+                    request.getSession().setAttribute(ParameterConstants.NO_PAGES, typeRoomService.getNoOfPages());
+                    request.getSession().setAttribute(ParameterConstants.ROOM_TYPES, typeRoomService.getRooms(currentPage));
+                    page = PageConstants.ROOM_TYPES_PAGE;
                     router.setRouteType(Router.RouteType.REDIRECT);
                 } else{
                     page = PageConstants.ADD_TYPE_ROOM_PAGE;

@@ -32,7 +32,7 @@ public class ShowUsersCommand implements Command{
         try {
             userList = userService.getAllUsers();
             request.setAttribute(ParameterConstants.USERS, userList);
-            page = PageConstants.CLIENTS_PAGE;
+            page = PageConstants.USERS_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);
         }

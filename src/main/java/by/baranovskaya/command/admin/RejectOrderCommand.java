@@ -33,7 +33,7 @@ public class RejectOrderCommand implements Command {
         try {
             if (orderService.updateStatus(idOrder)) {
                 orderList = orderService.getNewOrders();
-                request.setAttribute(ParameterConstants.ORDERS, orderList);
+                request.getSession().setAttribute(ParameterConstants.ORDERS, orderList);
                 page = PageConstants.APPLICATIONS_PAGE;
             }
         } catch (ServiceException e) {
@@ -41,7 +41,7 @@ public class RejectOrderCommand implements Command {
         }
 
         router.setPagePath(page);
-        router.setRouteType(Router.RouteType.FORWARD);
+        router.setRouteType(Router.RouteType.REDIRECT);
         return router;
     }
 }

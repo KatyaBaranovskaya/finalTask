@@ -24,7 +24,7 @@
         <p class="line"></p>
 
         <form class="addServiceForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form"
-              onsubmit="return validationService();">
+              onsubmit="return validationEditService();">
             <div class=" form-group">
                 <label class="col-sm-2 control-label"><fmt:message key="label.serviceName" bundle="${rb}"/>:</label>
                 <div class="col-sm-7">

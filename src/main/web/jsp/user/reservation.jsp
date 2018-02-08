@@ -29,8 +29,8 @@
                     <label class="col-sm-7 control-label"><fmt:message key="label.arrivalDate" bundle="${rb}"/>:</label>
                     <input class="form-control" type="text" name="arrival_date" placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-4">
-                    <label class="col-sm-7 control-label"><fmt:message key="label.departureDate"
+                <div class="col-md-4 col-sm-8 col-xs-4">
+                    <label class="col-sm-9 control-label"><fmt:message key="label.departureDate"
                                                                        bundle="${rb}"/>:</label>
                     <input class="form-control" type="text" name="departure_date" placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
@@ -38,7 +38,7 @@
             </br>
             <div class="form-group">
                 <label class="col-md-4 control-label"><fmt:message key="label.noPeople" bundle="${rb}"/>:</label>
-                <select class="custom-select col-md-2" name="noAdults">
+                <select id="noAdults" class="custom-select col-md-2" name="noAdults">
                     <option selected disabled><fmt:message key="label.adults" bundle="${rb}"/></option>
                     <option>1</option>
                     <option>2</option>
@@ -47,7 +47,7 @@
                     <option>4</option>
                     <option>5</option>
                 </select>
-                <select class="custom-select col-md-2" name="noChildren">
+                <select id="noChildren" class="custom-select col-md-2" name="noChildren">
                     <option selected disabled><fmt:message key="label.children" bundle="${rb}"/></option>
                     <option>0</option>
                     <option>1</option>
@@ -72,10 +72,10 @@
             <input type="hidden" name="typeApartment" value="${typeApartment}">
 
             <div class="form-group">
-                <label class="col-sm-6 control-label">Включить завтрак:</label>
+                <label class="col-sm-4 control-label"><fmt:message key="label.includeBreakfast" bundle="${rb}"/>:</label>
                 <label class="radio-inline">
-                    <input type="radio" name="breakfast" value="да"> да
-                    <input type="radio" name="breakfast" value="нет"> нет
+                    <input type="radio" name="breakfast" value="да"> <fmt:message key="label.yes" bundle="${rb}"/>
+                    <input type="radio" name="breakfast" value="нет"> <fmt:message key="label.not" bundle="${rb}"/>
                 </label>
             </div>
             <err:mtg messageError="${errorOrder}"/>

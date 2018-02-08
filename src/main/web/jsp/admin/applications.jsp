@@ -20,7 +20,7 @@
         <h1 class="serviceH1"><fmt:message key="page.applications" bundle="${rb}"/></h1>
         <p class="line"></p>
         <a href="${pageContext.request.contextPath}/Controller?command=show_executed_applications">
-            Оформленные заявки
+            <fmt:message key="label.executedApplications" bundle="${rb}"/>
         </a>
         <table class="table table-hover">
             <thead>
@@ -32,22 +32,32 @@
                 <th><fmt:message key="label.departureDate" bundle="${rb}"/></th>
                 <th></th>
             </thead>
-            <tbody>
-            <c:forEach var="order" items="${orders}">
-            <tr>
-                <td>${order.user.surname} ${order.user.name} ${order.user.middleName}</td>
-                <td>${order.noAdults}</td>
-                <td>${order.noChildren}</td>
-                <td>${order.arrivalDate}</td>
-                <td>${order.departureDate}</td>
-                <td>
-                    <a href="/Controller?command=edit_order&id=${order.idOrder}"><fmt:message key="label.issue"
-                                                                                              bundle="${rb}"/></a
-                    <br/><a href="/Controller?command=reject_order&id=${order.idOrder}">Отклонить</a>
-                </td>
-            </tr>
-            </tbody>
-            </c:forEach>
+
+
+            <c:choose>
+                <c:when test="${not empty orders}">
+                    <tbody>
+                    <c:forEach var="order" items="${orders}">
+                        <tr>
+                            <td>${order.user.surname} ${order.user.name} ${order.user.middleName}</td>
+                            <td>${order.noAdults}</td>
+                            <td>${order.noChildren}</td>
+                            <td>${order.arrivalDate}</td>
+                            <td>${order.departureDate}</td>
+                            <td>
+                                <a href="/Controller?command=edit_order&id=${order.idOrder}"><fmt:message
+                                        key="label.issue"
+                                        bundle="${rb}"/></a>
+                                <br/><a href="/Controller?command=reject_order&id=${order.idOrder}"><fmt:message key="label.reject" bundle="${rb}"/></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <p class="null-list"><fmt:message key="message.emptyData" bundle="${rb}"/></p>
+                </c:otherwise>
+            </c:choose>
         </table>
     </div>
 </div>
