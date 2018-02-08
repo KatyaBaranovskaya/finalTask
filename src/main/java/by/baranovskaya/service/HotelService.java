@@ -35,17 +35,17 @@ public class HotelService {
         }
     }
 
-    public Service findService(int idService) throws ServiceException {
+    public boolean updateService(Service service) throws ServiceException {
         try {
-            return serviceDAO.findServiceById(idService);
+            return serviceDAO.updateServiceById(service);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
 
-    public boolean updateService(Service service) throws ServiceException {
+    public Service findService(int idService) throws ServiceException {
         try {
-            return serviceDAO.updateServiceById(service);
+            return serviceDAO.findServiceById(idService);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

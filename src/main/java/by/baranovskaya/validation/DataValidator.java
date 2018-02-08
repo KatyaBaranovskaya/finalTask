@@ -35,6 +35,11 @@ public class DataValidator {
         return matcher.matches();
     }
 
+    public static boolean validatePassword(String lastPassword, String newPassword) {
+        return isDataMatch(lastPassword, PASSWORD_REGEX)
+                && isDataMatch(newPassword, PASSWORD_REGEX);
+    }
+
     public static boolean validateLoginPassword(String loginValue, String passValue) {
         return isDataMatch(loginValue, LOGIN_REGEX)
                 && isDataMatch(passValue, PASSWORD_REGEX);
@@ -43,11 +48,6 @@ public class DataValidator {
     public static boolean validateLoginEmail(String login, String email) {
         return isDataMatch(login, LOGIN_REGEX)
                 && isDataMatch(email, EMAIL_REGEX);
-    }
-
-    public static boolean validatePassword(String lastPassword, String newPassword) {
-        return isDataMatch(lastPassword, PASSWORD_REGEX)
-                && isDataMatch(newPassword, PASSWORD_REGEX);
     }
 
     public static boolean validateAvatar(String avatar) {

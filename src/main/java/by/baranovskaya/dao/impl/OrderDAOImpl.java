@@ -41,7 +41,7 @@ public class OrderDAOImpl implements OrderDAO {
             preparedStatement.setString(7, order.getBreakfast());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception inserting order " + e);
+            throw new DAOException("Exception inserting order: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -73,7 +73,7 @@ public class OrderDAOImpl implements OrderDAO {
                 orderList.add(order);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting user orders" + e);
+            throw new DAOException("Exception selecting user orders: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -94,7 +94,7 @@ public class OrderDAOImpl implements OrderDAO {
                 orderList.add(order);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting executed orders" + e);
+            throw new DAOException("Exception selecting executed orders: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -115,7 +115,7 @@ public class OrderDAOImpl implements OrderDAO {
                 orderList.add(order);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting new orders" + e);
+            throw new DAOException("Exception selecting new orders: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -148,7 +148,7 @@ public class OrderDAOImpl implements OrderDAO {
                 order.setStatus(resultSet.getString("status"));
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting users orders" + e);
+            throw new DAOException("Exception selecting users orders: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -174,7 +174,7 @@ public class OrderDAOImpl implements OrderDAO {
             preparedStatement.setInt(10, order.getIdOrder());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating order" + e);
+            throw new DAOException("Exception updating order: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -191,7 +191,7 @@ public class OrderDAOImpl implements OrderDAO {
             preparedStatement.setInt(1, idOrder);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating status order" + e);
+            throw new DAOException("Exception updating status order: " + e);
         } finally {
             close(preparedStatement);
             close(connection);

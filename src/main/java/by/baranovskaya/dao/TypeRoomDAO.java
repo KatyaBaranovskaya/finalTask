@@ -8,17 +8,17 @@ import java.util.Set;
 
 public interface TypeRoomDAO extends AbstractDAO {
 
-    List<TypeRoom> getRoomTypes() throws DAOException;
-
-    int countRoomTypes() throws DAOException;
+    boolean addTypeRoom(TypeRoom typeRoom) throws DAOException;
 
     boolean deleteTypeRoom(int idType) throws DAOException;
 
+    boolean updateTypeRoomById(TypeRoom typeName) throws DAOException;
+
     TypeRoom findTypeRoomById(int idType) throws DAOException;
 
-    boolean addTypeRoom(TypeRoom typeRoom) throws DAOException;
+    int countRoomTypes() throws DAOException;
 
-    boolean updateTypeRoomById(TypeRoom typeName) throws DAOException;
+    List<TypeRoom> getRoomTypes() throws DAOException;
 
     Set<String> getTypes() throws DAOException;
 

@@ -85,7 +85,6 @@
                                                                                                         bundle="${rb}"/></a>
                 </li>
             </c:if>
-
         </ul>
     </nav>
     <div class="locale">

@@ -12,6 +12,12 @@ public interface UserDAO extends AbstractDAO {
 
     boolean deleteUser(int idUser) throws DAOException;
 
+    boolean updatePasswordById(int idUser, String password) throws DAOException;
+
+    boolean updateAvatarById(int idClient, String avatarPath) throws DAOException;
+
+    boolean updateUser(User user) throws DAOException;
+
     User findUserByLoginPassword(String login, String password) throws DAOException;
 
     boolean findUserByLogin(String login) throws DAOException;
@@ -19,10 +25,4 @@ public interface UserDAO extends AbstractDAO {
     User findUserByLoginEmail(String login, String email) throws DAOException;
 
     User findUserById(int idUser) throws DAOException;
-
-    boolean updatePasswordById(int idUser, String password) throws DAOException;
-
-    boolean updateAvatarById(int idClient, String avatarPath) throws DAOException;
-
-    boolean updateUser(User user) throws DAOException;
 }

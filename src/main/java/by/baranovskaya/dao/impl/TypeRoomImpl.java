@@ -40,7 +40,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 typeRoomList.add(typeRoom);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting all room types" + e);
+            throw new DAOException("Exception selecting all room types: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -59,7 +59,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 return resultSet.getInt(1);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception counting all room types" + e);
+            throw new DAOException("Exception counting all room types: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -76,7 +76,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setInt(1, idType);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception deleting type room" + e);
+            throw new DAOException("Exception deleting type room: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -97,7 +97,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 typeRoom = initTypeRoomFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting type room by id" + e);
+            throw new DAOException("Exception selecting type room by id: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -118,7 +118,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setString(5, typeRoom.getImage());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception inserting type room" + e);
+            throw new DAOException("Exception inserting type room: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -140,7 +140,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setString(6, typeRoom.getImage());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating type room" + e);
+            throw new DAOException("Exception updating type room: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -160,7 +160,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 typesList.add(resultSet.getString("type_name"));
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting all types" + e);
+            throw new DAOException("Exception selecting all types: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -181,7 +181,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 typeRoom = initTypeRoomFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting type room by type" + e);
+            throw new DAOException("Exception selecting type room by type: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -202,7 +202,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 price = resultSet.getInt("price");
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting price by type" + e);
+            throw new DAOException("Exception selecting price by type: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -225,7 +225,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 typeRoomList.add(typeRoom);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception searching room types by price" + e);
+            throw new DAOException("Exception searching room types by price: " + e);
         } finally {
             close(preparedStatement);
             close(connection);

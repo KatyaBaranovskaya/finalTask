@@ -13,7 +13,7 @@ public interface ServiceDAO extends AbstractDAO {
 
     boolean deleteService(int idService) throws DAOException;
 
-    Service findServiceById(int idService) throws DAOException;
-
     boolean updateServiceById(Service service) throws DAOException;
+
+    Service findServiceById(int idService) throws DAOException;
 }

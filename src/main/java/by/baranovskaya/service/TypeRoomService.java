@@ -37,7 +37,7 @@ public class TypeRoomService {
             throw new ServiceException(e);
         }
     }
-
+ 
     public boolean updateTypeRoom(TypeRoom typeRoom) throws ServiceException {
         try {
             return typeRoomDAO.updateTypeRoomById(typeRoom);

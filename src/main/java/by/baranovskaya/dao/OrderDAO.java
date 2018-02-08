@@ -17,7 +17,7 @@ public interface OrderDAO extends AbstractDAO {
 
     Order getOrderById(int idOrder) throws DAOException;
 
-    boolean updateStatusById(int idOrder) throws DAOException;
-
     boolean updateOrder(Order order) throws DAOException;
+
+    boolean updateStatusById(int idOrder) throws DAOException;
 }

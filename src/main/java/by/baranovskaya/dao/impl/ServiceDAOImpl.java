@@ -37,7 +37,7 @@ public class ServiceDAOImpl implements ServiceDAO{
                 serviceList.add(service);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting all service" + e);
+            throw new DAOException("Exception selecting all service: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -56,7 +56,7 @@ public class ServiceDAOImpl implements ServiceDAO{
             preparedStatement.setString(3, service.getImage());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception inserting service" + e);
+            throw new DAOException("Exception inserting service: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -73,7 +73,7 @@ public class ServiceDAOImpl implements ServiceDAO{
             preparedStatement.setInt(1, idService);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception deleting service" + e);
+            throw new DAOException("Exception deleting service: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -97,7 +97,7 @@ public class ServiceDAOImpl implements ServiceDAO{
                 service.setImage(resultSet.getString("image"));
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting service by id" + e);
+            throw new DAOException("Exception selecting service by id: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -117,7 +117,7 @@ public class ServiceDAOImpl implements ServiceDAO{
             preparedStatement.setInt(4, service.getIdService());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating service" + e);
+            throw new DAOException("Exception updating service: " + e);
         } finally {
             close(preparedStatement);
             close(connection);

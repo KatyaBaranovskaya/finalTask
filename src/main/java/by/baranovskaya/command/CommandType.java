@@ -26,7 +26,6 @@ public enum CommandType {
     EDIT_ROOMS(new EditRoomsCommand(new RoomService(), new TypeRoomService())),
     UPDATE_ROOM(new UpdateRoomCommand(new RoomService(), new TypeRoomService())),
     FIND_ROOMS(new FindRoomsCommand(new TypeRoomService())),
-    /*GET_TYPES(new GetTypesCommand(new TypeRoomService())),*/
     ADD_SERVICE(new AddServiceCommand(new HotelService())),
     EDIT_SERVICE(new EditServiceCommand(new HotelService())),
     UPDATE_SERVICE(new UpdateServiceCommand(new HotelService())),

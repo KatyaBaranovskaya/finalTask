@@ -28,6 +28,14 @@ public class RoomService {
         }
     }
 
+    public boolean updateRoom(Room room) throws ServiceException {
+        try {
+            return roomDAO.updateRoomByNumber(room);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     public Set<Integer> getRoomNumbers() throws ServiceException {
         try {
             return roomDAO.getRoomNumbers();
@@ -39,13 +47,6 @@ public class RoomService {
     public List<Integer> getFreeRoomNumbers() throws ServiceException {
         try {
             return roomDAO.getFreeRoomNumbers();
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-    public boolean updateRoom(Room room) throws ServiceException {
-        try {
-            return roomDAO.updateRoomByNumber(room);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

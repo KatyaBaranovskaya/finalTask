@@ -85,7 +85,7 @@ public class UserService {
 
     public boolean updateUserInfo(User user) throws ServiceException {
         try {
-            return userDAO.updateUser(user);
+            return userDAO.updateUser (user);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

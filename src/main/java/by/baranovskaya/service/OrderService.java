@@ -51,17 +51,17 @@ public class OrderService {
         }
     }
 
-    public boolean updateStatus(int idOrder) throws ServiceException {
+    public boolean issueOrder(Order order) throws ServiceException {
         try {
-            return orderDAO.updateStatusById(idOrder);
+            return orderDAO.updateOrder(order);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
 
-    public boolean issueOrder(Order order) throws ServiceException {
+    public boolean updateStatus(int idOrder) throws ServiceException {
         try {
-            return orderDAO.updateOrder(order);
+            return orderDAO.updateStatusById(idOrder);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

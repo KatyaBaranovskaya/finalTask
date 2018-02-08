@@ -30,7 +30,7 @@ public class RoomDAOImpl implements RoomDAO {
             preparedStatement.setInt(1, roomNumber);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception deleting room" + e);
+            throw new DAOException("Exception deleting room: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -50,7 +50,7 @@ public class RoomDAOImpl implements RoomDAO {
                 numbersList.add(resultSet.getInt("room_number"));
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting room numbers" + e);
+            throw new DAOException("Exception selecting room numbers: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -70,7 +70,7 @@ public class RoomDAOImpl implements RoomDAO {
                 numbersList.add(resultSet.getInt("room_number"));
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting free room numbers" + e);
+            throw new DAOException("Exception selecting free room numbers: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -89,7 +89,7 @@ public class RoomDAOImpl implements RoomDAO {
             preparedStatement.setString(3, room.getStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception inserting room" + e);
+            throw new DAOException("Exception inserting room: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -108,7 +108,7 @@ public class RoomDAOImpl implements RoomDAO {
             preparedStatement.setInt(3, room.getRoomNumber());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating room" + e);
+            throw new DAOException("Exception updating room: " + e);
         } finally {
             close(preparedStatement);
             close(connection);

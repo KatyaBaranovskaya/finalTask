@@ -306,6 +306,23 @@ function validationUserInfo() {
     }
 }
 
+function validationRoom() {
+    if (document.form.roomNumber.value == "") {
+        alert("Пожалуйста, введите № номера!");
+        return false;
+    } else if (document.form.typeRoom.value == "") {
+        alert("Пожалуйста, введите тип номера!");
+        return false;
+    } else if (document.form.status.value == "") {
+        alert("Пожалуйста, введите статус номера!");
+        return false;
+    }
+
+    if (!(/[0-9]+$/.test(document.form.roomNumber.value))) {
+        alert("Некорректный № номера!Поле содержит только цифры");
+        return false;
+    }
+}
 
 function validationOrder() {
     if (document.form.arrival_date.value == "") {
@@ -393,20 +410,3 @@ function validationChangePass() {
     }
 }
 
-function validationRoom() {
-    if (document.form.roomNumber.value == "") {
-        alert("Пожалуйста, введите № номера!");
-        return false;
-    } else if (document.form.typeRoom.value == "") {
-        alert("Пожалуйста, введите тип номера!");
-        return false;
-    } else if (document.form.status.value == "") {
-        alert("Пожалуйста, введите статус номера!");
-        return false;
-    }
-
-    if (!(/[0-9]+$/.test(document.form.roomNumber.value))) {
-        alert("Некорректный № номера!Поле содержит только цифры");
-        return false;
-    }
-}

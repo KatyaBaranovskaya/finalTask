@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
                 listUser.add(user);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting all clients" + e);
+            throw new DAOException("Exception selecting all clients: " + e);
         } finally {
             close(statement);
             close(connection);
@@ -66,7 +66,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(8, user.getTelephone());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception inserting client" + e);
+            throw new DAOException("Exception inserting client: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -83,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setInt(1, idUser);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception deleting client" + e);
+            throw new DAOException("Exception deleting client: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -105,7 +105,7 @@ public class UserDAOImpl implements UserDAO {
                 user = initUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting client by login and password" + e);
+            throw new DAOException("Exception selecting client by login and password: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -123,7 +123,7 @@ public class UserDAOImpl implements UserDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             return (resultSet.next());
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting client by login" + e);
+            throw new DAOException("Exception selecting client by login: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -144,7 +144,7 @@ public class UserDAOImpl implements UserDAO {
                 user = initUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting client by login and email" + e);
+            throw new DAOException("Exception selecting client by login and email: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -165,7 +165,7 @@ public class UserDAOImpl implements UserDAO {
                 user = initUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting client by id" + e);
+            throw new DAOException("Exception selecting client by id: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -183,7 +183,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setInt(2, idUser);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating password" + e);
+            throw new DAOException("Exception updating password: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -201,7 +201,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setInt(2, idClient);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating avatar" + e);
+            throw new DAOException("Exception updating avatar: " + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -223,7 +223,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setInt(6, user.getIdUser());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating avatar" + e);
+            throw new DAOException("Exception updating avatar: " + e);
         } finally {
             close(preparedStatement);
             close(connection);

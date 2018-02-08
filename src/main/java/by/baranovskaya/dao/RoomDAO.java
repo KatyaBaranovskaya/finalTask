@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.Set;
 
 public interface RoomDAO extends AbstractDAO {
+    boolean addRoom(Room room) throws DAOException;
+
+    boolean updateRoomByNumber(Room room) throws DAOException;
 
     boolean deleteRoomNumber(int roomNumber) throws DAOException;
 
     Set<Integer> getRoomNumbers() throws DAOException;
 
     List<Integer> getFreeRoomNumbers() throws DAOException;
-
-    boolean addRoom(Room room) throws DAOException;
-
-    boolean updateRoomByNumber(Room room) throws DAOException;
 }
