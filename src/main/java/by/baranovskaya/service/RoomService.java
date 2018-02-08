@@ -13,54 +13,36 @@ public class RoomService {
     private RoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 
     public boolean addRoom(Room room) throws ServiceException {
-        boolean flag;
         try {
-            flag = roomDAO.addRoom(room);
+            return roomDAO.addRoom(room);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 
 
     public boolean deleteRoomNumber(int roomNumber) throws ServiceException {
-        boolean flag;
         try {
-            flag = roomDAO.deleteRoomNumber(roomNumber);
+           return roomDAO.deleteRoomNumber(roomNumber);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 
-   /* public TypeRoom findRoomByNumber(int idType) throws ServiceException {
-        TypeRoom typeRoom;
-        try {
-            typeRoom = roomDAO.findRoomByNumber(idType);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-        return typeRoom;
-    }*/
-
     public Set<Integer> getRoomNumbers() throws ServiceException {
-        Set<Integer> typeRoomList;
         try {
-            typeRoomList = roomDAO.getRoomNumbers();
+            return roomDAO.getRoomNumbers();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return typeRoomList;
     }
 
     public List<Integer> getFreeRoomNumbers() throws ServiceException {
-        List<Integer> typeRoomList;
         try {
-            typeRoomList = roomDAO.getFreeRoomNumbers();
+            return roomDAO.getFreeRoomNumbers();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return typeRoomList;
     }
     public boolean updateRoom(Room room) throws ServiceException {
         boolean flag;
@@ -71,34 +53,4 @@ public class RoomService {
         }
         return flag;
     }
-
-  /* public Set<String> getTypesRoom() throws ServiceException {
-        Set<String> listTypes;
-        try {
-            listTypes = roomDAO.getTypesRoom();
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-        return listTypes;
-    }
-
-    public Room findRoomByNumber(int roomNumber) throws ServiceException {
-        Room room;
-        try {
-            room = roomDAO.findRoomByNumber(roomNumber);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-        return room;
-    }
-
-    public boolean updateRoom(Room room) throws ServiceException {
-        boolean flag;
-        try {
-            flag = roomDAO.updateRoomByNumber(room);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-        return flag;
-    }*/
 }

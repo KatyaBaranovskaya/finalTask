@@ -16,9 +16,9 @@ import java.util.*;
 public class ServiceDAOImpl implements ServiceDAO{
     private final static String SELECT_SERVICES = "SELECT id_service, type_service,description, image FROM hotel.services";
     private final static String INSERT_SERVICE = "INSERT INTO services(type_service, description, image) VALUES (?,?,?)";
-    public final static String DELETE_SERVICE = "DELETE FROM services WHERE id_service=?";
-    public final static String FIND_SERVICE_BY_ID = "SELECT id_service, type_service, description, image FROM services WHERE id_service=?";
-    public final static String UPDATE_SERVICE_BY_ID = "UPDATE services SET type_service=?, description=?, image=? WHERE id_service=?";
+    private final static String DELETE_SERVICE = "DELETE FROM services WHERE id_service=?";
+    private final static String FIND_SERVICE_BY_ID = "SELECT id_service, type_service, description, image FROM services WHERE id_service=?";
+    private final static String UPDATE_SERVICE_BY_ID = "UPDATE services SET type_service=?, description=?, image=? WHERE id_service=?";
     private final static String SELECT_TYPES_SERVICE = "SELECT id_service, type_service FROM hotel.services";
     private final static String SELECT_SERVICES_BY_ID_ORDER = "SELECT services.id_service, type_service, description, image FROM services \n" +
             "JOIN order_service ON order_service.id_service = services.id_service WHERE order_service.id_order = ?";

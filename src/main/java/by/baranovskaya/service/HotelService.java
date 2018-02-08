@@ -12,62 +12,42 @@ public class HotelService {
     private ServiceDAO serviceDAO = DAOFactory.getInstance().getServiceDAO();
 
     public boolean addService(Service service) throws ServiceException {
-        boolean flag;
         try {
-            flag = serviceDAO.addService(service);
+            return serviceDAO.addService(service);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 
     public List<Service> getServices() throws ServiceException {
-        List<Service> serviceList;
         try {
-            serviceList =  serviceDAO.getAllServices();
+            return serviceDAO.getAllServices();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return serviceList;
     }
 
-    public boolean deleteSevice(int idService) throws ServiceException {
-        boolean flag;
+    public boolean deleteService(int idService) throws ServiceException {
         try {
-            flag = serviceDAO.deleteService(idService);
+            return serviceDAO.deleteService(idService);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 
     public Service findServiceById(int idService) throws ServiceException {
-        Service service;
         try {
-            service =  serviceDAO.findServiceById(idService);
+            return serviceDAO.findServiceById(idService);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return service;
     }
 
     public boolean updateService(Service service) throws ServiceException {
-        boolean flag;
         try {
-            flag = serviceDAO.updateServiceById(service);
+            return serviceDAO.updateServiceById(service);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
-
-  /*  public Map<Integer, String> getTypesService() throws ServiceException {
-        Map<Integer, String> mapTypes;
-        try {
-            mapTypes =  serviceDAO.getTypesService();
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-        return mapTypes;
-    }*/
 }

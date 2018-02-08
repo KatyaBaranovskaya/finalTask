@@ -16,8 +16,4 @@ public interface ServiceDAO extends AbstractDAO {
     Service findServiceById(int idService) throws DAOException;
 
     boolean updateServiceById(Service service) throws DAOException;
-/*
-    Map<Integer, String> getTypesService() throws DAOException;
-
-    List<Service> getServicesByIdOrder(int idOrder) throws DAOException;*/
 }

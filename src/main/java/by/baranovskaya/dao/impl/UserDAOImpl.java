@@ -17,7 +17,7 @@ public class UserDAOImpl implements UserDAO {
     private final static String SELECT_USER = "SELECT id_user, email, login, password, role_name, surname, name, middle_name, date_birth, telephone, avatar \n" +
             "FROM hotel.users JOIN roles ON roles.id_role = users.id_role WHERE roles.role_name = 'Пользователь'";
     private final static String INSERT_USER = "INSERT INTO users(email, login, password, surname, name, middle_name, date_birth, telephone) VALUES (?,?,?,?,?,?,?,?)";
-    public final static String DELETE_USER = "DELETE FROM users WHERE id_user=?";
+    private final static String DELETE_USER = "DELETE FROM users WHERE id_user=?";
     private final static String FIND_USER_BY_LOGIN_PASS = "SELECT id_user, email, login, password, role_name, surname, name, middle_name, date_birth, telephone, avatar \n" +
             "FROM hotel.users JOIN roles ON roles.id_role = users.id_role WHERE login = ? AND password = ?";
     private final static String FIND_USER_BY_LOGIN = "SELECT id_user FROM users WHERE login = ? ";
@@ -25,9 +25,9 @@ public class UserDAOImpl implements UserDAO {
             "FROM hotel.users JOIN roles ON roles.id_role = users.id_role WHERE login = ? AND email = ?";
     private final static String FIND_USER_BY_ID = "SELECT id_user, email, login, password, role_name, surname, name, middle_name, date_birth, telephone, avatar \n" +
             "FROM hotel.users JOIN roles ON roles.id_role = users.id_role WHERE id_user = ?";
-    public final static String UPDATE_PASSWORD_BY_ID = "UPDATE users SET password=? WHERE id_user=?";
-    public final static String UPDATE_AVATAR_BY_ID = "UPDATE users SET avatar=? WHERE id_user=?";
-    public final static String UPDATE_ACCOUNT_INFO_BY_ID = "UPDATE users SET surname=?, name=?, middle_name=?, date_birth=?, telephone=? WHERE id_user=?";
+    private final static String UPDATE_PASSWORD_BY_ID = "UPDATE users SET password=? WHERE id_user=?";
+    private final static String UPDATE_AVATAR_BY_ID = "UPDATE users SET avatar=? WHERE id_user=?";
+    private final static String UPDATE_ACCOUNT_INFO_BY_ID = "UPDATE users SET surname=?, name=?, middle_name=?, date_birth=?, telephone=? WHERE id_user=?";
 
     @Override
     public List<User> getAllUsers() throws DAOException {
