@@ -1,13 +1,14 @@
 package by.baranovskaya.service;
 
+import by.baranovskaya.reader.FileReader;
 import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.dao.TypeRoomDAO;
 import by.baranovskaya.dao.factory.DAOFactory;
 import by.baranovskaya.entity.Order;
 import by.baranovskaya.entity.TypeRoom;
 import by.baranovskaya.exception.DAOException;
+import by.baranovskaya.exception.ParseDataException;
 import by.baranovskaya.exception.ServiceException;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -106,7 +107,7 @@ public class TypeRoomService {
         }
     }
 
-    public List<TypeRoom> findRoomTypesByPrice(int minPrice, int maxPrice) throws ServiceException {
+    public List<TypeRoom> findRoomTypes(int minPrice, int maxPrice) throws ServiceException {
         try {
             return typeRoomDAO.findRoomTypesByPrice(minPrice, maxPrice);
         } catch (DAOException e) {
@@ -114,19 +115,13 @@ public class TypeRoomService {
         }
     }
 
-    public double calculatePrice(Order order) {
-        double price = 0;
-        double breakfast = 12;
-        try {
-            price = getPrice(order.getTypeApartment());
-        } catch (ServiceException e) {
-            LOGGER.log(Level.ERROR, e);
-        }
-
+    public double calculatePrice(Order order) throws ServiceException, ParseDataException {
+        double breakfast = FileReader.readData();
+        double price = getPrice(order.getTypeApartment());
         double diff = ((order.getDepartureDate().getTime() - order.getArrivalDate().getTime()) / ParameterConstants.DIVISION_DAYS);
-        price = price * diff;
+        price *= diff;
         if (order.getBreakfast().equals(ParameterConstants.YES)) {
-            price = price + (breakfast * diff);
+            price += (breakfast * diff);
         }
         return price;
     }

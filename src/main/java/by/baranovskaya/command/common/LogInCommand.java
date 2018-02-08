@@ -5,9 +5,8 @@ import by.baranovskaya.constant.*;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
-import by.baranovskaya.manager.MessageManager;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.UserValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +31,7 @@ public class LogInCommand implements Command {
         String passValue = request.getParameter(ParameterConstants.PASSWORD);
         User user;
 
-        if (UserValidator.validateLoginPassword(loginValue, passValue)) {
+        if (DataValidator.validateLoginPassword(loginValue, passValue)) {
             try {
                 user = userService.checkUserIsExist(loginValue, passValue);
                 if (user != null) {

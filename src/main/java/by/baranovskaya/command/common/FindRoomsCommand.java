@@ -9,7 +9,7 @@ import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.TypeRoom;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.TypeRoomService;
-import by.baranovskaya.validation.TypeRoomValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,9 +33,9 @@ public class FindRoomsCommand implements Command {
         int minPrice = Integer.parseInt(request.getParameter(ParameterConstants.MIN));
         int maxPrice = Integer.parseInt(request.getParameter(ParameterConstants.MAX));
 
-        if (TypeRoomValidator.validateSearchParam(minPrice, maxPrice)) {
+        if (DataValidator.validateSearchParam(minPrice, maxPrice)) {
             try {
-                typeRoomList = typeRoomService.findRoomTypesByPrice(minPrice, maxPrice);
+                typeRoomList = typeRoomService.findRoomTypes(minPrice, maxPrice);
                 request.setAttribute(ParameterConstants.ROOM_TYPES, typeRoomList);
             } catch (ServiceException e) {
                 LOGGER.log(Level.ERROR, e);

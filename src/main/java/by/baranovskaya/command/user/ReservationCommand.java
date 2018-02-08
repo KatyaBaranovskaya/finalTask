@@ -7,7 +7,7 @@ import by.baranovskaya.entity.Order;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.OrderService;
-import by.baranovskaya.validation.OrderValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -59,6 +59,8 @@ public class ReservationCommand implements Command {
     private Order initOrder(HttpServletRequest request) {
         Order order = new Order();
         Date arrivalDate = Date.valueOf(request.getParameter(ParameterConstants.ARRIVAL_DATE));
+        System.out.println(arrivalDate);
+        System.out.println(request.getParameter(ParameterConstants.DEPARTURE_DATE));
         Date departureDate = Date.valueOf(request.getParameter(ParameterConstants.DEPARTURE_DATE));
         int noAdults = Integer.parseInt(request.getParameter(ParameterConstants.NO_ADULTS));
         int noChildren = Integer.parseInt(request.getParameter(ParameterConstants.NO_CHILDREN));
@@ -66,7 +68,7 @@ public class ReservationCommand implements Command {
         String breakfast = request.getParameter(ParameterConstants.BREAKFAST);
 
         System.out.println(typeApartment);
-        if (OrderValidator.validateOrder(arrivalDate, departureDate, noAdults, noChildren, typeApartment, breakfast)) {
+        if (DataValidator.validateOrder(arrivalDate, departureDate, noAdults, noChildren, typeApartment, breakfast)) {
             User user = (User) request.getSession().getAttribute(RoleType.USER);
             order.setUser(user);
             order.setArrivalDate(arrivalDate);

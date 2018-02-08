@@ -9,7 +9,7 @@ import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.TypeRoom;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.TypeRoomService;
-import by.baranovskaya.validation.TypeRoomValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -70,7 +70,7 @@ public class UpdateTypeRoomCommand implements Command {
             image = request.getParameter(ParameterConstants.IMAGE);
         }
 
-        if (TypeRoomValidator.validateTypeRoom(typeApartment, capacity, price, description, image)) {
+        if (DataValidator.validateTypeRoom(typeApartment, capacity, price, description, image)) {
             typeRoom.setIdType(idType);
             typeRoom.setTypeRoom(typeApartment);
             typeRoom.setCapacity(capacity);

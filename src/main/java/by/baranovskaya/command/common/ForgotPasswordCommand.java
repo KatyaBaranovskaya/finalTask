@@ -11,7 +11,7 @@ import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.sender.generator.PasswordGenerator;
 import by.baranovskaya.sender.MailSender;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.UserValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,7 +35,7 @@ public class ForgotPasswordCommand implements Command {
         String login = request.getParameter(ParameterConstants.LOGIN);
         String email = request.getParameter(ParameterConstants.EMAIL);
 
-        if (UserValidator.validateLoginEmail(login, email)) {
+        if (DataValidator.validateLoginEmail(login, email)) {
             try {
                 user = userService.checkLoginEmailIsExist(login, email);
                 if(user != null){

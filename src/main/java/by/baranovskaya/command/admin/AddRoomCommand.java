@@ -11,7 +11,7 @@ import by.baranovskaya.entity.TypeRoom;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.RoomService;
 import by.baranovskaya.service.TypeRoomService;
-import by.baranovskaya.validation.RoomValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,7 +64,7 @@ public class AddRoomCommand implements Command {
         TypeRoom typeRoom = getTypeRoom(request.getParameter(ParameterConstants.TYPE_ROOM));
         String status = request.getParameter(ParameterConstants.STATUS);
 
-        if (RoomValidator.validateRoom(roomNumber, typeRoom, status)) {
+        if (DataValidator.validateRoom(roomNumber, typeRoom, status)) {
             room.setRoomNumber(roomNumber);
             room.setTypeRoom(typeRoom);
             room.setStatus(status);

@@ -13,15 +13,7 @@ public class OrderService {
 
     public boolean doOrder(Order order) throws ServiceException {
         try {
-            return orderDAO.addOrderByUser(order);
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    public boolean doConcreteOrder(Order order) throws ServiceException {
-        try {
-            return orderDAO.doConcreteOrderByUser(order);
+            return orderDAO.addOrder(order);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

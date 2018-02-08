@@ -29,7 +29,7 @@
                 <input type="text" name="middleName"
                        placeholder="<fmt:message key="label.middleName" bundle="${rb}" />"/>
                 <label><fmt:message key="label.birthDate" bundle="${rb}"/></label>
-                <input type="date" name="dateBirth"/>
+                <input type="text" name="dateBirth" placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 <input type="text" name="phone" placeholder="<fmt:message key="label.telephone" bundle="${rb}" />"/>
                 <input id="coppy" type="email" name="email"
                        placeholder="<fmt:message key="label.email" bundle="${rb}" />"/>

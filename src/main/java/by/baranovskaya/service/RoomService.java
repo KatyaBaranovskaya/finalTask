@@ -20,7 +20,6 @@ public class RoomService {
         }
     }
 
-
     public boolean deleteRoomNumber(int roomNumber) throws ServiceException {
         try {
            return roomDAO.deleteRoomNumber(roomNumber);

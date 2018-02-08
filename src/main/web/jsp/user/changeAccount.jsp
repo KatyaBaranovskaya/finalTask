@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label class="col-sm-6 control-label"><fmt:message key="label.birthDate" bundle="${rb}"/>:</label>
                 <div class="col-sm-4">
-                    <input type="date" class="form-control" name="dateBirth" value="${user.dateBirth}">
+                    <input class="form-control" type="text" name="dateBirth" value="${user.dateBirth}" placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
             </div>
             <div class="form-group">

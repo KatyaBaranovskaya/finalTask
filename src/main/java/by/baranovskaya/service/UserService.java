@@ -6,8 +6,26 @@ import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.exception.ServiceException;
 
+import java.util.List;
+
 public class UserService {
     private UserDAO userDAO = DAOFactory.getInstance().getClientDAO();
+
+    public List<User> getAllUsers() throws ServiceException {
+        try {
+            return userDAO.getAllUsers();
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public boolean deleteUser(int idUser) throws ServiceException {
+        try {
+            return  userDAO.deleteUser(idUser);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
 
     public User checkUserIsExist(String login, String password) throws ServiceException {
         try {
@@ -67,7 +85,7 @@ public class UserService {
 
     public boolean updateUserInfo(User user) throws ServiceException {
         try {
-            return userDAO.updateUserInfo(user);
+            return userDAO.updateUser(user);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

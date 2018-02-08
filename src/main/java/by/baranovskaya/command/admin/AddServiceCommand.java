@@ -6,13 +6,10 @@ import by.baranovskaya.constant.MessageProperty;
 import by.baranovskaya.constant.PageConstants;
 import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
-import by.baranovskaya.entity.Room;
 import by.baranovskaya.entity.Service;
-import by.baranovskaya.entity.TypeRoom;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.HotelService;
-import by.baranovskaya.validation.RoomValidator;
-import by.baranovskaya.validation.ServiceValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,7 +61,7 @@ public class AddServiceCommand implements Command {
         String description = request.getParameter(ParameterConstants.DESCRIPTION);
         String image = request.getParameter(ParameterConstants.IMAGE);
 
-        if (ServiceValidator.validateService(typeService, description, image)) {
+        if (DataValidator.validateService(typeService, description, image)) {
             service.setTypeService(typeService);
             service.setDescription(description);
             service.setImage(image);

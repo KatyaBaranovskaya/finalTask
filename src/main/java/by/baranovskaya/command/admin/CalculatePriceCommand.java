@@ -7,8 +7,11 @@ import by.baranovskaya.constant.PageConstants;
 import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.Order;
+import by.baranovskaya.exception.ParseDataException;
+import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.TypeRoomService;
-import by.baranovskaya.validation.OrderValidator;
+import by.baranovskaya.validation.DataValidator;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 
 public class CalculatePriceCommand implements Command {
+    private final static Logger LOGGER = LogManager.getLogger(CalculatePriceCommand.class);
+
     private TypeRoomService typeRoomService;
 
     public CalculatePriceCommand(TypeRoomService typeRoomService) {
@@ -31,10 +36,14 @@ public class CalculatePriceCommand implements Command {
         order = initOrder(request);
         if (order != null) {
             double price;
-            price = typeRoomService.calculatePrice(order);
-            order.setPrice(price);
-            request.getSession().setAttribute(ParameterConstants.ORDER, order);
-            page = PageConstants.ISSUE_ORDER;
+            try {
+                price = typeRoomService.calculatePrice(order);
+                order.setPrice(price);
+                request.getSession().setAttribute(ParameterConstants.ORDER, order);
+                page = PageConstants.ISSUE_ORDER;
+            } catch (ServiceException | ParseDataException e) {
+                LOGGER.log(Level.ERROR, e);
+            }
         } else {
             setErrorMessage(request, MessageConstants.ERROR_ORDER_LABEL, MessageProperty.ERROR_ORDER_MESSAGE);
             router.setRouteType(Router.RouteType.FORWARD);
@@ -57,8 +66,8 @@ public class CalculatePriceCommand implements Command {
         String typeApartment = request.getParameter(ParameterConstants.TYPE_APARTMENT);
         String breakfast = request.getParameter(ParameterConstants.BREAKFAST);
 
-        if (OrderValidator.validateOrder(arrivalDate, departureDate, noAdults, noChildren, typeApartment, breakfast)
-                && OrderValidator.validateNumber(roomNumber)) {
+        if (DataValidator.validateOrder(arrivalDate, departureDate, noAdults, noChildren, typeApartment, breakfast)
+                && DataValidator.validateRoomNumber(roomNumber)) {
             order.setRoomNumber(roomNumber);
             order.setArrivalDate(arrivalDate);
             order.setDepartureDate(departureDate);

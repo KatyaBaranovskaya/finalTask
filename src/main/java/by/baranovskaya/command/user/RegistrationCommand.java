@@ -9,7 +9,7 @@ import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.UserValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -69,7 +69,7 @@ public class RegistrationCommand implements Command {
         Date dateBirth = Date.valueOf(request.getParameter(ParameterConstants.DATE_BIRTH));
         String telephone = request.getParameter(ParameterConstants.PHONE);
 
-        if (UserValidator.validateRegistration(email, login, password, surname, name, middleName, dateBirth, telephone)) {
+        if (DataValidator.validateRegistration(email, login, password, surname, name, middleName, dateBirth, telephone)) {
             user.setEmail(email);
             user.setLogin(login);
             user.setPassword(password);

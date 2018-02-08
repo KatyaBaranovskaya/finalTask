@@ -6,7 +6,7 @@ import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.UserValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +31,7 @@ public class ChangeAvatarCommand implements Command {
         User user = (User) session.getAttribute(RoleType.USER);
         String avatar = request.getParameter(ParameterConstants.AVATAR);
 
-        if (UserValidator.validateAvatar(avatar)) {
+        if (DataValidator.validateAvatar(avatar)) {
             try {
                 if (userService.updateAvatar(user.getIdUser(), avatar)) {
                     user.setAvatar(avatar);

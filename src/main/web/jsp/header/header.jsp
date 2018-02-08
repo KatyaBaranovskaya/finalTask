@@ -95,6 +95,7 @@
             <div class="form-group localeBtn">
                 <button class="btn btn-link" type="submit" name="locale" value="en_US">EN</button>
                 <button class="btn btn-link" type="submit" name="locale" value="ru_RU">RU</button>
+                <button class="btn btn-link" type="submit" name="locale" value="be_BY">BY</button>
             </div>
         </form>
     </div>

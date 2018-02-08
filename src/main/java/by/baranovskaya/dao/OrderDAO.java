@@ -7,13 +7,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface OrderDAO extends AbstractDAO {
-    boolean addOrderByUser(Order order) throws DAOException;
-
-    boolean doConcreteOrderByUser(Order order) throws DAOException;
-
-    int getIdOrder(int idUser, Date arrivalDate, Date departureDate) throws DAOException;
-
-    //boolean orderService(int idUser, int idService) throws DAOException;
+    boolean addOrder(Order order) throws DAOException;
 
     List<Order> getUserOrders(int idUser) throws DAOException;
 

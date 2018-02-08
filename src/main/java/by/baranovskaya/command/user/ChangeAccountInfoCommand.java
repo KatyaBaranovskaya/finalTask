@@ -6,7 +6,7 @@ import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.UserValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -61,7 +61,7 @@ public class ChangeAccountInfoCommand implements Command {
         String telephone = request.getParameter(ParameterConstants.PHONE);
         int idUser = Integer.parseInt(request.getParameter(ParameterConstants.ID));
 
-        if (UserValidator.validateUserInfo(surname, name, middleName, dateBirth, telephone)) {
+        if (DataValidator.validateUserInfo(surname, name, middleName, dateBirth, telephone)) {
             User user = (User) request.getSession().getAttribute(RoleType.USER);
             if (request.getParameter(ParameterConstants.ID).equals("")) {
                 User newUser = new User();

@@ -13,8 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ConnectionPool {
-  //  private final static Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
-    private final static Logger LOGGER = LogManager.getLogger();
+    private final static Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     private static ConnectionPool instance;
     private static AtomicBoolean instanceCreated = new AtomicBoolean();

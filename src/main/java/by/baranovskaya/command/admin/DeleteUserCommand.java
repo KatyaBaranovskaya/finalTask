@@ -6,7 +6,7 @@ import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
-import by.baranovskaya.service.AdminService;
+import by.baranovskaya.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,10 +17,10 @@ import java.util.List;
 public class DeleteUserCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(DeleteUserCommand.class);
 
-    private AdminService adminService;
+    private UserService userService;
 
-    public DeleteUserCommand(AdminService adminService) {
-        this.adminService = adminService;
+    public DeleteUserCommand(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -31,8 +31,8 @@ public class DeleteUserCommand implements Command {
         int idUser = Integer.parseInt(request.getParameter(ParameterConstants.ID));
 
         try {
-            if (adminService.deleteUser(idUser)) {
-                userList = adminService.getAllUsers();
+            if (userService.deleteUser(idUser)) {
+                userList = userService.getAllUsers();
                 request.setAttribute(ParameterConstants.USERS, userList);
                 page = PageConstants.CLIENTS_PAGE;
             }

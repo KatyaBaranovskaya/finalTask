@@ -9,7 +9,7 @@ import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.Service;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.HotelService;
-import by.baranovskaya.validation.ServiceValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -68,7 +68,7 @@ public class UpdateServiceCommand implements Command {
             image = request.getParameter(ParameterConstants.IMAGE);
         }
 
-        if (ServiceValidator.validateService(typeService, description, image)) {
+        if (DataValidator.validateService(typeService, description, image)) {
             service.setIdService(idService);
             service.setTypeService(typeService);
             service.setDescription(description);

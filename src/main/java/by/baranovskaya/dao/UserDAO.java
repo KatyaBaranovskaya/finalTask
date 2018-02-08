@@ -24,5 +24,5 @@ public interface UserDAO extends AbstractDAO {
 
     boolean updateAvatarById(int idClient, String avatarPath) throws DAOException;
 
-    boolean updateUserInfo(User user) throws DAOException;
+    boolean updateUser(User user) throws DAOException;
 }

@@ -35,7 +35,7 @@ public class HotelService {
         }
     }
 
-    public Service findServiceById(int idService) throws ServiceException {
+    public Service findService(int idService) throws ServiceException {
         try {
             return serviceDAO.findServiceById(idService);
         } catch (DAOException e) {

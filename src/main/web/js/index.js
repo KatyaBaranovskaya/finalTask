@@ -43,6 +43,11 @@ function validationRegister() {
         return false;
     }
 
+    if (!(/^(\d{4})\-(0\d|1[012])\-([0-2]\d|3[01])$/.test(document.form.dateBirth.value))) {
+        alert("Дата взятия книги введена некорректно!");
+        return false;
+    }
+
     var now = new Date();
     var other = new Date(document.form.dateBirth.value);
     var result = Math.floor((now.getTime() - other.getTime()) / 1000 / 60 / 60 / 24 / 30 / 12);
@@ -95,6 +100,22 @@ function validationSingUp() {
         alert("Пожалуйста, введите Ваш пароль!");
         return false;
     }
+
+    if (document.form.login.value.length < 5) {
+        alert("Имя пользователя должно содержать больше 5 символов!");
+        return false;
+    } else if (!(/^[A-Za-z][A-Za-z0-9_]+$/.test(document.form.login.value))) {
+        alert("Имя пользователя должно содержать буквы латинского алфавита!");
+        return false;
+    }
+
+    if (document.form.password.value.length < 7) {
+        alert("Пароль должен содержать не менее 7 символов!");
+        return false;
+    } else if (!(/^(?=.*[a-z])(?=.*[A-Z]).{4,}$/.test(document.form.password.value))) {
+        alert("Пароль должен содержать не менее одной буквы в каждом регистре и не менее одной цифры!")
+        return false;
+    }
 }
 
 function validationForgotPass() {
@@ -102,7 +123,15 @@ function validationForgotPass() {
         alert("Пожалуйста, введите Ваш логин!");
         return false;
     } else if (document.form.email.value == "") {
-        alert("Пожалуйста, введите Ваш пароль!");
+        alert("Пожалуйста, введите Ваш email!");
+        return false;
+    }
+
+    if (document.form.login.value.length < 5) {
+        alert("Имя пользователя должно содержать больше 5 символов!");
+        return false;
+    } else if (!(/^[A-Za-z][A-Za-z0-9_]+$/.test(document.form.login.value))) {
+        alert("Имя пользователя должно содержать буквы латинского алфавита!");
         return false;
     }
 
@@ -114,30 +143,30 @@ function validationForgotPass() {
 
 function validationSearch() {
     if (document.form.min.value == "") {
-        alert("Пожалуйста, введите Ваш логин!");
+        alert("Пожалуйста, введите минимальную цену!");
         return false;
     } else if (document.form.max.value == "") {
-        alert("Пожалуйста, введите Ваш пароль!");
+        alert("Пожалуйста, введите максимальную цену!");
         return false;
     }
 
     if (!(/[0-9]$/.test(document.form.min.value))) {
-        alert("Вместимость должна содержать только число!");
+        alert("Цена должна содержать только число!");
         return false;
     }
 
     if (!(/[0-9]$/.test(document.form.max.value))) {
-        alert("Вместимость должна содержать только число!");
+        alert("Цена должна содержать только число!");
         return false;
     }
 
     if (document.form.min.value > document.form.max.value) {
-        alert("Пожалуйста, введите Ваш логин!");
+        alert("Неккоректные данные(минимальная цена больше максимальной)!");
         return false;
     }
 
     if (document.form.min.value == document.form.max.value) {
-        alert("Пожалуйста, введите Ваш логин!");
+        alert("Неккоректные данные!Цены равны");
         return false;
     }
 }
@@ -159,6 +188,11 @@ function validationService() {
 
     if (!(/[A-ZА-Я0-9][a-zа-я0-9\s]+$/.test(document.form.typeService.value))) {
         alert("Название должно содержать только буквы и знаки пробела!");
+        return false;
+    }
+
+    if (!(/\d+(\.\d{0,})?$/.test(document.form.price.value))) {
+        alert("Цена должна содержать только цифры и знак '.'!");
         return false;
     }
 
@@ -249,6 +283,11 @@ function validationUserInfo() {
         return false;
     }
 
+    if (!(/^(\d{4})\-(0\d|1[012])\-([0-2]\d|3[01])$/.test(document.form.dateBirth.value))) {
+        alert("Дата рождения введена некорректно!");
+        return false;
+    }
+
     var now = new Date();
     var other = new Date(document.form.dateBirth.value);
     var result = Math.floor((now.getTime() - other.getTime()) / 1000 / 60 / 60 / 24 / 30 / 12);
@@ -270,42 +309,57 @@ function validationUserInfo() {
 
 function validationOrder() {
     if (document.form.arrival_date.value == "") {
-        alert("Пожалуйста, введите Вашу фамилию!");
+        alert("Пожалуйста, введите дату прибытия!");
         return false;
     } else if (document.form.departure_date.value == "") {
-        alert("Пожалуйста, введите Ваше имя!");
+        alert("Пожалуйста, введите дату отъезда!");
         return false;
     } else if (document.form.noAdults.value == "") {
-        alert("Пожалуйста, введите Ваше отчество!");
+        alert("Пожалуйста, введите кол-во взрослых!");
         return false;
     } else if (document.form.noChildren.value == "") {
-        alert("Пожалуйста, введите дату Вашего рождения!");
+        alert("Пожалуйста, введите кол-во детей!");
         return false;
     } else if (document.form.breakfast.value == "") {
-        alert("Пожалуйста, введите Ваш номер телефона!");
+        alert("Пожалуйста, выберите пункт завтрака!");
         return false;
     }
 
-/*    if (!(/^[A-ZА-Я][a-zа-я]+$/.test(document.form.arrival_date.value))) {
-        alert("Фамилия должна содержать только буквы и начинаться с заглавной буквы!");
+    if (!(/^(\d{4})\-(0\d|1[012])\-([0-2]\d|3[01])$/.test(document.form.arrival_date.value))) {
+        alert("Дата прибытия введена некорректно!");
         return false;
     }
 
-    if (!(/^[A-ZА-Я][a-zа-я]+$/.test(document.form.departure_date.value))) {
-        alert("Имя должно содержать только буквы и начинаться с заглавной буквы!");
+    if (!(/^(\d{4})\-(0\d|1[012])\-([0-2]\d|3[01])$/.test(document.form.departure_date.value))) {
+        alert("Дата отъезда введена некорректно!");
         return false;
-    }*/
+    }
+
+    var now = new Date();
+    var first = new Date(document.form.arrival_date.value);
+    var second = new Date(document.form.departure_date.value);
+    var result = Math.floor((second.getTime() - first.getTime()) / 1000 / 60 / 60 / 24 );
+
+    if(now.getTime() >= first.getTime() || now.getTime() > second.getTime()){
+        alert("плохо!");
+        return false;
+    }
+
+    if ( result <= 0) {
+        alert("Дата введена некорректно!Даты равны!");
+        return false;
+    }
 }
 
 function validationChangePass() {
     if (document.form.lastPassword.value == "") {
-        alert("Пожалуйста, введите Ваш логин!");
+        alert("Пожалуйста, введите Ваш старый пароль!");
         return false;
     } else if (document.form.newPassword.value == "") {
-        alert("Пожалуйста, введите Ваш пароль!");
+        alert("Пожалуйста, введите Ваш новый пароль!");
         return false;
     } else if (document.form.repeatNewPassword.value == "") {
-        alert("Пожалуйста, введите Ваш пароль!");
+        alert("Пожалуйста, введите Ваш повторный пароль!");
         return false;
     }
 
@@ -341,18 +395,18 @@ function validationChangePass() {
 
 function validationRoom() {
     if (document.form.roomNumber.value == "") {
-        alert("Пожалуйста, введите Ваш логин!");
+        alert("Пожалуйста, введите № номера!");
         return false;
     } else if (document.form.typeRoom.value == "") {
-        alert("Пожалуйста, введите Ваш пароль!");
+        alert("Пожалуйста, введите тип номера!");
         return false;
     } else if (document.form.status.value == "") {
-        alert("Пожалуйста, введите Ваш пароль!");
+        alert("Пожалуйста, введите статус номера!");
         return false;
     }
 
-    if (!(/$/.test(document.form.email.value))) {
-        alert("Некорректный email адрес!");
+    if (!(/[0-9]+$/.test(document.form.roomNumber.value))) {
+        alert("Некорректный № номера!Поле содержит только цифры");
         return false;
     }
 }

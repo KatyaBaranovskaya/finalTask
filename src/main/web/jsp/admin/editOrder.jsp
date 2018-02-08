@@ -14,9 +14,6 @@
     <script src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
-    <c:if test="${sessionScope.role == 'admin'}">
-    </c:if>
-
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
@@ -24,7 +21,8 @@
     <div class="addContent">
         <h1 class="serviceH1"><fmt:message key="page.reservation" bundle="${rb}"/></h1>
         <p class="line"></p>
-        <form action="/Controller" method="POST">
+        <form action="/Controller" method="POST" name="form"
+              onsubmit="return validationRegister();">
             <div class="form-group">
                 <label class="col-sm-2 control-label"><fmt:message key="label.roomNumber" bundle="${rb}"/>:</label>
                 <div class="col-sm-7">
@@ -39,13 +37,15 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Дата прибытия</label>
                 <div class="col-sm-3">
-                    <input type="date" class="form-control" name="arrival_date" value="${order.arrivalDate}">
+                    <input type="text" class="form-control" name="arrival_date" value="${order.arrivalDate}"
+                           placeholder="<fmt:message key="label.date" bundle="${rb}"/> "/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Дата отъезда</label>
                 <div class="col-sm-3">
-                    <input type="date" class="form-control" name="departure_date" value="${order.departureDate}">
+                    <input type="text" class="form-control" name="departure_date" value="${order.departureDate}"
+                           placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
             </div>
             <div class="form-group">

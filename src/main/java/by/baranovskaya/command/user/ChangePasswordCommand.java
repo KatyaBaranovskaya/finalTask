@@ -6,13 +6,12 @@ import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.UserValidator;
+import by.baranovskaya.validation.DataValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class ChangePasswordCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(ChangePasswordCommand.class);
@@ -31,7 +30,7 @@ public class ChangePasswordCommand implements Command {
         String lastPassword = request.getParameter(ParameterConstants.LAST_PASSWORD);
         String newPassword = request.getParameter(ParameterConstants.NEW_PASSWORD);
 
-        if (UserValidator.validatePassword(lastPassword, newPassword)) {
+        if (DataValidator.validatePassword(lastPassword, newPassword)) {
             try {
                 if (userService.findUserById(user.getIdUser()).getPassword().equals(lastPassword)) {
                     userService.updatePassword(user.getIdUser(), newPassword);

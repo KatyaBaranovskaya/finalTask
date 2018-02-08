@@ -36,13 +36,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_ROOM_TYPES);
             while (resultSet.next()) {
-                TypeRoom typeRoom = new TypeRoom();
-                typeRoom.setIdType(resultSet.getInt("id_type"));
-                typeRoom.setTypeRoom(resultSet.getString("type_name"));
-                typeRoom.setCapacity(resultSet.getInt("capacity"));
-                typeRoom.setPrice(resultSet.getDouble("price"));
-                typeRoom.setDescription(resultSet.getString("description"));
-                typeRoom.setImage(resultSet.getString("image"));
+                TypeRoom typeRoom = initTypeRoomFromResultSet(resultSet);
                 typeRoomList.add(typeRoom);
             }
         } catch (SQLException e) {
@@ -62,7 +56,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(COUNT_ROOM_TYPES);
             if (resultSet.next()) {
-                return resultSet.getInt(1); // параметр
+                return resultSet.getInt(1);
             }
         } catch (SQLException e) {
             throw new DAOException("Exception counting all room types" + e);
@@ -73,7 +67,6 @@ public class TypeRoomImpl implements TypeRoomDAO {
         return 0;
     }
 
-
     @Override
     public boolean deleteTypeRoom(int idType) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
@@ -83,7 +76,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setInt(1, idType);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception deleting room" + e);
+            throw new DAOException("Exception deleting type room" + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -95,22 +88,16 @@ public class TypeRoomImpl implements TypeRoomDAO {
     public TypeRoom findTypeRoomById(int idType) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
-        TypeRoom typeRoom = new TypeRoom();
+        TypeRoom typeRoom = null;
         try {
             preparedStatement = connection.prepareStatement(FIND_TYPE_ROOM_BY_NUMBER);
             preparedStatement.setInt(1, idType);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                typeRoom.setIdType(resultSet.getInt("id_type"));
-                typeRoom.setTypeRoom(resultSet.getString("type_name"));
-                typeRoom.setCapacity(resultSet.getInt("capacity"));
-                typeRoom.setPrice(resultSet.getDouble("price"));
-                typeRoom.setDescription(resultSet.getString("description"));
-                typeRoom.setImage(resultSet.getString("image"));
-
+                typeRoom = initTypeRoomFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting room by number" + e);
+            throw new DAOException("Exception selecting type room by id" + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -131,7 +118,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setString(5, typeRoom.getImage());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception inserting room" + e);
+            throw new DAOException("Exception inserting type room" + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -153,7 +140,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setString(6, typeRoom.getImage());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOException("Exception updating room" + e);
+            throw new DAOException("Exception updating type room" + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -185,22 +172,16 @@ public class TypeRoomImpl implements TypeRoomDAO {
     public TypeRoom getTypeByName(String type) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
-        TypeRoom typeRoom = new TypeRoom();
+        TypeRoom typeRoom = null;
         try {
             preparedStatement = connection.prepareStatement(FIND_TYPE_ROOM_BY_NAME);
             preparedStatement.setString(1, type);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                typeRoom.setIdType(resultSet.getInt("id_type"));
-                typeRoom.setTypeRoom(resultSet.getString("type_name"));
-                typeRoom.setCapacity(resultSet.getInt("capacity"));
-                typeRoom.setPrice(resultSet.getDouble("price"));
-                typeRoom.setDescription(resultSet.getString("description"));
-                typeRoom.setImage(resultSet.getString("image"));
-
+                typeRoom = initTypeRoomFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting room by number" + e);
+            throw new DAOException("Exception selecting type room by type" + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -221,7 +202,7 @@ public class TypeRoomImpl implements TypeRoomDAO {
                 price = resultSet.getInt("price");
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting room by number" + e);
+            throw new DAOException("Exception selecting price by type" + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -231,7 +212,6 @@ public class TypeRoomImpl implements TypeRoomDAO {
 
     @Override
     public List<TypeRoom> findRoomTypesByPrice(int minPrice, int maxPrice) throws DAOException {
-        System.out.println(maxPrice+minPrice);
         List<TypeRoom> typeRoomList = new ArrayList<>();
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
@@ -241,21 +221,26 @@ public class TypeRoomImpl implements TypeRoomDAO {
             preparedStatement.setInt(2, minPrice);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                TypeRoom typeRoom = new TypeRoom();
-                typeRoom.setIdType(resultSet.getInt("id_type"));
-                typeRoom.setTypeRoom(resultSet.getString("type_name"));
-                typeRoom.setCapacity(resultSet.getInt("capacity"));
-                typeRoom.setPrice(resultSet.getDouble("price"));
-                typeRoom.setDescription(resultSet.getString("description"));
-                typeRoom.setImage(resultSet.getString("image"));
+                TypeRoom typeRoom = initTypeRoomFromResultSet(resultSet);
                 typeRoomList.add(typeRoom);
             }
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting all room types" + e);
+            throw new DAOException("Exception searching room types by price" + e);
         } finally {
             close(preparedStatement);
             close(connection);
         }
         return typeRoomList;
+    }
+
+    private TypeRoom initTypeRoomFromResultSet(ResultSet resultSet) throws SQLException {
+        TypeRoom typeRoom = new TypeRoom();
+        typeRoom.setIdType(resultSet.getInt("id_type"));
+        typeRoom.setTypeRoom(resultSet.getString("type_name"));
+        typeRoom.setCapacity(resultSet.getInt("capacity"));
+        typeRoom.setPrice(resultSet.getDouble("price"));
+        typeRoom.setDescription(resultSet.getString("description"));
+        typeRoom.setImage(resultSet.getString("image"));
+        return typeRoom;
     }
 }

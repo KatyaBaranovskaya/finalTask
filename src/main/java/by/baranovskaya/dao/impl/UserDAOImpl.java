@@ -38,18 +38,7 @@ public class UserDAOImpl implements UserDAO {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_USER);
             while (resultSet.next()) {
-                User user = new User();
-                user.setIdUser(resultSet.getInt("id_user"));
-                user.setEmail(resultSet.getString("email"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                user.setRole(resultSet.getString("role_name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setName(resultSet.getString("name"));
-                user.setMiddleName(resultSet.getString("middle_name"));
-                user.setDateBirth(resultSet.getDate("date_birth"));
-                user.setTelephone(resultSet.getString("telephone"));
-                user.setAvatar(resultSet.getString("avatar"));
+                User user = initUserFromResultSet(resultSet);
                 listUser.add(user);
             }
         } catch (SQLException e) {
@@ -103,30 +92,17 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findUserByLoginPassword(String login, String password) throws DAOException { /// нормально так???
+    public User findUserByLoginPassword(String login, String password) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
+        User user = null;
         try {
             preparedStatement = connection.prepareStatement(FIND_USER_BY_LOGIN_PASS);
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                User user = new User();
-                user.setIdUser(resultSet.getInt("id_user"));
-                user.setEmail(resultSet.getString("email"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                user.setRole(resultSet.getString("role_name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setName(resultSet.getString("name"));
-                user.setMiddleName(resultSet.getString("middle_name"));
-                user.setDateBirth(resultSet.getDate("date_birth"));
-                user.setTelephone(resultSet.getString("telephone"));
-                user.setAvatar(resultSet.getString("avatar"));
-                return user;
-            } else {
-                return null;
+                user = initUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
             throw new DAOException("Exception selecting client by login and password" + e);
@@ -134,19 +110,20 @@ public class UserDAOImpl implements UserDAO {
             close(preparedStatement);
             close(connection);
         }
+        return user;
     }
 
     @Override
-    public boolean findUserByLogin(String login) throws DAOException { /// нормально так???
+    public boolean findUserByLogin(String login) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(FIND_USER_BY_LOGIN);
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return  (resultSet.next());
+            return (resultSet.next());
         } catch (SQLException e) {
-            throw new DAOException("Exception selecting client by login and password" + e);
+            throw new DAOException("Exception selecting client by login" + e);
         } finally {
             close(preparedStatement);
             close(connection);
@@ -154,30 +131,17 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findUserByLoginEmail(String login, String email) throws DAOException { /// нормально так???
+    public User findUserByLoginEmail(String login, String email) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
+        User user = null;
         try {
             preparedStatement = connection.prepareStatement(FIND_USER_BY_LOGIN_EMAIL);
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                User user = new User();
-                user.setIdUser(resultSet.getInt("id_user"));
-                user.setEmail(resultSet.getString("email"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                user.setRole(resultSet.getString("role_name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setName(resultSet.getString("name"));
-                user.setMiddleName(resultSet.getString("middle_name"));
-                user.setDateBirth(resultSet.getDate("date_birth"));
-                user.setTelephone(resultSet.getString("telephone"));
-                user.setAvatar(resultSet.getString("avatar"));
-                return user;
-            } else {
-                return null;
+                user = initUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
             throw new DAOException("Exception selecting client by login and email" + e);
@@ -185,32 +149,20 @@ public class UserDAOImpl implements UserDAO {
             close(preparedStatement);
             close(connection);
         }
+        return user;
     }
 
     @Override
-    public User findUserById(int idUser) throws DAOException { /// нормально так???
+    public User findUserById(int idUser) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
+        User user = null;
         try {
             preparedStatement = connection.prepareStatement(FIND_USER_BY_ID);
             preparedStatement.setInt(1, idUser);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                User user = new User();
-                user.setIdUser(resultSet.getInt("id_user"));
-                user.setEmail(resultSet.getString("email"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                user.setRole(resultSet.getString("role_name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setName(resultSet.getString("name"));
-                user.setMiddleName(resultSet.getString("middle_name"));
-                user.setDateBirth(resultSet.getDate("date_birth"));
-                user.setTelephone(resultSet.getString("telephone"));
-                user.setAvatar(resultSet.getString("avatar"));
-                return user;
-            } else {
-                return null;
+                user = initUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
             throw new DAOException("Exception selecting client by id" + e);
@@ -218,6 +170,7 @@ public class UserDAOImpl implements UserDAO {
             close(preparedStatement);
             close(connection);
         }
+        return user;
     }
 
     @Override
@@ -257,7 +210,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public boolean updateUserInfo(User user) throws DAOException {
+    public boolean updateUser(User user) throws DAOException {
         ProxyConnection connection = ConnectionPool.getInstance().getConnection();
         PreparedStatement preparedStatement = null;
         try {
@@ -276,5 +229,21 @@ public class UserDAOImpl implements UserDAO {
             close(connection);
         }
         return true;
+    }
+
+    private User initUserFromResultSet(ResultSet resultSet) throws SQLException {
+        User user = new User();
+        user.setIdUser(resultSet.getInt("id_user"));
+        user.setEmail(resultSet.getString("email"));
+        user.setLogin(resultSet.getString("login"));
+        user.setPassword(resultSet.getString("password"));
+        user.setRole(resultSet.getString("role_name"));
+        user.setSurname(resultSet.getString("surname"));
+        user.setName(resultSet.getString("name"));
+        user.setMiddleName(resultSet.getString("middle_name"));
+        user.setDateBirth(resultSet.getDate("date_birth"));
+        user.setTelephone(resultSet.getString("telephone"));
+        user.setAvatar(resultSet.getString("avatar"));
+        return user;
     }
 }

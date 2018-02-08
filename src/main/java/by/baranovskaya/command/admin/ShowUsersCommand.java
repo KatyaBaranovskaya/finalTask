@@ -6,7 +6,7 @@ import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
-import by.baranovskaya.service.AdminService;
+import by.baranovskaya.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,10 +17,10 @@ import java.util.List;
 public class ShowUsersCommand implements Command{
     private final static Logger LOGGER = LogManager.getLogger(ShowUsersCommand.class);
 
-    private AdminService adminService;
+    private UserService userService;
 
-    public ShowUsersCommand(AdminService adminService) {
-        this.adminService = adminService;
+    public ShowUsersCommand(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ShowUsersCommand implements Command{
         List<User> userList;
 
         try {
-            userList = adminService.getAllUsers();
+            userList = userService.getAllUsers();
             request.setAttribute(ParameterConstants.USERS, userList);
             page = PageConstants.CLIENTS_PAGE;
         } catch (ServiceException e) {
