@@ -67,9 +67,9 @@ public class OrderService {
         }
     }
 
-    public boolean updateOrder(Order order) throws ServiceException {
+    public boolean issueOrder(Order order) throws ServiceException {
         try {
-           return orderDAO.updateOrder(order);
+            return orderDAO.updateOrder(order);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

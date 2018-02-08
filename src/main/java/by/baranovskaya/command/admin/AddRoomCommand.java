@@ -1,6 +1,8 @@
 package by.baranovskaya.command.admin;
 
 import by.baranovskaya.command.Command;
+import by.baranovskaya.constant.MessageConstants;
+import by.baranovskaya.constant.MessageProperty;
 import by.baranovskaya.constant.PageConstants;
 import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
@@ -31,30 +33,44 @@ public class AddRoomCommand implements Command {
     public Router execute(HttpServletRequest request) {
         String page = null;
         Router router = new Router();
-        Room room = new Room();
-        room.setRoomNumber(Integer.parseInt(request.getParameter(ParameterConstants.ROOM_NUMBER)));
-        room.setTypeRoom(getTypeRoom(request.getParameter(ParameterConstants.TYPE_ROOM)));
-        room.setStatus(request.getParameter(ParameterConstants.STATUS));
+        Room room;
 
-        if (RoomValidator.validateRoom(room)) {
+        room = initRoom(request);
+        if (room != null) {
             try {
                 if (roomService.addRoom(room)) {
                     page = PageConstants.ROOM_TYPES_PAGE;
+                    router.setRouteType(Router.RouteType.REDIRECT);
                 } else {
-                    //TODO err
+                    router.setRouteType(Router.RouteType.FORWARD);
                     page = PageConstants.EDIT_ROOM_PAGE;
                 }
             } catch (ServiceException e) {
                 LOGGER.log(Level.ERROR, e);
             }
         } else {
-            //TODO warn incorrect info
+            setErrorMessage(request, MessageConstants.ERROR_ROOM_LABEL, MessageProperty.ERROR_ROOM_MESSAGE);
+            router.setRouteType(Router.RouteType.FORWARD);
             page = PageConstants.EDIT_ROOM_PAGE;
         }
 
         router.setPagePath(page);
-        router.setRouteType(Router.RouteType.REDIRECT);
         return router;
+    }
+
+    private Room initRoom(HttpServletRequest request) {
+        Room room = new Room();
+        int roomNumber = Integer.parseInt(request.getParameter(ParameterConstants.ROOM_NUMBER));
+        TypeRoom typeRoom = getTypeRoom(request.getParameter(ParameterConstants.TYPE_ROOM));
+        String status = request.getParameter(ParameterConstants.STATUS);
+
+        if (RoomValidator.validateRoom(roomNumber, typeRoom, status)) {
+            room.setRoomNumber(roomNumber);
+            room.setTypeRoom(typeRoom);
+            room.setStatus(status);
+        }
+
+        return room;
     }
 
     private TypeRoom getTypeRoom(String type) {
@@ -66,5 +82,4 @@ public class AddRoomCommand implements Command {
         }
         return typeRoom;
     }
-
 }

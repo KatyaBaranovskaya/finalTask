@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+.bg{
+    width: 760px ;
+    height: 510px;
+    top: 35px;
+    left: 25%;
+    position: relative;
+    background-color: #d8c0bd;
+    opacity: 0.9;
+}
+
+.block{
+    width: 700px ;
+    height: 410px;
+    position: relative;
+    right: -30px;
+    top: 10px;
+    background: linear-gradient(to top , #fff, #921c1c);
+    box-shadow: 4px 4px 8px -2px #811a1a;
+    opacity: 0.9;
+    border-radius: 0 0 20px 20px;
+}
+
+.block2 {
+    width: 500px;
+    height: 60px;
+    background: #921c1c;
+    position: relative;
+    top: 10px;
+    left: 230px;
+    -webkit-clip-path: polygon(16% 14%, 100% 14%, 100% 100%, 0% 100%);
+    clip-path: polygon(16% 14%, 100% 14%, 100% 100%, 0% 100%);
+    opacity: 0.9;
+}
+
+.txt {
+    position: absolute;
+    font-size: 33pt;
+    font-family: "Monotype Corsiva";
+    top: 5px;
+    left: 45px;
+}
+
+.img {
+    position: relative;
+    width: 140px;
+    height: 100px;
+    top: 15px;
+    left: 275px;
+}
+.contactsInf{
+    position: relative;
+    top: 45px;
+    left:-5px;
+    text-align: center;
+}
+.contactsInf p {
+    font-family: 'Comfortaa', cursive;
+    font-size: 15pt;
+}
+
+.line {
+    border-top: 2px solid #787878;
+    margin-left: 220px;
+    margin-right: 220px;
+    padding-left: 10px;
+}

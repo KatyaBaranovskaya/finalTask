@@ -1,6 +1,8 @@
 package by.baranovskaya.command.admin;
 
 import by.baranovskaya.command.Command;
+import by.baranovskaya.constant.MessageConstants;
+import by.baranovskaya.constant.MessageProperty;
 import by.baranovskaya.constant.PageConstants;
 import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
@@ -15,9 +17,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class UpdateTypeRoomCommand implements Command {
-    //private final static Logger LOGGER = LogManager.getLogger(UpdateTypeRoomCommand.class);
-    private final static Logger LOGGER = LogManager.getLogger();
-
+    private final static Logger LOGGER = LogManager.getLogger(UpdateTypeRoomCommand.class);
 
     private TypeRoomService typeRoomService;
 
@@ -30,37 +30,55 @@ public class UpdateTypeRoomCommand implements Command {
     public Router execute(HttpServletRequest request) {
         String page = null;
         Router router = new Router();
-        TypeRoom typeRoom = new TypeRoom();
-        typeRoom.setIdType(Integer.parseInt(request.getParameter(ParameterConstants.ID_TYPE_ROOM)));
-        typeRoom.setTypeRoom(request.getParameter(ParameterConstants.TYPE_ROOM));
-        typeRoom.setCapacity(Integer.parseInt(request.getParameter(ParameterConstants.CAPACITY)));
-        typeRoom.setPrice(Double.parseDouble(request.getParameter(ParameterConstants.PRICE)));
-        typeRoom.setDescription(request.getParameter(ParameterConstants.DESCRIPTION));
-        if(request.getParameter(ParameterConstants.IMAGE).equals("")){
-            typeRoom.setImage(request.getParameter(ParameterConstants.OLD_IMAGE));
-        } else {
-            typeRoom.setImage(request.getParameter(ParameterConstants.IMAGE));
-        }
+        TypeRoom typeRoom;
 
-        if(TypeRoomValidator.validateTypeRoom(typeRoom)){
+        typeRoom = initTypeRoom(request);
+        if (typeRoom != null) {
             try {
-                if(typeRoomService.updateTypeRoom(typeRoom)){
-                    request.getSession().setAttribute("roomTypes", typeRoomService.getTypesRoom());
+                if (typeRoomService.updateTypeRoom(typeRoom)) {
+                    request.getSession().setAttribute(ParameterConstants.ROOM_TYPES, typeRoomService.getTypesRoom());
                     page = PageConstants.SERVICES_PAGE;
-                } else{
-                    //TODO err
+                    router.setRouteType(Router.RouteType.REDIRECT);
+                } else {
                     page = PageConstants.EDIT_TYPE_ROOM_PAGE;
+                    router.setRouteType(Router.RouteType.FORWARD);
                 }
             } catch (ServiceException e) {
                 LOGGER.log(Level.ERROR, e);
             }
         } else {
-            //TODO warn incorrect info
-            page = PageConstants.EDIT_TYPE_ROOM_PAGE;;
+            setErrorMessage(request, MessageConstants.ERROR_TYPE_ROOM_LABEL, MessageProperty.ERROR_TYPE_ROOM_MESSAGE);
+            router.setRouteType(Router.RouteType.FORWARD);
+            page = PageConstants.EDIT_TYPE_ROOM_PAGE;
         }
 
         router.setPagePath(page);
-        router.setRouteType(Router.RouteType.REDIRECT);
         return router;
+    }
+
+    private TypeRoom initTypeRoom(HttpServletRequest request) {
+        TypeRoom typeRoom = new TypeRoom();
+        int idType = Integer.parseInt(request.getParameter(ParameterConstants.ID_TYPE_ROOM));
+        String typeApartment = request.getParameter(ParameterConstants.TYPE_ROOM);
+        int capacity = Integer.parseInt(request.getParameter(ParameterConstants.CAPACITY));
+        double price = Double.parseDouble(request.getParameter(ParameterConstants.PRICE));
+        String description = request.getParameter(ParameterConstants.DESCRIPTION);
+        String image;
+        if (request.getParameter(ParameterConstants.IMAGE).equals("")) {
+            image = request.getParameter(ParameterConstants.OLD_IMAGE);
+        } else {
+            image = request.getParameter(ParameterConstants.IMAGE);
+        }
+
+        if (TypeRoomValidator.validateTypeRoom(typeApartment, capacity, price, description, image)) {
+            typeRoom.setIdType(idType);
+            typeRoom.setTypeRoom(typeApartment);
+            typeRoom.setCapacity(capacity);
+            typeRoom.setPrice(price);
+            typeRoom.setDescription(description);
+            typeRoom.setImage(image);
+        }
+
+        return typeRoom;
     }
 }

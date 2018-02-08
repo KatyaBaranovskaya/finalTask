@@ -31,7 +31,7 @@ public class EditTypeRoomCommand implements Command {
 
         try {
             typeRoom = typeRoomService.findTypeRoom(idTypeRoom);
-            request.getSession().setAttribute("typeRoom", typeRoom);
+            request.getSession().setAttribute(ParameterConstants.TYPE_ROOM, typeRoom);
             page = PageConstants.EDIT_TYPE_ROOM_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

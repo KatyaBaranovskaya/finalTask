@@ -2,6 +2,7 @@ package by.baranovskaya.command.user;
 
 import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstants;
+import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.HotelService;
@@ -30,7 +31,7 @@ public class LoadReservationPageCommand implements Command {
 
         try {
             typesList = typeRoomService.getTypes();
-            request.setAttribute("types", typesList);
+            request.setAttribute(ParameterConstants.TYPES, typesList);
             page = PageConstants.RESERVATION_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="err" uri="/WEB-INF/tld/taglib.tld" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale" var="rb"/>
 <html>
@@ -60,6 +61,7 @@
                     </span>
                 </div>
             </div>
+            <err:mtg messageError="${errorTypeRoom}"/>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="hidden" name="command" value="add_type_room"/>

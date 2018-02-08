@@ -2,6 +2,7 @@ package by.baranovskaya.command.admin;
 
 import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstants;
+import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.Order;
 import by.baranovskaya.exception.ServiceException;
@@ -30,7 +31,7 @@ public class ShowApplicationsCommand implements Command{
 
         try {
             orderList = orderService.getNewOrders();
-            request.setAttribute("orders", orderList);
+            request.setAttribute(ParameterConstants.ORDERS, orderList);
             page = PageConstants.APPLICATIONS_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

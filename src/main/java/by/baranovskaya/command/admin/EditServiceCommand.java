@@ -30,7 +30,7 @@ public class EditServiceCommand implements Command {
 
         try {
             service = hotelService.findServiceById(idService);
-            request.getSession().setAttribute("service", service);
+            request.getSession().setAttribute(ParameterConstants.SERVICE, service);
             page = PageConstants.EDIT_SERVICE_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

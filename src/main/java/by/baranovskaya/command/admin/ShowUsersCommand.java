@@ -2,6 +2,7 @@ package by.baranovskaya.command.admin;
 
 import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstants;
+import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
@@ -30,7 +31,7 @@ public class ShowUsersCommand implements Command{
 
         try {
             userList = adminService.getAllUsers();
-            request.setAttribute("users", userList);
+            request.setAttribute(ParameterConstants.USERS, userList);
             page = PageConstants.CLIENTS_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

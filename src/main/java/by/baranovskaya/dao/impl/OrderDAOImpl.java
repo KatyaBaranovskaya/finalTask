@@ -100,24 +100,6 @@ public class OrderDAOImpl implements OrderDAO {
         return 0;
     }
 
-   /* @Override
-    public boolean orderService(int idUser, int idService) throws DAOException {
-        ProxyConnection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(INSERT_ORDER_SERVICE);
-            preparedStatement.setInt(1, idUser);
-            preparedStatement.setInt(2, idService);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new DAOException("Exception inserting inserting services" + e);
-        } finally {
-            close(preparedStatement);
-            close(connection);
-        }
-        return true;
-    }*/
-
     @Override
     public List<Order> getUserOrders(int idUser) throws DAOException {
         List<Order> orderList = new ArrayList<>();

@@ -34,7 +34,7 @@ public class ReservationCommand implements Command {
         if (order != null) {
             try {
                 if (orderService.doOrder(order)) {
-                    request.getSession().setAttribute("typeApartment", null);
+                    request.getSession().setAttribute(ParameterConstants.TYPE_APARTMENT, null);
                     router.setRouteType(Router.RouteType.REDIRECT);
                     page = PageConstants.MAIN_PAGE;
                 } else {

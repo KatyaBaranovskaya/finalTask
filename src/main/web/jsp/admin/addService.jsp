@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="err" uri="/WEB-INF/tld/taglib.tld" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale" var="rb"/>
 <html>
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/reg.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <script src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
 </head>
@@ -22,7 +24,8 @@
         <h1 class="serviceH1"><fmt:message key="label.addService" bundle="${rb}"/></h1>
         <p class="line"></p>
 
-        <form class="addServiceForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form" onsubmit="return validationService();">
+        <form class="addServiceForm" action="${pageContext.request.contextPath}/Controller" method="POST"
+              name="form" onsubmit="return validationService();">
             <div class="form-group">
                 <label class="col-sm-2 control-label"><fmt:message key="label.serviceName" bundle="${rb}"/>:</label>
                 <div class="col-sm-7">
@@ -42,6 +45,7 @@
                     </span>
                 </div>
             </div>
+            <err:mtg messageError="${errorService}"/>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-10">
                     <input type="hidden" name="command" value="add_service"/>

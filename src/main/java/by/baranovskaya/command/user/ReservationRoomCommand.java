@@ -16,7 +16,7 @@ public class ReservationRoomCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router = new Router();
-        request.getSession().setAttribute("typeApartment", request.getParameter(ParameterConstants.ID));
+        request.getSession().setAttribute(ParameterConstants.TYPE_APARTMENT, request.getParameter(ParameterConstants.ID));
 
         router.setPagePath(PageConstants.RESERVATION_PAGE);
         router.setRouteType(Router.RouteType.FORWARD);

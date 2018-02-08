@@ -2,6 +2,7 @@ package by.baranovskaya.command.common;
 
 import by.baranovskaya.command.Command;
 import by.baranovskaya.constant.PageConstants;
+import by.baranovskaya.constant.ParameterConstants;
 import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.Service;
 import by.baranovskaya.exception.ServiceException;
@@ -30,7 +31,7 @@ public class ShowServicesCommand implements Command {
 
         try {
             serviceList = hotelService.getServices();
-            request.setAttribute("services", serviceList);
+            request.setAttribute(ParameterConstants.SERVICES, serviceList);
             page = PageConstants.SERVICES_PAGE;
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);

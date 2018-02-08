@@ -45,12 +45,10 @@ public class RoomService {
         }
     }
     public boolean updateRoom(Room room) throws ServiceException {
-        boolean flag;
         try {
-            flag = roomDAO.updateRoomByNumber(room);
+            return roomDAO.updateRoomByNumber(room);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 }

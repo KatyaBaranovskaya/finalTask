@@ -162,11 +162,6 @@ function validationService() {
         return false;
     }
 
-    if (!(/\-?\d+(\.\d{0,})?$/.test(document.form.price.value))) {
-        alert("Цена должна содержать только цифры и знак '.'!");
-        return false;
-    }
-
     if (!(/[\W|\w|\s]+$/.test(document.form.description.value))) {
         alert("Описание должно содержать только буквы и знаки пробела!");
         return false;
@@ -209,7 +204,7 @@ function validationTypeRoom() {
         return false;
     }
 
-    if (!(/\-?\d+(\.\d{0,})?$/.test(document.form.price.value))) {
+    if (!(/\d+(\.\d{0,})?$/.test(document.form.price.value))) {
         alert("Цена должна содержать только цифры и знак '.'!");
         return false;
     }
@@ -340,6 +335,24 @@ function validationChangePass() {
 
     if (document.form.newPassword.value != document.form.repeatNewPassword.value) {
         alert("Пароли не совпадают!");
+        return false;
+    }
+}
+
+function validationRoom() {
+    if (document.form.roomNumber.value == "") {
+        alert("Пожалуйста, введите Ваш логин!");
+        return false;
+    } else if (document.form.typeRoom.value == "") {
+        alert("Пожалуйста, введите Ваш пароль!");
+        return false;
+    } else if (document.form.status.value == "") {
+        alert("Пожалуйста, введите Ваш пароль!");
+        return false;
+    }
+
+    if (!(/$/.test(document.form.email.value))) {
+        alert("Некорректный email адрес!");
         return false;
     }
 }

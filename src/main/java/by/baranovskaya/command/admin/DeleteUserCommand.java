@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class DeleteUserCommand implements Command{
+public class DeleteUserCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(DeleteUserCommand.class);
 
     private AdminService adminService;
@@ -31,9 +31,9 @@ public class DeleteUserCommand implements Command{
         int idUser = Integer.parseInt(request.getParameter(ParameterConstants.ID));
 
         try {
-            if(adminService.deleteUser(idUser)) {
+            if (adminService.deleteUser(idUser)) {
                 userList = adminService.getAllUsers();
-                request.setAttribute("users", userList);
+                request.setAttribute(ParameterConstants.USERS, userList);
                 page = PageConstants.CLIENTS_PAGE;
             }
         } catch (ServiceException e) {

@@ -31,9 +31,9 @@ public class DeleteServiceCommand implements Command {
         int idService = Integer.parseInt(request.getParameter(ParameterConstants.ID));
 
         try {
-            if(hotelService.deleteSevice(idService)) {
+            if(hotelService.deleteService(idService)) {
                 serviceList = hotelService.getServices();
-                request.setAttribute("services", serviceList);
+                request.setAttribute(ParameterConstants.SERVICES, serviceList);
                 page = PageConstants.SERVICES_PAGE;
             }
         } catch (ServiceException e) {
