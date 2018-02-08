@@ -1,20 +1,24 @@
 package by.baranovskaya.command.common;
 
 import by.baranovskaya.command.Command;
+import by.baranovskaya.constant.ParameterConstants;
+import by.baranovskaya.controller.Router;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class ChangeLocaleCommand implements Command {
-    private final static String PARAM_LOCALE = "locale";
-    private final static String PARAM_URL = "url";
 
     @Override
-    public String execute(HttpServletRequest request) {
-        String locale = request.getParameter(PARAM_LOCALE);
-        HttpSession httpSession = request.getSession();
-        httpSession.setAttribute(PARAM_LOCALE, locale);
+    public Router execute(HttpServletRequest request) {
+        Router router = new Router();
 
-        return request.getParameter(PARAM_URL);
+        String locale = request.getParameter(ParameterConstants.LOCALE);
+        String page = request.getParameter(ParameterConstants.URL);
+        request.getSession().setAttribute(ParameterConstants.LOCALE, locale);
+
+        router.setPagePath(page);
+        router.setRouteType(Router.RouteType.FORWARD);
+
+        return router;
     }
 }

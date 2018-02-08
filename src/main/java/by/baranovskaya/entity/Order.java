@@ -2,20 +2,19 @@ package by.baranovskaya.entity;
 
 
 import java.sql.Date;
-import java.util.Arrays;
 
 public class Order extends Entity {
     private int idOrder;
-    private int idClient;
+    private User user;
     private int roomNumber;
     private Date arrivalDate;
     private Date departureDate;
-    private int noPersons;
-    private int classApartment;
+    private int noAdults;
+    private int noChildren;
+    private String typeApartment;
+    private String breakfast;
     private double price;
     private String status;
-    private Service[] services;
-    private Client client;
 
     public int getIdOrder() {
         return idOrder;
@@ -25,12 +24,12 @@ public class Order extends Entity {
         this.idOrder = idOrder;
     }
 
-    public int getIdClient() {
-        return idClient;
+    public User getUser() {
+        return user;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getRoomNumber() {
@@ -57,20 +56,36 @@ public class Order extends Entity {
         this.departureDate = departureDate;
     }
 
-    public int getNoPersons() {
-        return noPersons;
+    public int getNoAdults() {
+        return noAdults;
     }
 
-    public void setNoPersons(int noPersons) {
-        this.noPersons = noPersons;
+    public void setNoAdults(int noAdults) {
+        this.noAdults = noAdults;
     }
 
-    public int getClassApartment() {
-        return classApartment;
+    public int getNoChildren() {
+        return noChildren;
     }
 
-    public void setClassApartment(int classApartment) {
-        this.classApartment = classApartment;
+    public void setNoChildren(int noChildren) {
+        this.noChildren = noChildren;
+    }
+
+    public String getTypeApartment() {
+        return typeApartment;
+    }
+
+    public void setTypeApartment(String typeApartment) {
+        this.typeApartment = typeApartment;
+    }
+
+    public String getBreakfast() {
+        return breakfast;
+    }
+
+    public void setBreakfast(String breakfast) {
+        this.breakfast = breakfast;
     }
 
     public double getPrice() {
@@ -89,22 +104,6 @@ public class Order extends Entity {
         this.status = status;
     }
 
-    public Service[] getServices() {
-        return services;
-    }
-
-    public void setServices(Service[] services) {
-        this.services = services;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,18 +112,18 @@ public class Order extends Entity {
         Order order = (Order) o;
 
         if (idOrder != order.idOrder) return false;
-        if (idClient != order.idClient) return false;
         if (roomNumber != order.roomNumber) return false;
-        if (noPersons != order.noPersons) return false;
-        if (classApartment != order.classApartment) return false;
+        if (noAdults != order.noAdults) return false;
+        if (noChildren != order.noChildren) return false;
         if (Double.compare(order.price, price) != 0) return false;
+        if (user != null ? !user.equals(order.user) : order.user != null) return false;
         if (arrivalDate != null ? !arrivalDate.equals(order.arrivalDate) : order.arrivalDate != null) return false;
         if (departureDate != null ? !departureDate.equals(order.departureDate) : order.departureDate != null)
             return false;
-        if (status != null ? !status.equals(order.status) : order.status != null) return false;
-        // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        if (!Arrays.equals(services, order.services)) return false;
-        return client != null ? client.equals(order.client) : order.client == null;
+        if (typeApartment != null ? !typeApartment.equals(order.typeApartment) : order.typeApartment != null)
+            return false;
+        if (breakfast != null ? !breakfast.equals(order.breakfast) : order.breakfast != null) return false;
+        return status != null ? status.equals(order.status) : order.status == null;
     }
 
     @Override
@@ -132,17 +131,17 @@ public class Order extends Entity {
         int result;
         long temp;
         result = idOrder;
-        result = 31 * result + idClient;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + roomNumber;
         result = 31 * result + (arrivalDate != null ? arrivalDate.hashCode() : 0);
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
-        result = 31 * result + noPersons;
-        result = 31 * result + classApartment;
+        result = 31 * result + noAdults;
+        result = 31 * result + noChildren;
+        result = 31 * result + (typeApartment != null ? typeApartment.hashCode() : 0);
+        result = 31 * result + (breakfast != null ? breakfast.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(services);
-        result = 31 * result + (client != null ? client.hashCode() : 0);
         return result;
     }
 
@@ -150,16 +149,16 @@ public class Order extends Entity {
     public String toString() {
         return "Order{" +
                 "idOrder=" + idOrder +
-                ", idClient=" + idClient +
+                ", user=" + user +
                 ", roomNumber=" + roomNumber +
                 ", arrivalDate=" + arrivalDate +
                 ", departureDate=" + departureDate +
-                ", noPersons=" + noPersons +
-                ", classApartment=" + classApartment +
+                ", noAdults=" + noAdults +
+                ", noChildren=" + noChildren +
+                ", typeApartment='" + typeApartment + '\'' +
+                ", breakfast='" + breakfast + '\'' +
                 ", price=" + price +
                 ", status='" + status + '\'' +
-                ", services=" + Arrays.toString(services) +
-                ", client=" + client +
                 '}';
     }
 }

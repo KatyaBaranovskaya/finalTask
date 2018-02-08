@@ -1,238 +1,703 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+
 * {
-  margin:0;
+     margin: 0;
+ }
+
+html, body {
+    height: 100%;
 }
 
 body {
-  height: 100%;
-}
-html {
-  position:relative;
-  min-height:100%;
+    display: flex;
+    flex-direction: column;
+    background-image: url("/resources/taupe-curls.png");
 }
 
-.formHolder p{
-  text-align: center;
-  font-family: Sans-serif;
-  font-size: 25px;
-  padding-top: 7px;
+header img{
+    width: 130px;
+    height: 60px;
 }
 
-.formHolder {
-  position: absolute;
-  top: 35px;
-  left: 560px;
-  background: #ecf0f1;
-  width: 400px;
-  border-radius: 5px;
+.content {
+    flex-grow: 1;
 }
 
-.formHolder input[type="text"], .formHolder input[type="password"], .formHolder input[type="date"], .formHolder input[type="email"] {
-  padding: 7px 5px;
-  margin: 20px 0;
-  width: 96%;
-  display: block;
-  font-size: 18px;
-  border-radius: 5px;
-  border: none;
-  -webkit-transition: 0.3s linear;
-  -moz-transition: 0.3s linear;
-  -o-transition: 0.3s linear;
-  transition: 0.3s linear;
+.content, .header, .footer {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.formSingUp {
+    position: relative;
+    margin: auto;
+    margin-top: 100px;
+    background: #ecf0f1;
+    width: 420px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.formRegistr {
+    position: relative;
+    background: #ecf0f1;
+    width: 400px;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.randompad p {
+    text-align: center;
+    font-family: Sans-serif;
+    font-size: 28px;
+    padding-bottom: 10px;
+}
+
+.randompad label {
+   margin-bottom: 0;
+}
+
+.randompad input[type="text"], .randompad input[type="password"], .randompad input[type="date"], .randompad input[type="email"] {
+    padding: 7px 5px;
+    margin: 20px 0;
+    width: 96%;
+    display: block;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    -webkit-transition: 0.3s linear;
+    -moz-transition: 0.3s linear;
+    -o-transition: 0.3s linear;
+    transition: 0.3s linear;
 }
 
 .randompad {
-  padding: 20px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
 }
 
-a {
-  color: #ecf0f1;
-  text-decoration: none;
-}
-a:hover {
-  color: #1abc9c;
-}
-
-.svgClass
-{
-  position: relative;
-  padding-top: 5px;
-  width: 30px;
-  height: 30px;
-  animation: svgRun 15s infinite linear;
+#error {
+    color: #6d1414;
+    position: relative;
+    top: -25px;
+    text-align: center;
 }
 
-@keyframes svgRun
-{
-  0%{}
-  50% {transform: translate(1500px,0) rotate(360deg);}
-  100%{transform: translate(0%,0);}
+.but {
+    position: relative;
+    background: rgb(146, 28, 28);
+    top: -10px;
+    left: 25px;
+    height: 40px;
+    width: 300px;
+    font-size: 20px;
+    display: block;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
 }
 
-#butAdd{
-  top:446px;
-  left:980px;
+.forgotPass{
+    position: relative;
+    top: 3px;
+    left: 120px;
 }
 
-#butDelete{
-  top:446px;
-  left:1070px;
-}
-
-.but  {
-  position: absolute;
-  background: #1abc9c;
-  padding: 3px;
-  font-size: 15px;
-  display: block;
-  border: none;
-  color: #fff;
-  border-radius: 5px;
-}
-
-.newMail{
-  position: absolute;
-  top:425px;
-  left:1150px;
-}
-
-.newMail input[type="email"] {
-  padding: 5px 5px;
-  margin: 20px 0;
-  width: 96%;
-  display: block;
-  font-size: 15px;
-  border-radius: 5px;
-  border: none;
-  -webkit-transition: 0.3s linear;
-  -moz-transition: 0.3s linear;
-  -o-transition: 0.3s linear;
-  transition: 0.3s linear;
+.forgotPass a:hover{
+    text-decoration: none;
 }
 
 /*header*/
-p {color: #524f4e;}
+p {
+    color: #524f4e;
+}
 
 .top-menu {
-  background: rgba(255,255,255,.5);
-  box-shadow: 3px 0 7px rgba(0,0,0,.3);
-  padding: 20px;
+    background: rgba(255, 255, 255, .5);
+    box-shadow: 3px 0 7px rgba(0, 0, 0, .3);
+    padding: 20px;
 }
+
 .top-menu:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
-.navbar-logo {display: inline-block;}
+
+.navbar-logo {
+    display: inline-block;
+}
+
 .menu-main {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
 }
-.menu-main li {display: inline-block;}
+
+.menu-main li {
+    display: inline-block;
+}
 
 .menu-main a {
-  text-decoration: none;
-  display: block;
-  position: relative;
-  line-height: 61px;
-  padding-left: 20px;
-  font-size: 18px;
-  letter-spacing: 2px;
-  font-family: 'Arimo', sans-serif;
-  font-weight: bold;
-  color: #F73E24;
-  transition:.3s linear;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    line-height: 61px;
+    padding-left: 20px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: 'Arimo', sans-serif;
+    font-weight: bold;
+    color: #801818;
+    transition: .3s linear;
 }
 
 .menu-main a:before {
-  content:"";
-  width: 9px;
-  height: 9px;
-  background: #F73E24;
-  position: absolute;
-  left: 50%;
-  transform: rotate(45deg) translateX(6.5px);
-  opacity: 0;
-  transition:.3s linear;
-  text-decoration: none;
-}
-.menu-main a:hover{
-  text-decoration: none;
-  color: #F73E24;
+    content: "";
+    width: 9px;
+    height: 9px;
+    background: #801818;
+    position: absolute;
+    left: 50%;
+    transform: rotate(45deg) translateX(6.5px);
+    opacity: 0;
+    transition: .3s linear;
+    text-decoration: none;
 }
 
-.menu-main a:hover:before {opacity: 1;}
-
-@media (max-width:660px){
-  .menu-main {float: none;padding-top:20px}
-  .top-menu {text-align:center;padding: 20px 0 0 0}
-  .menu-main a {padding: 0 10px;}
-  .menu-main a:before{transform: rotate(45deg) translateX(-6px);}
+.menu-main a:hover {
+    text-decoration: none;
+    color: #801818;
 }
-@media (max-width:600px){
-  .menu-main li {display: block;}
+
+.menu-main a:hover:before {
+    opacity: 1;
+}
+
+@media (max-width: 660px) {
+    .menu-main {
+        float: none;
+        padding-top: 20px
+    }
+
+    .top-menu {
+        text-align: center;
+        padding: 20px 0 0 0
+    }
+
+    .menu-main a {
+        padding: 0 10px;
+    }
+
+    .menu-main a:before {
+        transform: rotate(45deg) translateX(-6px);
+    }
+}
+
+@media (max-width: 600px) {
+    .menu-main li {
+        display: block;
+    }
+}
+
+.locale {
+    position: absolute;
+    left: 1415px;
+    top: 3px;
+    height: 30px;
+   /* border-radius: 20px;
+    background-color: #7b1313b0;*/
+}
+
+.localeBtn {
+    color: black;
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+
+.localeBtn button {
+    color: black;
+    text-decoration: none;
+}
+
+.localeBtn button:hover {
+    color: black;
+    text-decoration: none;
 }
 /*header*/
 
-.footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  padding-top: 19px;
-  color: #000000;
-  width: 100%;
+footer {
+    background: rgba(255, 255, 255, .5);
+    box-shadow: 3px 0 7px rgba(0, 0, 0, .3);
+    height: 60px;
 }
 
-.footerBtn{
-  position: fixed;
-  bottom:0;
-  right: 0;
-}
-
-.footer button{
-  color: black;
-  text-decoration: none;
-}
-
-.footer button:hover{
-  color: black;
-  text-decoration: none;
+footer .copyright {
+    margin-top: 15px;
+    text-align: left;
 }
 
 /*account*/
-body.account
-{
-  font-family: 'Lato', 'sans-serif';
-}
-.profile
-{
-  min-height: 355px;
-  display: inline-block;
-}
-.divider
-{
-  border-top:1px solid rgba(0,0,0,0.1);
+body.account {
+    font-family: 'Lato', 'sans-serif';
 }
 
-span.tags
-{
-  background: #1abc9c;
-  border-radius: 2px;
-  color: #f5f5f5;
-  font-weight: bold;
-  padding: 2px 4px;
+.profile {
+    min-height: 355px;
+    display: inline-block;
 }
+
+.divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+span.tags {
+    background: #1abc9c;
+    border-radius: 2px;
+    color: #f5f5f5;
+    font-weight: bold;
+    padding: 2px 4px;
+}
+
 /*account*/
 
-.printRoom img{
-  height: 100px;
-  width: 100px;
+.printRoom img {
+    height: 100px;
+    width: 100px;
 }
+
 .b-content {
-  padding: 10px 0;
-  /*background: url(/upload/images/room-bg.jpg) no-repeat;*/
-  background-position: center center;
-  background-size: cover;
-  background-repeat: repeat-y;
+    padding: 10px 0;
+    /*background: url(/upload/images/room-bg.jpg) no-repeat;*/
+    background-position: center center;
+    background-size: cover;
+    background-repeat: repeat-y;
+}
+
+/*slider*/
+#slider { /* Оболочка слайдера */
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide { /* Слайд */
+    width: 80%;
+    height: 600px;
+}
+
+.internal {
+    position: relative;
+    left: 150px;
+}
+
+.slide img {
+    width: 100%;
+    height: 600px;
+}
+
+.sli-links { /* Кнопки смены слайдов */
+    position: absolute;
+    /* margin-top: 10px; */
+    /* text-align: center; */
+    top: 670px;
+    left: 700px;
+}
+
+.sli-links .control-slide {
+    margin: 2px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-indent: -9999px;
+    background: url(/resources/radioBg.png) center bottom no-repeat;
+}
+
+.sli-links .control-slide:hover {
+    cursor: pointer;
+    background-position: center center;
+}
+
+.sli-links .control-slide.active {
+    background-position: center top;
+}
+
+#prewbutton, #nextbutton { /* Ссылка "Следующий" и "Педыдущий" */
+    display: block;
+    width: 15px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    text-indent: -999px;
+    background: url(/resources/arrowBg.png) left center no-repeat;
+    opacity: 0.8;
+    z-index: 3;
+    outline: none !important;
+}
+
+#prewbutton {
+    left: 162px;
+}
+
+#nextbutton {
+    left: 1340px;
+    background: url(/resources/arrowBg.png) right center no-repeat;
+}
+
+#prewbutton:hover, #nextbutton:hover {
+    opacity: 1;
+}
+
+.printContent {
+    width: 1000px;
+    position: relative;
+    left: 270px;
+    margin: 30px 0 30px 0;
+    background: whitesmoke;
+    opacity: 0.9;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.serviceH1 {
+    color: #811a1a;
+    font: 36px/1 FuturaMediumCTTRegular, Arial, sans-serif;
+    font-weight: normal;
+    margin: 0 0 25px 0;
+    position: relative;
+    top: 10px;
+    text-align: center;
+}
+
+.line {
+    border-top: 2px solid #787878;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 10px;
+}
+
+.nomerView {
+    width: 947px;
+    height: 238px;
+    padding: 30px 0 0 50px;
+}
+
+.nomerPic {
+    float: left;
+    padding-right: 35px;
+}
+
+.nomerPic img {
+    width: 270px;
+    height: 180px;
+}
+
+.nomerText {
+    float: left;
+    width: 535px;
+    font-size: 15px;
+    line-height: 1.7em;
+    color: #877269;
+    margin-top: 10px;
+}
+
+.nomerText H1 {
+    font-size: 28px;
+    color: #70645e;
+    margin: 0 0 15px;
+    padding: 0;
+}
+
+.nomerText a:hover{
+    text-decoration: none;
+}
+
+.roomFeature {
+    font-size: 19px;
+    color: #70645e;
+    margin-top: 22px;
+}
+
+.registrationForm {
+    position: relative;
+    left: 229px;
+}
+
+.addService {
+    position: relative;
+    top: 10px;
+}
+
+.addService a {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 15px 25px;
+    padding: 15px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.4s ease-in-out;
+    box-sizing: border-box;
+    border: 1px solid #801818;
+    color: #801818;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    line-height: 1;
+    padding: 15px 40px;
+    position: relative;
+    left: 25px;
+}
+
+.addService a:after {
+    content: "";
+    display: block;
+    border: 1px solid #801818;
+    position: absolute;
+    top: -5px;
+    right: 3px;
+    bottom: -5px;
+    left: 3px;
+}
+
+.addService a:hover {
+    text-decoration: none;
+    color: #801818;
+}
+
+.adminEdit {
+    position: relative;
+    left: 510px;
+    top: -140px;
+}
+
+img.edit {
+    width: 50px;
+    height: 50px;
+}
+
+img.delete{
+    width: 35px;
+    height: 33px;
+}
+
+.addServiceForm{
+    position: relative;
+    left: 100px;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+.searchRoomTypes{
+    position: relative;
+    left: 100px;
+}
+
+.addContent {
+    width: 700px;
+    position: relative;
+    left: 410px;
+    margin: 30px 0 30px 0;
+    background: whitesmoke;
+    opacity: 0.9;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.reservationForm{
+    position: relative;
+    left: 100px;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+label{
+    font-family: Sans-serif;
+    font-size: 18px;
+}
+
+.profile{
+    position: relative;
+    left: 330px;
+    width: 800px;
+    margin: 50px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    padding: 20px;
+}
+
+.profile a{
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 30px 10px 10px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.4s ease-in-out;
+    box-sizing: border-box;
+    border: 1px solid #801818;
+    color: #801818;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    line-height: 1;
+    padding: 15px 15px;
+    position: relative;
+}
+
+.profile a:after{
+    content: "";
+    display: block;
+    border: 1px solid #801818;
+    position: absolute;
+    top: -5px;
+    right: 3px;
+    bottom: -5px;
+    left: 3px;
+}
+
+.profile a:hover{
+    text-decoration: none;
+    color: #801818;
+}
+
+.profileLine {
+    border-top: 2px solid #787878;
+    margin-left: -10px;
+}
+
+.profile p{
+    font-size: 14pt;
+}
+
+.profile img{
+    width: 200px;
+    height: 200px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.changePasswordForm{
+    position: relative;
+    left: 150px;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+.changeAccountForm{
+    position: relative;
+    left: 125px;
+    margin-left: 50px;
+    padding: 10px;
+}
+
+.reserv{
+    position: relative;
+    top: -100px;
+    left: 320px;
+}
+
+.pagination{
+    padding: 20px;
+    width: 200px;
+    position: relative;
+    left: 450px;
+}
+
+#roomImage{
+    position: relative;
+    right: 140px;
+    top: 20px;
+    width: 370px;
+    height: 220px
+}
+
+.roomReserv{
+    position: relative;
+    right: 20px;
+}
+
+.table-hover a{
+    color: #811a1a;
+}
+
+.table-hover a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+/*error*/
+
+.body-error {
+    background: #d6edfa;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 15px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 18px
+}
+
+.error-content{
+    padding: 50px 50px;
+}
+
+.error-text{
+    width: 940px;
+}
+
+.error-content h1 {
+    margin-bottom: 25px;
+}
+
+.error-img {
+    position: absolute;
+    left: 1000px;
+    top: 150px;
+}
+
+.error-a{
+    position: absolute;
+    left: 1160px;
+    top: 50px;
+    font-size: 50px;
+    color: #12aada;
+}
+
+.tag{
+    width: 350px;
+    top: -10px;
+}
+
+.searchRoomTypes .tag{
+    top: 25px;
 }

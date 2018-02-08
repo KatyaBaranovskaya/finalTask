@@ -1,11 +1,11 @@
 package by.baranovskaya.command.admin;
 
 import by.baranovskaya.command.Command;
-import by.baranovskaya.constant.PageConstant;
-import by.baranovskaya.entity.Room;
+import by.baranovskaya.constant.PageConstants;
+import by.baranovskaya.constant.ParameterConstants;
+import by.baranovskaya.controller.Router;
 import by.baranovskaya.entity.Service;
 import by.baranovskaya.exception.ServiceException;
-import by.baranovskaya.service.AdminService;
 import by.baranovskaya.service.HotelService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -17,8 +17,6 @@ import java.util.List;
 public class DeleteServiceCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(DeleteServiceCommand.class);
 
-    private final static String PARAM_ID = "id";
-
     private HotelService hotelService;
 
     public DeleteServiceCommand(HotelService hotelService) {
@@ -26,20 +24,25 @@ public class DeleteServiceCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page = null;
+        Router router = new Router();
         List<Service> serviceList;
+        int idService = Integer.parseInt(request.getParameter(ParameterConstants.ID));
 
         try {
-            if(hotelService.deleteSevice(Integer.parseInt(request.getParameter(PARAM_ID)))) {
-                serviceList = hotelService.getAllService();
+            if(hotelService.deleteSevice(idService)) {
+                serviceList = hotelService.getServices();
                 request.setAttribute("services", serviceList);
-                page = PageConstant.PATH_PAGE_ADMIN_SERVICES;
+                page = PageConstants.SERVICES_PAGE;
             }
         } catch (ServiceException e) {
             LOGGER.log(Level.ERROR, e);
         }
 
-        return page;
+        router.setPagePath(page);
+        router.setRouteType(Router.RouteType.FORWARD);
+
+        return router;
     }
 }

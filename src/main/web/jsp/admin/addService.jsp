@@ -16,27 +16,41 @@
 <body>
 
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
-<jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
+<div class="content">
+    <div class="addContent">
 
-<form action="/Controller" method="POST">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Hаименование услуги</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="typeService">
-        </div>
+        <h1 class="serviceH1"><fmt:message key="label.addService" bundle="${rb}"/></h1>
+        <p class="line"></p>
+
+        <form class="addServiceForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form" onsubmit="return validationService();">
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><fmt:message key="label.serviceName" bundle="${rb}"/>:</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" name="typeService">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><fmt:message key="label.description" bundle="${rb}"/>:</label>
+                <div class="col-sm-8">
+                    <textarea type="text" class="form-control" name="description"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-5">
+                    <span class="btn btn-default btn-file">
+                        <input type="file" name="image"><fmt:message key="label.browsePhoto" bundle="${rb}"/>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-10">
+                    <input type="hidden" name="command" value="add_service"/>
+                </br><button type="submit" name="add" class="btn btn-success"><fmt:message key="label.add" bundle="${rb}"/></button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Цена</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="price">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <input type="hidden" name="command" value="add_service"/>
-            <button type="submit" name="add" class="btn btn-success">Добавить</button>
-        </div>
-    </div>
-</form>
+</div>
+<jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 </body>
 </html>

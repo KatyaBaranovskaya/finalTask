@@ -9,16 +9,8 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-<!--    <error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
         <location>/jsp/error/error.jsp</location>
-    </error-page>-->
-    <servlet>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>by.baranovskaya.controller.Controller</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/Controller</url-pattern>
-    </servlet-mapping>
+    </error-page>
 </web-app>

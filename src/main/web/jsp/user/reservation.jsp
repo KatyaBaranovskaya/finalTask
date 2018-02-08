@@ -1,64 +1,96 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="err" uri="/WEB-INF/tld/taglib.tld" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale" var="rb"/>
 <html>
 <head>
     <meta http-equiv="CONTENT-TYPE" content="text/html" ; charset="UTF-8"/>
-    <title><fmt:message key="page.main" bundle="${rb}"/></title>
+    <title><fmt:message key="page.reservation" bundle="${rb}"/></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/reg.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <script src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
 </head>
 <body>
-
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
-<jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
+<div class="content">
+    <div class="addContent">
+        <h1 class="serviceH1"><fmt:message key="page.reservation" bundle="${rb}"/></h1>
+        <p class="line"></p>
 
-<form action="/Controller" method="POST">
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Дата заезда</label>
-        <div class="col-sm-3">
-            <input type="date" class="form-control" name="arrival_date">
-        </div>
+        <form class="reservationForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form"
+              onsubmit="return validationOrder();">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <label class="col-sm-7 control-label"><fmt:message key="label.arrivalDate" bundle="${rb}"/>:</label>
+                    <input type="date" class="form-control" name="arrival_date">
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <label class="col-sm-7 control-label"><fmt:message key="label.departureDate"
+                                                                       bundle="${rb}"/>:</label>
+                    <input type="date" class="form-control" name="departure_date">
+                </div>
+            </div>
+            </br>
+            <div class="form-group">
+                <label class="col-md-4 control-label"><fmt:message key="label.noPeople" bundle="${rb}"/>:</label>
+                <select class="custom-select col-md-2" name="noAdults">
+                    <option selected disabled><fmt:message key="label.adults" bundle="${rb}"/></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <select class="custom-select col-md-2" name="noChildren">
+                    <option selected disabled><fmt:message key="label.children" bundle="${rb}"/></option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <c:if test="${sessionScope.typeApartment == null}">
+                <div class="form-group">
+                    <label class="col-sm-5 control-label"><fmt:message key="label.typeRoom" bundle="${rb}"/>:</label>
+                    <div class="col-sm-7">
+                        <select class="custom-select col-md-4" name="typeApartment">
+                            <c:forEach var="type" items="${types}">
+                                <option>${type}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+            </c:if>
+            <input type="hidden" name="typeApartment" value="${typeApartment}">
+
+            <div class="form-group">
+                <label class="col-sm-6 control-label">Включить завтрак:</label>
+                <label class="radio-inline">
+                    <input type="radio" name="breakfast" value="да"> да
+                    <input type="radio" name="breakfast" value="нет"> нет
+                </label>
+            </div>
+            <err:mtg messageError="${errorOrder}"/>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-5">
+                    <input type="hidden" name="command" value="reservation"/></br>
+                    <button type="submit" name="add" class="btn btn-success"><fmt:message key="label.add"
+                                                                                          bundle="${rb}"/></button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Дата выезда</label>
-        <div class="col-sm-3">
-            <input type="date" class="form-control" name="departure_date">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Услуги</label>
-        <c:forEach var="service" items="${services}">
-            <br/><input type="checkbox" name="services" value="${service.key}"> ${service.value}
-        </c:forEach>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Количество людей</label>
-        <div class="col-sm-3">
-            <input type="text" class="form-control" name="noPersons">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Класс апартамента</label>
-        <label class="radio-inline">
-            <input type="radio" name="classApartment" value="1"> 1
-            <input type="radio" name="classApartment" value="2"> 2
-            <input type="radio" name="classApartment" value="3"> 3
-            <input type="radio" name="classApartment" value="4"> 4
-            <input type="radio" name="classApartment" value="5"> 5
-        </label>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <input type="hidden" name="command" value="reservation"/>
-            <button type="submit" name="add" class="btn btn-success">Добавить</button>
-        </div>
-    </div>
-</form>
+</div>
+<jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 </body>
 </html>
+
+

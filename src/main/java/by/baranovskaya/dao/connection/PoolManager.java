@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class PoolManager {
-    private final static Logger LOGGER = LogManager.getLogger(PoolManager.class);
+   // private final static Logger LOGGER = LogManager.getLogger(PoolManager.class);
+    private final static Logger LOGGER = LogManager.getLogger();
 
     private String url;
     private String user;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ServiceDAO extends AbstractDAO {
-    List<Service> getAll() throws DAOException;
+    List<Service> getAllServices() throws DAOException;
 
     boolean addService(Service service) throws DAOException;
 
@@ -16,6 +16,8 @@ public interface ServiceDAO extends AbstractDAO {
     Service findServiceById(int idService) throws DAOException;
 
     boolean updateServiceById(Service service) throws DAOException;
-
+/*
     Map<Integer, String> getTypesService() throws DAOException;
+
+    List<Service> getServicesByIdOrder(int idOrder) throws DAOException;*/
 }

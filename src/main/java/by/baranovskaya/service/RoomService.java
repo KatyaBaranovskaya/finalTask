@@ -1,6 +1,6 @@
 package by.baranovskaya.service;
 
-import by.baranovskaya.dao.DAOFactory;
+import by.baranovskaya.dao.factory.DAOFactory;
 import by.baranovskaya.dao.RoomDAO;
 import by.baranovskaya.entity.Room;
 import by.baranovskaya.exception.DAOException;
@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RoomService {
-    private final static int recordsPerPage = 5;
-    private RoomDAO roomDAO = DAOFactory.getRoomDAO();
+    private RoomDAO roomDAO = DAOFactory.getInstance().getRoomDAO();
 
     public boolean addRoom(Room room) throws ServiceException {
         boolean flag;
@@ -24,48 +23,56 @@ public class RoomService {
     }
 
 
-    public boolean deleteRoom(int roomNumber) throws ServiceException {
+    public boolean deleteRoomNumber(int roomNumber) throws ServiceException {
         boolean flag;
         try {
-            flag = roomDAO.deleteRoom(roomNumber);
+            flag = roomDAO.deleteRoomNumber(roomNumber);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
         return flag;
     }
 
-    public List<Room> getAllRoom() throws ServiceException {
-        List<Room> listRoom;
+   /* public TypeRoom findRoomByNumber(int idType) throws ServiceException {
+        TypeRoom typeRoom;
         try {
-            listRoom = roomDAO.getAll();
+            typeRoom = roomDAO.findRoomByNumber(idType);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return listRoom;
-    }
+        return typeRoom;
+    }*/
 
-    public List<Room> getRooms(int noPage) throws ServiceException {
-        List<Room> listRoom = getAllRoom(); // исключение ?
-        int step = (noPage - 1) * recordsPerPage;
-        if (step + recordsPerPage >= listRoom.size()) {
-            listRoom = listRoom.subList(step, listRoom.size());
-        } else {
-            listRoom = listRoom.subList(step, step + recordsPerPage);
-        }
-        return listRoom;
-    }
-
-    public int getNoOfPages() throws ServiceException {
-        int noOfRecords;
+    public Set<Integer> getRoomNumbers() throws ServiceException {
+        Set<Integer> typeRoomList;
         try {
-            noOfRecords = roomDAO.countRoom();
+            typeRoomList = roomDAO.getRoomNumbers();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+        return typeRoomList;
     }
 
-    public Set<String> getTypesRoom() throws ServiceException {
+    public List<Integer> getFreeRoomNumbers() throws ServiceException {
+        List<Integer> typeRoomList;
+        try {
+            typeRoomList = roomDAO.getFreeRoomNumbers();
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return typeRoomList;
+    }
+    public boolean updateRoom(Room room) throws ServiceException {
+        boolean flag;
+        try {
+            flag = roomDAO.updateRoomByNumber(room);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+        return flag;
+    }
+
+  /* public Set<String> getTypesRoom() throws ServiceException {
         Set<String> listTypes;
         try {
             listTypes = roomDAO.getTypesRoom();
@@ -93,5 +100,5 @@ public class RoomService {
             throw new ServiceException(e);
         }
         return flag;
-    }
+    }*/
 }

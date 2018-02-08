@@ -1,11 +1,15 @@
 package by.baranovskaya.command.user;
 
 import by.baranovskaya.command.Command;
-import by.baranovskaya.constant.PageConstant;
-import by.baranovskaya.entity.Client;
+import by.baranovskaya.constant.MessageConstants;
+import by.baranovskaya.constant.MessageProperty;
+import by.baranovskaya.constant.PageConstants;
+import by.baranovskaya.constant.ParameterConstants;
+import by.baranovskaya.controller.Router;
+import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.Validation;
+import by.baranovskaya.validation.UserValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,14 +20,6 @@ import java.sql.Date;
 public class RegistrationCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(RegistrationCommand.class);
 
-    private final static String PARAM_EMAIL = "mail";
-    private final static String PARAM_LOGIN = "login";
-    private final static String PARAM_PASSWORD = "password";
-    private final static String PARAM_SURNAME = "surname";
-    private final static String PARAM_NAME = "name";
-    private final static String PARAM_MIDDLE_NAME = "middleName";
-    private final static String PARAM_DATE_BIRTH = "date";
-    private final static String PARAM_PHONE = "phone";
     private UserService userService;
 
     public RegistrationCommand(UserService userService) {
@@ -31,33 +27,59 @@ public class RegistrationCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page = null;
-        Client client = new Client();
-        client.setEmail(request.getParameter(PARAM_EMAIL));
-        client.setLogin(request.getParameter(PARAM_LOGIN));
-        client.setPassword(request.getParameter(PARAM_PASSWORD));
-        client.setSurname(request.getParameter(PARAM_SURNAME));
-        client.setName(request.getParameter(PARAM_NAME));
-        client.setMiddleName(request.getParameter(PARAM_MIDDLE_NAME));
-        client.setDateBirth(Date.valueOf(request.getParameter(PARAM_DATE_BIRTH)));
-        client.setTelephone(request.getParameter(PARAM_PHONE));
+        Router router = new Router();
+        User user;
 
-        if(Validation.validateRegistration(client)){
+        user = initUser(request);
+        if (user != null) {
             try {
-                if(userService.registerUser(client)){
-                    page = PageConstant.PATH_PAGE_MAIN;
-                } else{
-                    //TODO user is exist
-                    page = PageConstant.PATH_PAGE_REGISTER;
+                if (!userService.checkLoginIsExist(user.getLogin())) {
+                    userService.registerUser(user);
+                    router.setRouteType(Router.RouteType.REDIRECT);
+                    page = PageConstants.MAIN_PAGE;
+                } else {
+                    setErrorMessage(request, MessageConstants.ERROR_REGISTRATION_LABEL, MessageProperty.ERROR_USER_IS_EXIST_MESSAGE);
+                    router.setRouteType(Router.RouteType.FORWARD);
+                    page = PageConstants.REGISTRATION_PAGE;
                 }
             } catch (ServiceException e) {
                 LOGGER.log(Level.ERROR, e);
             }
         } else {
-            //TODO warn incorrect info
-            page = PageConstant.PATH_PAGE_REGISTER;;
+            setErrorMessage(request, MessageConstants.ERROR_REGISTRATION_LABEL, MessageProperty.ERROR_REGISTRATION_MESSAGE);
+            router.setRouteType(Router.RouteType.FORWARD);
+            page = PageConstants.REGISTRATION_PAGE;
         }
-        return page;
+
+        router.setPagePath(page);
+
+        return router;
+    }
+
+    private User initUser(HttpServletRequest request) {
+        User user = new User();
+        String email = request.getParameter(ParameterConstants.EMAIL);
+        String login = request.getParameter(ParameterConstants.LOGIN);
+        String password = request.getParameter(ParameterConstants.PASSWORD);
+        String surname = request.getParameter(ParameterConstants.SURNAME);
+        String name = request.getParameter(ParameterConstants.NAME);
+        String middleName = request.getParameter(ParameterConstants.MIDDLE_NAME);
+        Date dateBirth = Date.valueOf(request.getParameter(ParameterConstants.DATE_BIRTH));
+        String telephone = request.getParameter(ParameterConstants.PHONE);
+
+        if (UserValidator.validateRegistration(email, login, password, surname, name, middleName, dateBirth, telephone)) {
+            user.setEmail(email);
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setSurname(surname);
+            user.setName(name);
+            user.setMiddleName(middleName);
+            user.setDateBirth(dateBirth);
+            user.setTelephone(telephone);
+        }
+
+        return user;
     }
 }

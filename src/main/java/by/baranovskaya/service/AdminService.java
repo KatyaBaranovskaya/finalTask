@@ -1,34 +1,30 @@
 package by.baranovskaya.service;
 
-import by.baranovskaya.dao.ClientDAO;
-import by.baranovskaya.dao.DAOFactory;
-import by.baranovskaya.dao.RoomDAO;
-import by.baranovskaya.dao.ServiceDAO;
-import by.baranovskaya.entity.Client;
-import by.baranovskaya.entity.Room;
-import by.baranovskaya.entity.Service;
+import by.baranovskaya.dao.UserDAO;
+import by.baranovskaya.dao.factory.DAOFactory;
+import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.exception.ServiceException;
 
 import java.util.List;
 
 public class AdminService {
-    private ClientDAO clientDAO = DAOFactory.getClientDAO();
+    private UserDAO userDAO = DAOFactory.getInstance().getClientDAO();
 
-    public List<Client> getAllClient() throws ServiceException {
-        List<Client> clientList;
+    public List<User> getAllUsers() throws ServiceException {
+        List<User> userList;
         try {
-            clientList =  clientDAO.getAll();
+            userList =  userDAO.getAllUsers();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return clientList;
+        return userList;
     }
 
-    public boolean deleteClient(int idClient) throws ServiceException {
+    public boolean deleteUser(int idUser) throws ServiceException {
         boolean flag;
         try {
-            flag = clientDAO.deleteClient(idClient);
+            flag = userDAO.deleteUser(idUser);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }

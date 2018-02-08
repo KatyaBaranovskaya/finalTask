@@ -1,11 +1,12 @@
 package by.baranovskaya.command.user;
 
 import by.baranovskaya.command.Command;
-import by.baranovskaya.constant.PageConstant;
-import by.baranovskaya.entity.Client;
+import by.baranovskaya.constant.*;
+import by.baranovskaya.controller.Router;
+import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.ServiceException;
 import by.baranovskaya.service.UserService;
-import by.baranovskaya.validation.Validation;
+import by.baranovskaya.validation.UserValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,9 +17,6 @@ import javax.servlet.http.HttpSession;
 public class ChangePasswordCommand implements Command {
     private final static Logger LOGGER = LogManager.getLogger(ChangePasswordCommand.class);
 
-    private final static String PARAM_LAST_PASSWORD = "lastPassword";
-    private final static String PARAM_NEW_PASSWORD = "newPassword";
-
     private UserService userService;
 
     public ChangePasswordCommand(UserService userService) {
@@ -26,29 +24,34 @@ public class ChangePasswordCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public Router execute(HttpServletRequest request) {
         String page = null;
-        HttpSession session = request.getSession(true);
-        Client client = (Client) session.getAttribute("client");
-        String lastPassword = request.getParameter(PARAM_LAST_PASSWORD);
-        String newPassword = request.getParameter(PARAM_NEW_PASSWORD);
+        Router router = new Router();
+        User user = (User) request.getSession().getAttribute(RoleType.USER);
+        String lastPassword = request.getParameter(ParameterConstants.LAST_PASSWORD);
+        String newPassword = request.getParameter(ParameterConstants.NEW_PASSWORD);
 
-        if (Validation.validatePassword(lastPassword, newPassword)) {
+        if (UserValidator.validatePassword(lastPassword, newPassword)) {
             try {
-                if (userService.findClientById(client.getIdClient()).getPassword().equals(lastPassword)) {
-                    userService.updatePassword(client.getIdClient(), newPassword);
-                    page = PageConstant.PATH_PAGE_USER_ACCOUNT;
+                if (userService.findUserById(user.getIdUser()).getPassword().equals(lastPassword)) {
+                    userService.updatePassword(user.getIdUser(), newPassword);
+                    page = PageConstants.USER_ACCOUNT_PAGE;
+                    router.setRouteType(Router.RouteType.REDIRECT);
                 } else {
-                    //TODO err
-                    page = PageConstant.PATH_PAGE_CHANGE_PASSWORD;
+                    setErrorMessage(request, MessageConstants.ERROR_CHANGE_PASS_LABEL, MessageProperty.ERROR_CHANGE_PASS_MESSAGE);
+                    page = PageConstants.CHANGE_PASSWORD_PAGE;
+                    router.setRouteType(Router.RouteType.FORWARD);
                 }
             } catch (ServiceException e) {
                 LOGGER.log(Level.ERROR, e);
             }
         } else {
-            //TODO warn incorrect info
-            page = PageConstant.PATH_PAGE_CHANGE_PASSWORD;
+            setErrorMessage(request, MessageConstants.ERROR_CHANGE_PASS_LABEL, MessageProperty.ERROR_CHANGE_PASS_MESSAGE);
+            page = PageConstants.CHANGE_PASSWORD_PAGE;
+            router.setRouteType(Router.RouteType.FORWARD);
         }
-        return page;
+
+        router.setPagePath(page);
+        return router;
     }
 }

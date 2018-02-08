@@ -1,71 +1,75 @@
 package by.baranovskaya.service;
 
-import by.baranovskaya.dao.ClientDAO;
-import by.baranovskaya.dao.DAOFactory;
-import by.baranovskaya.entity.Client;
+import by.baranovskaya.dao.UserDAO;
+import by.baranovskaya.dao.factory.DAOFactory;
+import by.baranovskaya.entity.User;
 import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.exception.ServiceException;
 
 public class UserService {
-    private ClientDAO clientDAO = DAOFactory.getClientDAO();
+    private UserDAO userDAO = DAOFactory.getInstance().getClientDAO();
 
-    public Client checkUserIsExist(String login, String password) throws ServiceException {
-        Client client;
+    public User checkUserIsExist(String login, String password) throws ServiceException {
         try {
-            client = clientDAO.findClientByLoginPassword(login, password);
+            return userDAO.findUserByLoginPassword(login, password);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return client;
     }
 
-    public boolean registerUser(Client client) throws ServiceException {
-        boolean flag;
+    public boolean checkLoginIsExist(String login) throws ServiceException {
         try {
-            flag = clientDAO.addClient(client);
+            return userDAO.findUserByLogin(login);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 
-    public Client findClientById(int idClient) throws ServiceException {
-        Client client;
+    public User checkLoginEmailIsExist(String login, String email) throws ServiceException {
         try {
-            client = clientDAO.findClientById(idClient);
+            return userDAO.findUserByLoginEmail(login, email);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return client;
+    }
+
+    public boolean registerUser(User user) throws ServiceException {
+        try {
+            return userDAO.addUser(user);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public User findUserById(int idClient) throws ServiceException {
+        try {
+            return userDAO.findUserById(idClient);
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
     }
 
     public boolean updatePassword(int idClient, String password) throws ServiceException {
-        boolean flag;
         try {
-            flag = clientDAO.updatePasswordById(idClient, password);
+            return userDAO.updatePasswordById(idClient, password);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 
     public boolean updateAvatar(int idClient, String avatarPath) throws ServiceException {
-        boolean flag;
         try {
-            flag = clientDAO.updateAvatarById(idClient, avatarPath);
+            return userDAO.updateAvatarById(idClient, avatarPath);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 
-    public boolean updateClientInfo(Client client) throws ServiceException {
-        boolean flag;
+    public boolean updateUserInfo(User user) throws ServiceException {
         try {
-            flag = clientDAO.updateClientInfo(client);
+            return userDAO.updateUserInfo(user);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
-        return flag;
     }
 }

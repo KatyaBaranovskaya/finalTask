@@ -16,6 +16,8 @@ public class Router {
         this.pagePath = pagePath;
     }
 
+    public RouteType getRouteType() { return routeType; }
+
     public void setRouteType(RouteType routeType) {
         if (routeType == null){
             this.routeType = RouteType.FORWARD;

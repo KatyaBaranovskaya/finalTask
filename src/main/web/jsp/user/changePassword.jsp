@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="err" uri="/WEB-INF/tld/taglib.tld" %>
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale" var="rb"/>
 <html>
@@ -10,34 +11,47 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/reg.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <script src="${pageContext.request.contextPath}/js/jquery-1.7.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
 </head>
 <body>
-
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
-<jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
+<div class="content">
+    <div class="addContent">
+        <h1 class="serviceH1"><fmt:message key="label.changePassword" bundle="${rb}"/></h1>
+        <p class="line"></p>
 
-<form action="/Controller" method="POST">
-    <h3>Изменить пароль</h3>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Старый пароль</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="lastPassword">
-        </div>
+        <form class="changePasswordForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form"
+              onsubmit="return validationChangePass();">
+                <div class="form-group">
+                <label class="col-sm-5 control-label"><fmt:message key="label.lastPassword" bundle="${rb}"/>:</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="lastPassword">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label"><fmt:message key="label.newPassword" bundle="${rb}"/>:</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="newPassword">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label"><fmt:message key="label.confirmPassword" bundle="${rb}"/>:</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" name="repeatNewPassword">
+                </div>
+            </div>
+            <err:mtg messageError="${errorChangePass}"/>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="hidden" name="command" value="change_password"/>
+                    <button type="submit" class="btn btn-success"><fmt:message key="label.change" bundle="${rb}"/></button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label">Новый пароль</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" name="newPassword">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <input type="hidden" name="command" value="change_password"/>
-            <button type="submit" class="btn btn-success">Добавить</button>
-        </div>
-    </div>
-</form>
+</div>
+<jsp:include page="${pageContext.request.contextPath}/jsp/footer/footer.jsp"></jsp:include>
 </body>
 </html>

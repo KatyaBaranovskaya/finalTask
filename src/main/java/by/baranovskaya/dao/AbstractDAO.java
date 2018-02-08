@@ -9,11 +9,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public interface AbstractDAO {
-
     Logger LOGGER = LogManager.getLogger(AbstractDAO.class);
 
-    default void close(Statement st){
-        if (st != null){
+    default void close(Statement st) {
+        if (st != null) {
             try {
                 st.close();
             } catch (SQLException e) {
@@ -22,8 +21,8 @@ public interface AbstractDAO {
         }
     }
 
-    default void close(ProxyConnection connection){
-        if (connection != null){
+    default void close(ProxyConnection connection) {
+        if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {

@@ -1,19 +1,15 @@
 package by.baranovskaya.service;
 
-import by.baranovskaya.dao.DAOFactory;
-import by.baranovskaya.dao.RoomDAO;
+import by.baranovskaya.dao.factory.DAOFactory;
 import by.baranovskaya.dao.ServiceDAO;
-import by.baranovskaya.entity.Room;
 import by.baranovskaya.entity.Service;
 import by.baranovskaya.exception.DAOException;
 import by.baranovskaya.exception.ServiceException;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class HotelService {
-    private ServiceDAO serviceDAO = DAOFactory.getServiceDAO();
+    private ServiceDAO serviceDAO = DAOFactory.getInstance().getServiceDAO();
 
     public boolean addService(Service service) throws ServiceException {
         boolean flag;
@@ -25,10 +21,10 @@ public class HotelService {
         return flag;
     }
 
-    public List<Service> getAllService() throws ServiceException {
+    public List<Service> getServices() throws ServiceException {
         List<Service> serviceList;
         try {
-            serviceList =  serviceDAO.getAll();
+            serviceList =  serviceDAO.getAllServices();
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
@@ -65,7 +61,7 @@ public class HotelService {
         return flag;
     }
 
-    public Map<Integer, String> getTypesService() throws ServiceException {
+  /*  public Map<Integer, String> getTypesService() throws ServiceException {
         Map<Integer, String> mapTypes;
         try {
             mapTypes =  serviceDAO.getTypesService();
@@ -73,5 +69,5 @@ public class HotelService {
             throw new ServiceException(e);
         }
         return mapTypes;
-    }
+    }*/
 }
