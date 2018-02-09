@@ -49,7 +49,9 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-10">
                     <input type="hidden" name="command" value="add_service"/>
-                </br><button type="submit" name="add" class="btn btn-success"><fmt:message key="label.add" bundle="${rb}"/></button>
+                    </br>
+                    <button type="submit" name="add" class="btn btn-success"><fmt:message key="label.add"
+                                                                                          bundle="${rb}"/></button>
                 </div>
             </div>
         </form>

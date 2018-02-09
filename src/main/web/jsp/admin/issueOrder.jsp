@@ -28,7 +28,9 @@
                 </div>
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="hidden" name="command" value="issue_order"/>
-                    <button type="submit" name="edit" class="btn btn-success"><fmt:message key="label.issue" bundle="${rb}"/></button><br/>
+                    <button type="submit" name="edit" class="btn btn-success"><fmt:message key="label.issue"
+                                                                                           bundle="${rb}"/></button>
+                    <br/>
                 </div>
             </div>
         </form>

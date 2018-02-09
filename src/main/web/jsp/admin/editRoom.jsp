@@ -23,7 +23,7 @@
         <h1 class="serviceH1"><fmt:message key="label.addRoom" bundle="${rb}"/></h1>
         <p class="line"></p>
         <form class="addServiceForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form"
-        onsubmit="validationRoom()">
+              onsubmit="validationRoom()">
             <div class="form-group">
                 <label class="col-sm-2 control-label"><fmt:message key="label.roomNumber" bundle="${rb}"/>:</label>
                 <div class="col-sm-3">
@@ -43,15 +43,18 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label"><fmt:message key="label.status" bundle="${rb}"/>:</label>
                 <label class="radio-inline">
-                    <input type="radio" name="status" value="Свободен" checked> <fmt:message key="label.free" bundle="${rb}"/>
-                    <input type="radio" name="status" value="Бронирован"> <fmt:message key="label.armored" bundle="${rb}"/>
+                    <input type="radio" name="status" value="Свободен" checked> <fmt:message key="label.free"
+                                                                                             bundle="${rb}"/>
+                    <input type="radio" name="status" value="Бронирован"> <fmt:message key="label.armored"
+                                                                                       bundle="${rb}"/>
                 </label>
             </div>
             <err:mtg messageError="${errorRoom}"/>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-10">
                     <input type="hidden" name="command" value="add_room"/>
-                    </br><button type="submit" class="btn btn-success"><fmt:message key="label.add" bundle="${rb}"/></button>
+                    </br>
+                    <button type="submit" class="btn btn-success"><fmt:message key="label.add" bundle="${rb}"/></button>
                 </div>
             </div>
         </form>
@@ -72,7 +75,9 @@
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-10">
                     <input type="hidden" name="command" value="delete_room"/>
-                    </br><button type="submit" class="btn btn-success"><fmt:message key="label.delete" bundle="${rb}"/></button>
+                    </br>
+                    <button type="submit" class="btn btn-success"><fmt:message key="label.delete"
+                                                                               bundle="${rb}"/></button>
                 </div>
             </div>
         </form>
@@ -103,15 +108,19 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label"><fmt:message key="label.status" bundle="${rb}"/>:</label>
                 <label class="radio-inline">
-                    <input type="radio" name="status" value="Свободен" checked> <fmt:message key="label.free" bundle="${rb}"/>
-                    <input type="radio" name="status" value="Бронирован"> <fmt:message key="label.armored" bundle="${rb}"/>
+                    <input type="radio" name="status" value="Свободен" checked> <fmt:message key="label.free"
+                                                                                             bundle="${rb}"/>
+                    <input type="radio" name="status" value="Бронирован"> <fmt:message key="label.armored"
+                                                                                       bundle="${rb}"/>
                 </label>
             </div>
             <err:mtg messageError="${errorRoom}"/>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-10">
                     <input type="hidden" name="command" value="update_room"/>
-                    </br><button type="submit" class="btn btn-success"><fmt:message key="label.change" bundle="${rb}"/></button>
+                    </br>
+                    <button type="submit" class="btn btn-success"><fmt:message key="label.change"
+                                                                               bundle="${rb}"/></button>
                 </div>
             </div>
         </form>

@@ -39,7 +39,7 @@
                                              class="delete">
                                     </a>
                                     <br/><a class="a-order"
-                                        href="${pageContext.request.contextPath}/Controller?command=show_user_orders&id=${user.idUser}"><fmt:message
+                                            href="${pageContext.request.contextPath}/Controller?command=show_user_orders&id=${user.idUser}"><fmt:message
                                         key="label.orders" bundle="${rb}"/></a>
                                 </div>
                             </c:if>

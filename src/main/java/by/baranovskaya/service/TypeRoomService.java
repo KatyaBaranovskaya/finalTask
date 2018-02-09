@@ -18,8 +18,6 @@ import java.util.Set;
 import static by.baranovskaya.constant.ParameterConstants.RECORDS_PER_PAGE;
 
 public class TypeRoomService {
-    private final static Logger LOGGER = LogManager.getLogger(TypeRoomService.class);
-
     private TypeRoomDAO typeRoomDAO = DAOFactory.getInstance().getTypeRoomDAO();
 
     public boolean addTypeRoom(TypeRoom typeRoom) throws ServiceException {
@@ -123,6 +121,7 @@ public class TypeRoomService {
         if (order.getBreakfast().equals(ParameterConstants.YES)) {
             price += (breakfast * diff);
         }
+
         return price;
     }
 }

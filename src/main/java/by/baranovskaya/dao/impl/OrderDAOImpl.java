@@ -194,8 +194,8 @@ public class OrderDAOImpl implements OrderDAO {
         User user = new User();
         order.setIdOrder(resultSet.getInt("id_order"));
         user.setIdUser(resultSet.getInt("id_user"));
-        user.setLogin(resultSet.getString("email"));
-        user.setEmail(resultSet.getString("login"));
+        user.setLogin(resultSet.getString("login"));
+        user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
         user.setRole(resultSet.getString("role_name"));
         user.setSurname(resultSet.getString("surname"));

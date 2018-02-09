@@ -27,12 +27,14 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <label class="col-sm-7 control-label"><fmt:message key="label.arrivalDate" bundle="${rb}"/>:</label>
-                    <input class="form-control" type="text" name="arrival_date" placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
+                    <input class="form-control" type="text" name="arrival_date"
+                           placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
                 <div class="col-md-4 col-sm-8 col-xs-4">
                     <label class="col-sm-9 control-label"><fmt:message key="label.departureDate"
                                                                        bundle="${rb}"/>:</label>
-                    <input class="form-control" type="text" name="departure_date" placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
+                    <input class="form-control" type="text" name="departure_date"
+                           placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
             </div>
             </br>
@@ -72,7 +74,8 @@
             <input type="hidden" name="typeApartment" value="${typeApartment}">
 
             <div class="form-group">
-                <label class="col-sm-4 control-label"><fmt:message key="label.includeBreakfast" bundle="${rb}"/>:</label>
+                <label class="col-sm-4 control-label"><fmt:message key="label.includeBreakfast"
+                                                                   bundle="${rb}"/>:</label>
                 <label class="radio-inline">
                     <input type="radio" name="breakfast" value="да"> <fmt:message key="label.yes" bundle="${rb}"/>
                     <input type="radio" name="breakfast" value="нет"> <fmt:message key="label.not" bundle="${rb}"/>

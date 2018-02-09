@@ -75,7 +75,8 @@
             <err:mtg messageError="${errorOrder}"/>
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="hidden" name="command" value="calculate_price"/>
-                <button type="submit" name="edit" class="btn btn-success"><fmt:message key="label.count" bundle="${rb}"/></button>
+                <button type="submit" name="edit" class="btn btn-success"><fmt:message key="label.count"
+                                                                                       bundle="${rb}"/></button>
             </div>
 
         </form>

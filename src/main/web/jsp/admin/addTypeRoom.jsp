@@ -65,7 +65,9 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="hidden" name="command" value="add_type_room"/>
-                    </br><button type="submit" name="add" class="btn btn-success"><fmt:message key="label.add" bundle="${rb}"/></button>
+                    </br>
+                    <button type="submit" name="add" class="btn btn-success"><fmt:message key="label.add"
+                                                                                          bundle="${rb}"/></button>
                 </div>
             </div>
         </form>

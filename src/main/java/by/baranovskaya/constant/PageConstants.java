@@ -30,5 +30,4 @@ public class PageConstants {
     public final static String ISSUE_ORDER = "/jsp/admin/issueOrder.jsp";
     public final static String APPLICATIONS_PAGE = "/jsp/admin/applications.jsp";
     public final static String EXECUTED_APPLICATIONS_PAGE = "/jsp/admin/executedApplications.jsp";
-
 }

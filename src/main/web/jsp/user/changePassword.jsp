@@ -22,9 +22,10 @@
         <h1 class="serviceH1"><fmt:message key="label.changePassword" bundle="${rb}"/></h1>
         <p class="line"></p>
 
-        <form class="changePasswordForm" action="${pageContext.request.contextPath}/Controller" method="POST" name="form"
+        <form class="changePasswordForm" action="${pageContext.request.contextPath}/Controller" method="POST"
+              name="form"
               onsubmit="return validationChangePass();">
-                <div class="form-group">
+            <div class="form-group">
                 <label class="col-sm-5 control-label"><fmt:message key="label.lastPassword" bundle="${rb}"/>:</label>
                 <div class="col-sm-6">
                     <input type="password" class="form-control" name="lastPassword">
@@ -46,7 +47,8 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="hidden" name="command" value="change_password"/>
-                    <button type="submit" class="btn btn-success"><fmt:message key="label.change" bundle="${rb}"/></button>
+                    <button type="submit" class="btn btn-success"><fmt:message key="label.change"
+                                                                               bundle="${rb}"/></button>
                 </div>
             </div>
         </form>

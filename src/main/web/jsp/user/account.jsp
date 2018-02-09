@@ -37,7 +37,8 @@
                     <form action="${pageContext.request.contextPath}/Controller" method="POST">
                         <input type="hidden" name="command" value="change_avatar"/></br>
                         <span class="btn btn-default btn-file">
-                        <input type="file" name="avatar" accept="image/*"><fmt:message key="label.browsePhoto" bundle="${rb}"/>
+                        <input type="file" name="avatar" accept="image/*"><fmt:message key="label.browsePhoto"
+                                                                                       bundle="${rb}"/>
                     </span>
                         <err:mtg messageError="${errorLoginPass}"/>
                         <button type="submit" name="changePhoto" class="btn btn-success">OK</button>

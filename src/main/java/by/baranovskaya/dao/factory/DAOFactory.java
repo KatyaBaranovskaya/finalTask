@@ -10,7 +10,7 @@ public class DAOFactory {
         return instance;
     }
 
-    public UserDAO getClientDAO() {
+    public UserDAO getUserDAO() {
         return new UserDAOImpl();
     }
 

@@ -9,7 +9,7 @@ import by.baranovskaya.exception.ServiceException;
 import java.util.List;
 
 public class UserService {
-    private UserDAO userDAO = DAOFactory.getInstance().getClientDAO();
+    private UserDAO userDAO = DAOFactory.getInstance().getUserDAO();
 
     public List<User> getAllUsers() throws ServiceException {
         try {

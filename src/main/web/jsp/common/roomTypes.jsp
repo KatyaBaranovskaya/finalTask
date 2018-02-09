@@ -18,8 +18,6 @@
 <body>
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
 <div class="content">
-
-
     <div class="printContent">
         <h1 class="serviceH1"><fmt:message key="label.rooms" bundle="${rb}"/></h1>
         <p class="line"></p>

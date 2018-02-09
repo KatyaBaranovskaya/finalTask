@@ -48,7 +48,8 @@
                                 <a href="/Controller?command=edit_order&id=${order.idOrder}"><fmt:message
                                         key="label.issue"
                                         bundle="${rb}"/></a>
-                                <br/><a href="/Controller?command=reject_order&id=${order.idOrder}"><fmt:message key="label.reject" bundle="${rb}"/></a>
+                                <br/><a href="/Controller?command=reject_order&id=${order.idOrder}"><fmt:message
+                                    key="label.reject" bundle="${rb}"/></a>
                             </td>
                         </tr>
                         </tbody>

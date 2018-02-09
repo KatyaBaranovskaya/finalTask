@@ -23,7 +23,8 @@
         <h1 class="serviceH1"><fmt:message key="label.changePassword" bundle="${rb}"/></h1>
         <p class="line"></p>
 
-        <form class="changeAccountForm" action="${pageContext.request.contextPath}/Controller" method="POST" var="user" items="${user}" name="form"
+        <form class="changeAccountForm" action="${pageContext.request.contextPath}/Controller" method="POST" var="user"
+              items="${user}" name="form"
               onsubmit="return validationUserInfo();">
             <div class="form-group">
                 <label class="col-sm-3 control-label"><fmt:message key="label.surname" bundle="${rb}"/>:</label>
@@ -58,7 +59,8 @@
             <div class="form-group">
                 <label class="col-sm-6 control-label"><fmt:message key="label.birthDate" bundle="${rb}"/>:</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" name="dateBirth" value="${user.dateBirth}" placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
+                    <input class="form-control" type="text" name="dateBirth" value="${user.dateBirth}"
+                           placeholder="<fmt:message key="label.date" bundle="${rb}" />"/>
                 </div>
             </div>
             <div class="form-group">
@@ -72,7 +74,9 @@
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="hidden" name="command" value="change_account_information"/>
                     <input type="hidden" name="id" value="${user.idUser}"/>
-                    </br><button type="submit" class="btn btn-success"><fmt:message key="label.change" bundle="${rb}"/></button>
+                    </br>
+                    <button type="submit" class="btn btn-success"><fmt:message key="label.change"
+                                                                               bundle="${rb}"/></button>
                 </div>
             </div>
         </form>

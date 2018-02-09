@@ -16,7 +16,6 @@
     <script src="${pageContext.request.contextPath}/js/index.js"></script>
 </head>
 <body>
-
 <jsp:include page="${pageContext.request.contextPath}/jsp/header/header.jsp"></jsp:include>
 <div class="content">
     <div class="addContent">
