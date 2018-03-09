@@ -8,6 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import by.baranovskaya.exception.DBException;
+import com.sun.mail.iap.ConnectionException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +22,7 @@ public class ConnectionPool {
     private BlockingQueue<ProxyConnection> connections;
     private PoolManager manager;
 
-    public ConnectionPool()  {
+    ConnectionPool()  {
         init();
     }
 
@@ -33,7 +34,7 @@ public class ConnectionPool {
             try {
                 connections.put(manager.getConnection());
             } catch (InterruptedException e) {
-                LOGGER.log(Level.ERROR, "Can not init connection: " + e); //?
+                LOGGER.log(Level.ERROR, "Can not init connection: " + e);
             }
         }
     }
@@ -75,6 +76,11 @@ public class ConnectionPool {
         } catch (InterruptedException e) {
             throw new DBException("Can not release connection connection: " + e);
         }
+    }
+
+    @Override
+    protected void finalize() throws DBException {
+        closePool();
     }
 
     public void closePool() throws DBException {

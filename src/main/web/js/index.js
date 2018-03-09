@@ -258,11 +258,7 @@ function validationEditTypeRoom() {
     if (document.form.typeRoom.value == "") {
         alert("Пожалуйста, введите тип номера!");
         return false;
-    } else if(document.form.capacity.selectedIndex==0){
-        alert("Пожалуйста, выберите вместимость типа номера!");
-        document.form.capacity.focus();
-        return false;
-    } else if (document.form.price.value == "") {
+    }  else if (document.form.price.value == "") {
         alert("Пожалуйста, введите цену типа номера!");
         return false;
     } else if (document.form.description.value == "") {

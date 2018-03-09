@@ -61,7 +61,7 @@
                 <c:forEach var="typeRoom" items="${roomTypes}">
                     <div class="nomerView">
                         <div class="nomerPic">
-                            <img src="${pageContext.request.contextPath}/resources/${typeRoom.image}"></div>
+                            <img src="${pageContext.request.contextPath}/resources/rooms/${typeRoom.image}"></div>
                         <div class="nomerText">
                             <a href="${pageContext.request.contextPath}/Controller?command=show_type_room&id=${typeRoom.idType}">
                                 <h1>${typeRoom.typeRoom}</h1>

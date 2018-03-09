@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-xs-7 col-sm-4 text-center">
-                <img id="roomImage" src="${pageContext.request.contextPath}/resources/${requestScope.typeRoom.image}">
+                <img id="roomImage" src="${pageContext.request.contextPath}/resources/rooms/${typeRoom.image}">
             </div>
         </div>
         <div class="col-xs-12 divider text-center">
